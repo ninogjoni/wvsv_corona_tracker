@@ -1,6 +1,6 @@
 package de.govhackathon.wvsvcoronatracker.services;
 
-import de.ghwct.service.model.PositionDto;
+import de.govhackathon.wvsvcoronatracker.model.Position;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -8,11 +8,18 @@ import java.util.List;
 public interface PositionsService {
 
     /**
+     * Save given position
+     *
+     * @return Saved position
+     */
+    Position savePosition(Position position);
+
+    /**
      * Get all positions
      *
      * @return List of all positions, empty collection if none available
      */
-    List<PositionDto> getPositions();
+    List<Position> getPositions();
 
     /**
      * Get all positions starting from date till now
@@ -20,7 +27,7 @@ public interface PositionsService {
      * @param from date to get positions from
      * @return List of all positions, starting from date specified, empty collection if none available
      */
-    List<PositionDto> getPositionsFrom(final LocalDateTime from);
+    List<Position> getPositionsFrom(final LocalDateTime from);
 
     /**
      * Get all positions until date specified
@@ -28,7 +35,7 @@ public interface PositionsService {
      * @param to date to get positions until
      * @return List of all positions, ending at date specified, empty collection if none available
      */
-    List<PositionDto> getPositionsTo(final LocalDateTime to);
+    List<Position> getPositionsTo(final LocalDateTime to);
 
     /**
      * Get all positions within the dates specified
@@ -37,7 +44,7 @@ public interface PositionsService {
      * @param to   date to get positions until
      * @return List of all positions between the dates specified, empty collection if none available
      */
-    List<PositionDto> getPositionsFromTo(final LocalDateTime from, final LocalDateTime to);
+    List<Position> getPositionsFromTo(final LocalDateTime from, final LocalDateTime to);
 
     /**
      * Get specified positions
@@ -45,7 +52,7 @@ public interface PositionsService {
      * @param id List of position ids
      * @return List of requested positions
      */
-    List<PositionDto> getPositionsTo(final List<Integer> id);
+    List<Position> getPositionsTo(final List<Integer> id);
 
     /**
      * Get all users positions
@@ -53,7 +60,7 @@ public interface PositionsService {
      * @param userId users id
      * @return List of all positions for a specific user, empty collection if none available
      */
-    List<PositionDto> getPositionsByUserId(final Integer userId);
+    List<Position> getPositionsByUserId(final Integer userId);
 
     /**
      * Get all users positions starting from date till now
@@ -62,7 +69,7 @@ public interface PositionsService {
      * @param from   date to get positions from
      * @return List of all positions for a specific user, starting from date specified, empty collection if none available
      */
-    List<PositionDto> getPositionsByUserIdFrom(final Integer userId, final LocalDateTime from);
+    List<Position> getPositionsByUserIdFrom(final Integer userId, final LocalDateTime from);
 
     /**
      * Get all users positions until date specified
@@ -71,7 +78,7 @@ public interface PositionsService {
      * @param to     date to get positions until
      * @return List of all positions for a specific user, ending at date specified, empty collection if none available
      */
-    List<PositionDto> getPositionsByUserIdTo(final Integer userId, final LocalDateTime to);
+    List<Position> getPositionsByUserIdTo(final Integer userId, final LocalDateTime to);
 
     /**
      * Get all users positions within the dates specified
@@ -81,6 +88,6 @@ public interface PositionsService {
      * @param to     date to get positions until
      * @return List of all positions for a specific user between the dates specified, empty collection if none available
      */
-    List<PositionDto> getPositionsByUserIdFromTo(final Integer userId, final LocalDateTime from, final LocalDateTime to);
+    List<Position> getPositionsByUserIdFromTo(final Integer userId, final LocalDateTime from, final LocalDateTime to);
 
 }

@@ -1,6 +1,6 @@
 package de.govhackathon.wvsvcoronatracker.services;
 
-import de.ghwct.service.model.UserDto;
+import de.govhackathon.wvsvcoronatracker.model.User;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public interface UsersService {
      *
      * @return List of all users, empty collection if none available
      */
-    List<UserDto> getUsers();
+    List<User> getUsers();
 
     /**
      * Create a user
@@ -19,7 +19,7 @@ public interface UsersService {
      * @param user data to create user from
      * @return Created user
      */
-    UserDto createUser(final UserDto user);
+    User createUser(final User user);
 
     /**
      * Update a user
@@ -28,7 +28,7 @@ public interface UsersService {
      * @param user user data to be changed
      * @return Updated user
      */
-    UserDto updateUser(final Integer id, final UserDto user);
+    User updateUser(final Integer id, final User user);
 
     /**
      * Delete a user

@@ -63,25 +63,25 @@ paths:
           in: query
           schema:
             type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Position'
+        required: true
       responses:
         200:
           description: OK
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Position'
+                $ref: '#/components/schemas/Position'
             text/csv:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Position'
+                $ref: '#/components/schemas/Position'
             application/gpx+xml:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Position'
+                $ref: '#/components/schemas/Position'
   /users:
     get:
       summary: Fetch a list of Users

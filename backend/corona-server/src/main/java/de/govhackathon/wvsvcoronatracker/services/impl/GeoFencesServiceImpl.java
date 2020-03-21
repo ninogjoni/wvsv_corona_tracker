@@ -1,7 +1,7 @@
 package de.govhackathon.wvsvcoronatracker.services.impl;
 
-import de.ghwct.service.model.GeofenceDto;
-import de.ghwct.service.model.UserDto;
+import de.govhackathon.wvsvcoronatracker.model.GeoFence;
+import de.govhackathon.wvsvcoronatracker.model.User;
 import de.govhackathon.wvsvcoronatracker.services.GeoFencesService;
 import org.springframework.stereotype.Service;
 
@@ -11,17 +11,17 @@ import java.util.List;
 public class GeoFencesServiceImpl implements GeoFencesService {
 
     @Override
-    public List<GeofenceDto> getGeoFences() {
+    public List<GeoFence> getGeoFences() {
         return null;
     }
 
     @Override
-    public GeofenceDto createGeofence(GeofenceDto geofence) {
+    public GeoFence createGeoFence(GeoFence geofence) {
         return null;
     }
 
     @Override
-    public UserDto updateGeoFence(Integer id, GeofenceDto geoFence) {
+    public User updateGeoFence(Integer id, GeoFence geoFence) {
         return null;
     }
 

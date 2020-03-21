@@ -1,7 +1,7 @@
 package de.govhackathon.wvsvcoronatracker.services;
 
-import de.ghwct.service.model.GeofenceDto;
-import de.ghwct.service.model.UserDto;
+import de.govhackathon.wvsvcoronatracker.model.GeoFence;
+import de.govhackathon.wvsvcoronatracker.model.User;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ public interface GeoFencesService {
      *
      * @return List of all geo fences, empty collection if none available
      */
-    List<GeofenceDto> getGeoFences();
+    List<GeoFence> getGeoFences();
 
     /**
      * Create a geo fence
@@ -20,7 +20,7 @@ public interface GeoFencesService {
      * @param geofence data to create geo fence from
      * @return Created geo fence
      */
-    GeofenceDto createGeofence(final GeofenceDto geofence);
+    GeoFence createGeoFence(final GeoFence geofence);
 
     /**
      * Update a geo fence
@@ -29,7 +29,7 @@ public interface GeoFencesService {
      * @param geoFence geo fence data to be changed
      * @return Updated geo fence
      */
-    UserDto updateGeoFence(final Integer id, final GeofenceDto geoFence);
+    User updateGeoFence(final Integer id, final GeoFence geoFence);
 
     /**
      * Delete a geo fence

@@ -1,6 +1,6 @@
 package de.govhackathon.wvsvcoronatracker.services.impl;
 
-import de.ghwct.service.model.UserDto;
+import de.govhackathon.wvsvcoronatracker.model.User;
 import de.govhackathon.wvsvcoronatracker.services.UsersService;
 import org.springframework.stereotype.Service;
 
@@ -10,17 +10,17 @@ import java.util.List;
 public class UsersServiceImpl implements UsersService {
 
     @Override
-    public List<UserDto> getUsers() {
+    public List<User> getUsers() {
         return null;
     }
 
     @Override
-    public UserDto createUser(final UserDto user) {
+    public User createUser(final User user) {
         return null;
     }
 
     @Override
-    public UserDto updateUser(final Integer id, final UserDto user) {
+    public User updateUser(final Integer id, final User user) {
         return null;
     }
 
