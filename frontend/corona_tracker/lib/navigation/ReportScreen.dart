@@ -41,6 +41,7 @@ class ReportScreenFormState extends State<ReportScreenForm> {
   // Create a global key that uniquely identifies the Form widget
   // and allows validation of the form.
   final _formKey = GlobalKey<FormState>();
+  bool disabled = false;
   String _locale;
 
   @override
@@ -193,6 +194,14 @@ class ReportScreenFormState extends State<ReportScreenForm> {
                   // If the form is valid, display a Snackbar.
                   Scaffold.of(context)
                       .showSnackBar(SnackBar(content: Text('Fall wird gesendet')));
+                  setState(() {
+                    if (disabled == false) {
+                      disabled = true;
+                    } else {
+                      disabled = false;
+                    }
+                  });
+
                   _formKey.currentState.save();
                 }
               },
