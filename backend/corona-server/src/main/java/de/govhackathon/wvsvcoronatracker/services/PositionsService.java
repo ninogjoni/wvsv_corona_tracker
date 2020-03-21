@@ -47,14 +47,6 @@ public interface PositionsService {
     List<Position> getPositionsFromTo(final LocalDateTime from, final LocalDateTime to);
 
     /**
-     * Get specified positions
-     *
-     * @param id List of position ids
-     * @return List of requested positions
-     */
-    List<Position> getPositionsTo(final List<Integer> id);
-
-    /**
      * Get all users positions
      *
      * @param userId users id
