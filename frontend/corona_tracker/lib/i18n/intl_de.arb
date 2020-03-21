@@ -1,0 +1,27 @@
+{
+  "@@last_modified": "2020-03-21T12:34:30.637136",
+  "bottomNavigationBarStatusText": "Status",
+  "@bottomNavigationBarStatusText": {
+    "description": "Der Text für die Status Schaltfläche",
+    "type": "text",
+    "placeholders": {}
+  },
+  "bottomNavigationBarMapText": "Karte",
+  "@bottomNavigationBarMapText": {
+    "description": "Der Text für die Karte Schaltfläche",
+    "type": "text",
+    "placeholders": {}
+  },
+  "bottomNavigationBarReportText": "Sende Fall",
+  "@bottomNavigationBarReportText": {
+    "description": "Der Text für die Report Schaltfläche",
+    "type": "text",
+    "placeholders": {}
+  },
+  "bottomNavigationBarHelpText": "Hilfe",
+  "@bottomNavigationBarHelpText": {
+    "description": "Der Text für die Hilfe Schaltfläche",
+    "type": "text",
+    "placeholders": {}
+  }
+}

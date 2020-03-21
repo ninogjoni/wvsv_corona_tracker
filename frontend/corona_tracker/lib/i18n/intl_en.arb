@@ -1,0 +1,27 @@
+{
+  "@@last_modified": "2020-03-21T12:34:30.637136",
+  "bottomNavigationBarStatusText": "Status",
+  "@bottomNavigationBarStatusText": {
+    "description": "The text for the status button",
+    "type": "text",
+    "placeholders": {}
+  },
+  "bottomNavigationBarMapText": "Map",
+  "@bottomNavigationBarMapText": {
+    "description": "The Text for the map button",
+    "type": "text",
+    "placeholders": {}
+  },
+  "bottomNavigationBarReportText": "Send Report",
+  "@bottomNavigationBarReportText": {
+    "description": "The Text for the report button",
+    "type": "text",
+    "placeholders": {}
+  },
+  "bottomNavigationBarHelpText": "Help",
+  "@bottomNavigationBarHelpText": {
+    "description": "The Text for the help button",
+    "type": "text",
+    "placeholders": {}
+  }
+}

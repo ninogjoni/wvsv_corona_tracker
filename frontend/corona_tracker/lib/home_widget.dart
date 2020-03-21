@@ -5,6 +5,8 @@ import 'package:corona_tracker/navigation/ReportScreen.dart';
 
 import 'package:flutter/material.dart';
 
+import 'appLocalizations.dart';
+
 class Home extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -35,19 +37,19 @@ class _HomeState extends State<Home> {
         items: [
           BottomNavigationBarItem(
             icon: new Icon(Icons.airline_seat_individual_suite),
-            title: new Text('Status'),
+            title: new Text(AppLocalizations.of(context).bottomNavigationBarStatusText),
           ),
           BottomNavigationBarItem(
             icon: new Icon(Icons.map),
-            title: new Text('Karte'),
+            title: new Text(AppLocalizations.of(context).bottomNavigationBarMapText),
           ),
           BottomNavigationBarItem(
               icon: new Icon(Icons.report),
-              title: new Text('Fall melden')
+              title: new Text(AppLocalizations.of(context).bottomNavigationBarReportText),
           ),
           BottomNavigationBarItem(
               icon: new Icon(Icons.help),
-              title: new Text('Hilfe')
+              title: new Text(AppLocalizations.of(context).bottomNavigationBarHelpText),
           )
         ],
       ),
