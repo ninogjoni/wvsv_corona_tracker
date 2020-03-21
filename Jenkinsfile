@@ -59,7 +59,7 @@ spec:
 			
 			container('docker'){
 				stage('Build Docker Image') {
-                	    sh "cd backend && docker build --tag tommyelroy/coronatracker-server:$serverVersion ."	
+                	    sh "cd backend && docker build --tag tommyelroy/coronatracker-server:$serverVersion --build-arg VERSION=$serverVersion ."	
 				}
 				if(env.BRANCH_NAME=='master'){
 					stage('Push Docker Image'){

@@ -22,8 +22,6 @@ WORKDIR /coronatracker
 
 COPY --from=builder /coronatracker ./
 
-ENV VERSION 0.0.1-SNAPSHOT
-
 EXPOSE 8080
 
 RUN ls  corona-server/target && \
