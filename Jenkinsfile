@@ -50,13 +50,22 @@ spec:
             stage('Checkout'){
                 checkout scm
             }
-			container('docker'){
 			
+			container('maven'){
 				stage('Get Versions'){
-						serverVersion = sh label: '', returnStdout: true, script: 'cd backend && $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)'
+						serverVersion = sh(returnStdout: true, script: 'cd backend && mvn help:evaluate -Dexpression=project.version -q -DforceStdout').trim()
 				}
+			}
+			
+			container('docker'){
 				stage('Build Docker Image') {
-                	    sh 'cd backend && docker build --tag tommyelroy/wirvsirus:server-$serverVersion .'	
+                	    sh "cd backend && docker build --tag tommyelroy/coronatracker-server:$serverVersion ."	
+				}
+				
+				stage('Push Docker Images'){
+					withCredentials([string(credentialsId: 'dockerhub-tommyelroy-passwort', variable: 'password')]) {
+									sh "docker login --username='tommyelroy' --password='$password' && docker push tommyelroy/coronatracker-server:$serverVersion"
+					}		
 				}
 			}
     }
