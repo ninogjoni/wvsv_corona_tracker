@@ -41,5 +41,6 @@ public class Position {
 
     private Integer accuracy; // meters
 
-    private Object network;
+    //TODO add correct jpa annotation
+    //private Object network;
 }
