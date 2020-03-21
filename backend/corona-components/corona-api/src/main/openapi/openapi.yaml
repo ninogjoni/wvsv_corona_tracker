@@ -329,6 +329,9 @@ components:
           type: number
         altitude:
           type: number
+        accuracy:
+          type: integer
+          description: Position accuracy in meters (radius), lower is better
         network:
           type: object
           properties: {}
