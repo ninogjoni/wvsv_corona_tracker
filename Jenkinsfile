@@ -53,7 +53,7 @@ spec:
 			
 			container('maven'){
 				stage('Get Versions'){
-						serverVersion = sh label: '', returnStdout: true, script: 'cd backend && $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)'
+						serverVersion = sh label: '', returnStdout: true, script: 'cd backend && mvn help:evaluate -Dexpression=project.version -q -DforceStdout'
 				}
 			}
 			
