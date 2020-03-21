@@ -8,6 +8,7 @@ class WvsvCoronaTrackerApplicationTests {
 
 	@Test
 	void contextLoads() {
+		// intentionally left empty
 	}
 
 }
