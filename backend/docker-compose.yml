@@ -1,0 +1,26 @@
+version: '2.1'
+
+services:
+  swagger-editor-editor:
+    container_name: rulebook_api-editor
+    image: swaggerapi/swagger-editor
+    ports:
+      - '8888:8080'
+
+  database:
+    container_name: rulebook_db
+    image: postgres:11
+    environment:
+      POSTGRES_DB: corona
+      POSTGRES_USER: corona
+      POSTGRES_PASSWORD: password
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+
+volumes:
+  mysqldata:
+  pgdata:
+
