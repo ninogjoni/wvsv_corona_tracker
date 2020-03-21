@@ -63,7 +63,7 @@ spec:
 				}
 				
 				stage('Push Docker Images'){
-						sh "docker push --tag tommyelroy/coronatracker-server:$serverVersion ."
+						sh "docker push tommyelroy/coronatracker-server:$serverVersion"
 				}
 			}
     }
