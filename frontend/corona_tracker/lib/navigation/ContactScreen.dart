@@ -11,7 +11,7 @@ class ContactScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appTitle = 'Hilfe';
+    final appTitle = 'Kontake anonymisiert hochladen';
     return MaterialApp(
       theme: ThemeData(primarySwatch: Colors.blueGrey),
       title: appTitle,
@@ -66,6 +66,8 @@ class ContactScreenFormState extends State<ContactScreenForm> {
   List<List<String>> contacts = List<List<String>>();
   List<List<String>> contact_items = List<List<String>>();
   TextEditingController editingController = TextEditingController();
+  bool currentlyAllSelected = true;
+  String selectionToggleText = "Alle nicht auswählen";
 
   @override
   void initState() {
@@ -150,6 +152,15 @@ class ContactScreenFormState extends State<ContactScreenForm> {
     }
   }
 
+  void uploadContacts() {
+    for(int i = 0; i < contact_items.length; i++) {
+      if(contact_items[i][0] == "TRUE")
+        print("uploading: " + contact_items[i][1]);
+
+      // hier hashen: contact_items[i][2]
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -181,12 +192,38 @@ class ContactScreenFormState extends State<ContactScreenForm> {
                       },
                       controller: editingController,
                       decoration: InputDecoration(
-                          labelText: "Search",
-                          hintText: "Search",
+                          labelText: "Suchen",
+                          hintText: "Suchen",
                           prefixIcon: Icon(Icons.search),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.all(Radius.circular(25.0)))),
                     ),
+                  ),
+                  ButtonBar(
+                    alignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      //unSelectAllButton
+                      FlatButton(
+                        onPressed: () {
+                          setState(() {
+                            if(selectionToggleText == "Alle nicht auswählen") {
+                              selectionToggleText = "Alle auswählen";
+                              for(int i = 0; i < contact_items.length; i++) {
+                                contact_items[i][0] = "FALSE";
+                              }
+                            }
+                            else if(selectionToggleText == "Alle auswählen") {
+                              selectionToggleText = "Alle nicht auswählen";
+                              for(int i = 0; i < contact_items.length; i++) {
+                                contact_items[i][0] = "TRUE";
+                              }
+                            }
+
+                          });
+                        },
+                        child: Text(selectionToggleText),
+                      )
+                    ],
                   ),
                   Expanded(
                     child: ListView.builder(
@@ -208,10 +245,15 @@ class ContactScreenFormState extends State<ContactScreenForm> {
                         );
                       },
                     ),
-                  )
+                  ),
                 ]
             )
-        )
+        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: uploadContacts,
+        tooltip: 'Hochladen',
+        child: Icon(Icons.cloud_upload),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
