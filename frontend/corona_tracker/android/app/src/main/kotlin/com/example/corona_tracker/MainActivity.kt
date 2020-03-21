@@ -1,4 +1,4 @@
-package org.beatvirus.corona
+package com.example.corona_tracker
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

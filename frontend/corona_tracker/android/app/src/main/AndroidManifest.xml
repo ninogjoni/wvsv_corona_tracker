@@ -6,8 +6,8 @@
          additional functionality it is fine to subclass or reimplement
          FlutterApplication and put your custom class here. -->
     <application
-        android:name="org.beatvirus.corona"
-        android:label="org.beatvirus.corona"
+        android:name="io.flutter.app.FlutterApplication"
+        android:label="corona_tracker"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
