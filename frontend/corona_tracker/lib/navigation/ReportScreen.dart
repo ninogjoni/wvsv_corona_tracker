@@ -24,6 +24,7 @@ class ReportScreen extends StatelessWidget {
           title: Text(appTitle),
         ),
         body: ReportScreenForm(),
+
       ),
     );
   }
@@ -41,7 +42,7 @@ class ReportScreenFormState extends State<ReportScreenForm> {
   // Create a global key that uniquely identifies the Form widget
   // and allows validation of the form.
   final _formKey = GlobalKey<FormState>();
-  bool disabled = false;
+  bool _enabled = true;
   String _locale;
 
   @override
@@ -151,8 +152,10 @@ class ReportScreenFormState extends State<ReportScreenForm> {
                     fontSize: 17,
                     color: Colors.red
                 )
+
           ),
           TextFormField(
+            enabled: _enabled,
             keyboardType: TextInputType.number,
             inputFormatters: <TextInputFormatter>[
               WhitelistingTextInputFormatter.digitsOnly
@@ -188,20 +191,14 @@ class ReportScreenFormState extends State<ReportScreenForm> {
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: RaisedButton(
               onPressed: () {
+
                 // Validate returns true if the form is valid, or false
                 // otherwise.
-                if (_formKey.currentState.validate()) {
+                if (_formKey.currentState.validate() && _enabled) {
+                  _enabled = !_enabled;
                   // If the form is valid, display a Snackbar.
                   Scaffold.of(context)
                       .showSnackBar(SnackBar(content: Text('Fall wird gesendet')));
-                  setState(() {
-                    if (disabled == false) {
-                      disabled = true;
-                    } else {
-                      disabled = false;
-                    }
-                  });
-
                   _formKey.currentState.save();
                 }
               },

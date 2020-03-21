@@ -10,11 +10,20 @@ class StatusScreen extends StatelessWidget {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment:
-            MainAxisAlignment.spaceAround,
+//          mainAxisAlignment:
+//            MainAxisAlignment.spaceAround,
           children: [
+            new Container(
+              child:
+              Image.asset(
+                'assets/images/corona_tracker_homescreen_teaser.png',
+                fit: BoxFit.cover,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 17.0),
+            ),
             Column(
-
               children: [
                 Icon(
                     Icons.healing,

@@ -34,7 +34,7 @@ class _HomeState extends State<Home> {
         currentIndex: _currentIndex, // this will be set when a new tab is tapped
         items: [
           BottomNavigationBarItem(
-            icon: new Icon(Icons.airline_seat_individual_suite),
+            icon: new Icon(Icons.people),
             title: new Text('Status'),
           ),
           BottomNavigationBarItem(
