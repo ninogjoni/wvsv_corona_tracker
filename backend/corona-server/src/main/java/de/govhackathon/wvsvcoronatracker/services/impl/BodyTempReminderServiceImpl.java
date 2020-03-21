@@ -4,6 +4,8 @@ import de.govhackathon.wvsvcoronatracker.model.User;
 import de.govhackathon.wvsvcoronatracker.services.BodyTempService;
 import de.govhackathon.wvsvcoronatracker.services.PushService;
 import de.govhackathon.wvsvcoronatracker.services.UsersService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -17,6 +19,7 @@ import java.time.LocalDateTime;
  */
 @Component
 public class BodyTempReminderServiceImpl {
+    private static final Logger LOG = LoggerFactory.getLogger(PushServiceImpl.class);
 
     // TODO: i18n
     private static final String TITLE = "Fiebermessen";
@@ -50,6 +53,8 @@ public class BodyTempReminderServiceImpl {
      * their temperature after "afterHour" (0-23) today.
      */
     private void sendReminders(int afterHour) {
+        LOG.info("cronjob for reminders ater %d o'clock started", afterHour);
+
         LocalDateTime limit = LocalDate.now().atTime(afterHour, 0);
 
         for (User user : this.usersService.getUsers()) {
@@ -58,5 +63,7 @@ public class BodyTempReminderServiceImpl {
                 this.pushService.sendPushToDevice( this.TITLE, this.REMINDER, user.getDeviceToken());
             }
         }
+
+        LOG.info("cronjob for reminders ater %d o'clock done", afterHour);
     }
 }
