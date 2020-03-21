@@ -2,6 +2,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
+import de.govhackathon.wvsvcoronatracker.model.User;
+import de.govhackathon.wvsvcoronatracker.services.UsersService;
+
 /**
  * Send body temperature measurement reminder to users if
  * they didn't already report their temperature recently.
@@ -14,7 +19,7 @@ public class BodyTempReminderServiceImpl {
     private MessagingService messagingService;
 
     @Autowired
-    public JobServiceImpl(UsersService usersService, BodyTempService bodyTempService, MessagingService messagingService) {
+    public BodyTempReminderServiceImpl(UsersService usersService, BodyTempService bodyTempService, MessagingService messagingService) {
 	this.usersService = usersService;
 	this.bodyTempService = bodyTempService;
 	this.messagingService = messagingService;
