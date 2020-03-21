@@ -1,15 +1,16 @@
 package de.govhackathon.wvsvcoronatracker.services;
 
-import de.govhackathon.wvsvcoronatracker.model.TemperatureMeasurement;
-
 import java.time.LocalDateTime;
+import java.util.Optional;
+
+import de.govhackathon.wvsvcoronatracker.model.TemperatureMeasurement;
 
 public interface BodyTempService {
 
   /**
    * Get the timestamp of last reported temperature.
    */
-  LocalDateTime getLastBodyTempByUser(String userId);
+  Optional<LocalDateTime> getLastBodyTempByUser(String userId);
 
   /**
    * Add new self reported temperature for user.

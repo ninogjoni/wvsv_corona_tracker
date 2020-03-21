@@ -308,6 +308,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TempMeasurement'
+  /measurement/bodytemp/latest/{id}:
+    get:
+      summary: Get the latest body temp measurement
+      operationId: getLastestBodyTempMeasurement
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeStamp'
+
+      x-codegen-request-body-name: body
+
   /dataset/status:
     get:
       summary: Fetch a list of data-sets
@@ -542,6 +562,12 @@ components:
           description: in meters
         hours:
           type: number
+    TimeStamp:
+      type: object
+      properties:
+        timestamp:
+          type: number
+
   parameters:
     entityId:
       name: id
