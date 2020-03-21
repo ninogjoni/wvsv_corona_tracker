@@ -7,8 +7,8 @@ During the wirvsvirushackathon.org challenge, we collaborate on Discord to creat
 Planned features include:
 
 - Self-report health status (diagnosed/cured)
-- Upload your close contacts (anonymized, of course!) 
-- Get notified immediately if one of your 1st/2nd/3rd grade contacts gets diagnosed or cured
+- Upload your friends (anonymized, of course!) 
+- Get notified immediately if one of your 1st/2nd/3rd grade friends gets diagnosed or cured
 - View infected areas on a map (anonymized)
 - store data of fever measurement at least twice a day
 - check movement historys frequently to detect who had contact to (newly uncovered) infected persons
