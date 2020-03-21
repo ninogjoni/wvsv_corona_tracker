@@ -11,7 +11,7 @@ class StatusScreen extends StatelessWidget {
       body: Center(
         child: Center(
           child: Text(
-            'Hello World',
+            'Status',
             textDirection: TextDirection.ltr,
             style: TextStyle(
               fontSize: 32,

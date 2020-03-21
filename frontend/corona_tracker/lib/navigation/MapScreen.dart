@@ -9,16 +9,17 @@ class MapScreen extends StatelessWidget {
         title: Text('Karte'),
       ),
       body: Center(
-          child: RaisedButton(
-            child: Text('Dummy'),
-            color: Theme.of(context).primaryColor,
-            textColor: Colors.white,
-            /*onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => StatusScreen(),
-                  ))*/
-          )),
+        child: Center(
+          child: Text(
+            'Karte',
+            textDirection: TextDirection.ltr,
+            style: TextStyle(
+              fontSize: 32,
+              color: Colors.black87,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
