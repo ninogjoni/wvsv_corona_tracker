@@ -1,8 +1,8 @@
 package de.govhackathon.wvsvcoronatracker.repositories;
 
+import de.govhackathon.wvsvcoronatracker.model.GeoFence;
 import org.springframework.data.repository.CrudRepository;
 
-import de.govhackathon.wvsvcoronatracker.model.User;
+public interface GeoFenceRepository extends CrudRepository<GeoFence, String> {
 
-public interface UserRepository extends CrudRepository<User, String> {
 }
