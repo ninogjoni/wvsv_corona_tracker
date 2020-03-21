@@ -38,6 +38,7 @@ class ReportScreenFormState extends State<ReportScreenForm> {
   // Create a global key that uniquely identifies the Form widget
   // and allows validation of the form.
   final _formKey = GlobalKey<FormState>();
+  bool _enabled = true;
   String _locale;
 
   // @override
@@ -83,8 +84,11 @@ class ReportScreenFormState extends State<ReportScreenForm> {
     // Build a Form widget using the _formKey created above.
     return Form(
       key: _formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+      child: ListView(
+        //mainAxisAlignment: MainAxisAlignment.center,
+        //crossAxisAlignment: CrossAxisAlignment.center,
+        shrinkWrap: true,
+        padding: EdgeInsets.all(20.0),
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 5.0),
@@ -148,6 +152,7 @@ class ReportScreenFormState extends State<ReportScreenForm> {
             ),
           ),
           TextFormField(
+            enabled: _enabled,
             keyboardType: TextInputType.number,
             inputFormatters: <TextInputFormatter>[
               WhitelistingTextInputFormatter.digitsOnly
@@ -182,10 +187,12 @@ class ReportScreenFormState extends State<ReportScreenForm> {
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: RaisedButton(
               onPressed: () {
+
                 // Validate returns true if the form is valid, or false
                 // otherwise.
                 _locale = Localizations.localeOf(context).languageCode;
-                if (_formKey.currentState.validate()) {
+                if (_formKey.currentState.validate() && _enabled) {
+                  _enabled = !_enabled;
                   // If the form is valid, display a Snackbar.
                   Scaffold.of(context)
                       .showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).ReportScreen_SendingReportText)));

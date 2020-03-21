@@ -1,3 +1,4 @@
+import 'package:corona_tracker/navigation/ContactScreen.dart';
 import 'package:corona_tracker/navigation/HelpScreen.dart';
 import 'package:corona_tracker/navigation/MapScreen.dart';
 import 'package:corona_tracker/navigation/StatusScreen.dart';
@@ -21,7 +22,8 @@ class _HomeState extends State<Home> {
     StatusScreen(),
     MapScreen(),
     ReportScreen(),
-    HelpScreen()
+    HelpScreen(),
+    ContactScreen()
   ];
 
   @override
@@ -37,7 +39,7 @@ class _HomeState extends State<Home> {
         currentIndex: _currentIndex, // this will be set when a new tab is tapped
         items: [
           BottomNavigationBarItem(
-            icon: new Icon(Icons.airline_seat_individual_suite),
+            icon: new Icon(Icons.people),
             title: new Text(AppLocalizations.of(context).bottomNavigationBarStatusText),
           ),
           BottomNavigationBarItem(
@@ -50,7 +52,12 @@ class _HomeState extends State<Home> {
           ),
           BottomNavigationBarItem(
               icon: new Icon(Icons.help),
-              title: new Text(AppLocalizations.of(context).bottomNavigationBarHelpText),
+              title: new Text(AppLocalizations.of(context).bottomNavigationBarHelpText)
+          ),
+          BottomNavigationBarItem(
+              icon: new Icon(Icons.contacts),
+              // TODO: i18n
+              title: new Text('Kontakte')
           )
         ],
       ),

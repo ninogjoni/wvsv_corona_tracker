@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class HelpScreen extends StatelessWidget {
-  @override
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +11,7 @@ class HelpScreen extends StatelessWidget {
       body: Center(
         child: Center(
           child: Text(
-            'Hilfe',
+            'Karte',
             textDirection: TextDirection.ltr,
             style: TextStyle(
               fontSize: 32,
@@ -23,5 +22,4 @@ class HelpScreen extends StatelessWidget {
       ),
     );
   }
-
 }
