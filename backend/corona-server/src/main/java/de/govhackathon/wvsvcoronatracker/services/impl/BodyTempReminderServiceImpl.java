@@ -1,3 +1,5 @@
+package de.govhackathon.wvsvcoronatracker.services.impl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -14,39 +16,44 @@ import de.govhackathon.wvsvcoronatracker.services.UsersService;
 @Component
 public class BodyTempReminderServiceImpl {
 
+    // TODO: i18n
+    private static final String TITLE = "Fiebermessen";
+    private static final String REMINDER = "Bitte trage deine Körpertemperatur in die App ein";
+
     private UsersService usersService;
     private BodyTempService bodyTempService;
-    private MessagingService messagingService;
+    private PushService pushService;
 
     @Autowired
-    public BodyTempReminderServiceImpl(UsersService usersService, BodyTempService bodyTempService, MessagingService messagingService) {
+    public BodyTempReminderServiceImpl(UsersService usersService, BodyTempService bodyTempService, PushService pushService) {
 	this.usersService = usersService;
 	this.bodyTempService = bodyTempService;
-	this.messagingService = messagingService;
+	this.pushService = pushService;
     }
 
     // Run at 08:00 daily
     @Scheduled(cron = "0 0 8 * * *")
     public void morningReminder() {
-	LocalDateTime earlyMorning = LocalDate.now().atTime(4, 0);
-
-	for(User user : this.usersService.getUsers()) {
-	    LocalDateTime last = this.bodyTempService.getLastBodyTempByUser(user.getId());
-	    if(last.isBefore(earlyMorning)) {
-		this.messagingService.sendMessage(user.getDeviceId(), "reminder"); // TODO: text
-	    }
-	}
+        this.sendReminders(4);
     }
 
     // Run at 20:00 daily
     @Scheduled(cron = "0 0 20 * * *")
     public void eveningReminder() {
-	LocalDateTime earlyEvening = LocalDate.now().atTime(16, 0);
+        this.sendReminders(16);
+    }
+
+    /**
+     * Send reminder to all users that have not yet reported
+     * their temperature after "afterHour" (0-23) today.
+     */
+    private void sendReminders(afterHour int) {
+	LocalDateTime earlyEvening = LocalDate.now().atTime(afterHour, 0);
 
 	for(User user : this.usersService.getUsers()) {
 	    LocalDateTime last = this.bodyTempService.getLastBodyTempByUser(user.getId());
 	    if(last.isBefore(earlyMorning)) {
-		this.messagingService.sendMessage(user.getDeviceId(), "reminder"); // TODO: text
+		this.pushService.sendPushToOneDevice(appId, this.TITLE, this.MESSAGE, user.getDeviceToken());
 	    }
 	}
     }
