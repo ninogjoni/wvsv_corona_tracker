@@ -23,12 +23,19 @@
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>2.2.5.RELEASE</version>
                 <type>pom</type>
-							  <scope>import</scope>
+			    <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
 	<dependencies>
+		<dependency>
+			<groupId>de.govhackathon</groupId>
+			<artifactId>corona-api</artifactId>
+			<classifier>specs</classifier>
+			<type>zip</type>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -74,6 +81,27 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>unpack-api-specs</id>
+						<goals>
+							<goal>unpack-dependencies</goal>
+						</goals>
+						<phase>generate-sources</phase>
+						<configuration>
+							<outputDirectory>${project.build.directory}/generated-sources</outputDirectory>
+							<includeArtifactIds>corona-api</includeArtifactIds>
+							<includeGroupIds>de.govhackathon</includeGroupIds>
+							<excludeTransitive>true</excludeTransitive>
+							<classifier>specs</classifier>
+							<type>zip</type>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>2.2.5.RELEASE</version>
@@ -84,11 +112,14 @@
 				<version>3.3.0</version>
 				<executions>
 					<execution>
+						<id>generate-server-stubs</id>
+						<phase>generate-sources</phase>
 						<goals>
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<inputSpec>${project.basedir}/src/main/resources/api/Api.yaml</inputSpec>
+							<output>${project.build.directory}/generated-sources</output>
+							<inputSpec>${project.build.directory}/generated-sources/openapi.yaml</inputSpec>
 							<modelPackage>de.ghwct.service.model</modelPackage>
 							<apiPackage>de.ghwct.service.api</apiPackage>
 							<generateApis>false</generateApis>
