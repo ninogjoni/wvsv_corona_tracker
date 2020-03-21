@@ -6,7 +6,7 @@ class ContactScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appTitle = 'Kontakte';
+    final appTitle = 'Freunde';
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(

@@ -55,9 +55,9 @@ class _HomeState extends State<Home> {
               title: new Text(AppLocalizations.of(context).bottomNavigationBarHelpText)
           ),
           BottomNavigationBarItem(
-              icon: new Icon(Icons.contacts),
+              icon: new Icon(Icons.person_add),
               // TODO: i18n
-              title: new Text('Kontakte')
+              title: new Text('Freunde')
           )
         ],
       ),

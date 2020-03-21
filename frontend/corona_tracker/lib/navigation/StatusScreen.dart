@@ -12,8 +12,8 @@ class StatusScreen extends StatelessWidget {
       ),
       body: Center(
         child: Column(
-//          mainAxisAlignment:
-//            MainAxisAlignment.spaceAround,
+  //          mainAxisAlignment:
+          //       MainAxisAlignment.spaceAround,
           children: [
             new Container(
               child:
@@ -23,24 +23,47 @@ class StatusScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
             ),
             Column(
               children: [
                 Icon(
-                    Icons.healing,
-                    color: Colors.green[500],
-                    size: 100.0 ,
+                  Icons.people,
+                  color: Colors.blueGrey,
+                  size: 50.0 ,
                 ),
                 Text(
-                  'Anzahl der Geheilten',
-                  style: TextStyle(
-                    //fontWeight: FontWeight.bold,
-                    fontSize: 34
-                  )),
+                    'Anzahl der Benutzer',
+                    style: TextStyle(
+                        fontSize: 34
+                    )),
                 //TODO API CALL
                 Text(
                     '13022',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      decoration: TextDecoration.underline,
+                      fontSize: 34,
+                    )
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                Icon(
+                  Icons.person,
+                  color: Colors.green[500],
+                  size: 50.0 ,
+                ),
+                Text(
+                    'Eigener Status',
+                    style: TextStyle(
+                      //fontWeight: FontWeight.bold,
+                        fontSize: 34
+                    )),
+                //TODO API CALL
+                Text(
+                    'Gesund',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 34,
@@ -52,29 +75,31 @@ class StatusScreen extends StatelessWidget {
             Column(
               children: [
                 Icon(
-                  Icons.people,
-                  color: Colors.blueGrey,
-                  size: 100.0 ,
+                  Icons.healing,
+                  color: Colors.green[500],
+                  size: 50.0 ,
                 ),
                 Text(
-                    'Anzahl der Benutzer',
+                    'Anzahl der Geheilten',
                     style: TextStyle(
-                        fontSize: 34
+                      //fontWeight: FontWeight.bold,
+                      fontSize: 34,
+                      color: Colors.green[500],
                     )),
                 //TODO API CALL
                 Text(
                     '13022',
                     style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        decoration: TextDecoration.underline,
-                        fontSize: 34
+                      fontWeight: FontWeight.bold,
+                      fontSize: 34,
+                      decoration: TextDecoration.underline,
+                      color: Colors.green[500],
                     )
                 ),
               ],
             ),
           ],
         )
-
 //        child: Center (
 //          child: Text(
 //            'Anzahl der Geheilten',

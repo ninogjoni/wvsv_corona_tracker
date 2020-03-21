@@ -73,10 +73,10 @@ class ReportScreenFormState extends State<ReportScreenForm> {
 
   //TODO Am Besten eine User Instanz erzeugen und die gewaehlten Checkboxes in eine Liste packen
 
-  bool _feverChecked = true;
-  bool _tirednessChecked = true;
-  bool _dryCoughChecked = true;
-  bool _achesPainsChecked = true;
+  bool _feverChecked = false;
+  bool _tirednessChecked = false;
+  bool _dryCoughChecked = false;
+  bool _achesPainsChecked = false;
 
 
   @override
