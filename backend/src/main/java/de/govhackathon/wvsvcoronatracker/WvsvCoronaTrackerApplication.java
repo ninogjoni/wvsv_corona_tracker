@@ -1,4 +1,4 @@
-package de.gov_hackathon.wvsv_corona_tracker;
+package de.govhackathon.wvsvcoronatracker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

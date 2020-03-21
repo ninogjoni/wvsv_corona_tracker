@@ -8,10 +8,10 @@
 		<version>2.2.5.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>de.gov_hackathon</groupId>
-	<artifactId>wvsv_corona_tracker</artifactId>
+	<groupId>de.govhackathon</groupId>
+	<artifactId>wvsvcoronatracker</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>wvsv_corona_tracker</name>
+	<name>wvsvcoronatracker</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
