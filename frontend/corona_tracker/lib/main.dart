@@ -1,30 +1,17 @@
 import 'package:flutter/material.dart';
 import './navigation/HomeScreen.dart';
 import './navigation/StatusScreen.dart';
+import 'home_widget.dart';
 
 
 void main() => runApp(MyApp());
-
-/*class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}*/
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData(primarySwatch: Colors.blue), home: HomeScreen());
+        theme: ThemeData(primarySwatch: Colors.blue), home: Home());
   }
 }
 

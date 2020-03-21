@@ -7,18 +7,19 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home Screen'),
+        title: Text('Home'),
       ),
       body: Center(
           child: RaisedButton(
               child: Text('Go to StatusScreen'),
               color: Theme.of(context).primaryColor,
               textColor: Colors.white,
-              onPressed: () => Navigator.push(
+              /*onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (BuildContext context) => StatusScreen(),
-                  )))),
+                  ))*/
+          )),
     );
   }
 }

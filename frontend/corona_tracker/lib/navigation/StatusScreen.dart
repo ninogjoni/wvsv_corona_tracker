@@ -6,14 +6,14 @@ class StatusScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Second Screen'),
+        title: Text('Status'),
       ),
       body: Center(
         child: RaisedButton(
             child: Text('Back To HomeScreen'),
             color: Theme.of(context).primaryColor,
             textColor: Colors.white,
-            onPressed: () => Navigator.pop(context)
+            //onPressed: () => Navigator.pop(context)
         ),
       ),
     );
