@@ -276,7 +276,39 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ReportTrips'
-  /dataset:
+  /measurement/bodytemp:
+    get:
+      summary: Fetch a list of body temp measurements
+      operationId: getBodyTempMeasurements
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TempMeasurement'
+        400:
+          description: No Permission
+          content: {}
+    post:
+      summary: Add a plague body temp measurement
+      operationId: createBodyTempMeasurement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TempMeasurement'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TempMeasurement'
+  /dataset/status:
     get:
       summary: Fetch a list of data-sets
       operationId: getDataSets
@@ -373,6 +405,22 @@ components:
         geofenceId:
           type: integer
         maintenanceId:
+          type: integer
+    TempMeasurement:
+      type: object
+      required:
+        - time
+        - userId
+        - value
+      properties:
+        time:
+          type: string
+          description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
+          format: date-time
+        userId:
+          type: integer
+        value:
+          description: 'temp value, caution: is multiplied *100. E.g. 38.02°C gets 3802 here!'
           type: integer
     PlagueDataSet:
       type: object
