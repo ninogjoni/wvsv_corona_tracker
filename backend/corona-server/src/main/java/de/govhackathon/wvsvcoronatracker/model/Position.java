@@ -22,7 +22,7 @@ public class Position {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer userId;
+    private String userId;
 
     @Builder.Default
     private LocalDateTime timestamp = LocalDateTime.now(ZoneOffset.UTC);

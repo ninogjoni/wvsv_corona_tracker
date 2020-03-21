@@ -31,12 +31,12 @@ public class PositionsServiceImpl implements PositionsService {
   }
 
   @Override
-  public List<Position> getPositionsByUserId(final Integer userId) {
+  public List<Position> getPositionsByUserId(final String userId) {
     return positionsRepository.findByUserId(userId);
   }
 
   @Override
-  public List<Position> getPositionsByUserIdAndTimeStamp(Integer userId, LocalDateTime timestamp) {
+  public List<Position> getPositionsByUserIdAndTimeStamp(String userId, LocalDateTime timestamp) {
     return positionsRepository.findByUserIdAndTimestamp(userId, timestamp);
   }
 

@@ -36,7 +36,7 @@ public interface PositionsService {
      * @param userId users id
      * @return List of all positions for a specific user, empty collection if none available
      */
-    List<Position> getPositionsByUserId(final Integer userId);
+    List<Position> getPositionsByUserId(final String userId);
 
     /**
      * Get all users positions starting from date and the user id
@@ -45,7 +45,7 @@ public interface PositionsService {
      * @param timestamp   date to get positions from
      * @return List of all positions for a specific user, starting from date specified, empty collection if none available
      */
-    List<Position> getPositionsByUserIdAndTimeStamp(final Integer userId, final LocalDateTime timestamp);
+    List<Position> getPositionsByUserIdAndTimeStamp(final String userId, final LocalDateTime timestamp);
 
 
 }
