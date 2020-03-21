@@ -139,6 +139,7 @@
 							<generateModelTests>true</generateModelTests>
 							<withXml>true</withXml>
 							<generatorName>spring</generatorName>
+							<modelNameSuffix>Dto</modelNameSuffix>
 							<configOptions>
 								<sourceFolder>src/gen/java/</sourceFolder>
 								<java8>true</java8>

@@ -1,7 +1,7 @@
 package de.govhackathon.wvsvcoronatracker.api;
 
 import de.ghwct.service.api.PositionsApi;
-import de.ghwct.service.model.Position;
+import de.ghwct.service.model.PositionDto;
 import de.govhackathon.wvsvcoronatracker.services.PositionsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ public class PositionsController implements PositionsApi {
     PositionsService positionsService;
 
     @Override
-    public ResponseEntity<List<Position>> getPositions(Integer userId, OffsetDateTime from, OffsetDateTime to, Integer id) {
+    public ResponseEntity<List<PositionDto>> getPositions(Integer userId, OffsetDateTime from, OffsetDateTime to, Integer id) {
         // TODO implement me
         return ResponseEntity.ok().body(Collections.emptyList());
     }

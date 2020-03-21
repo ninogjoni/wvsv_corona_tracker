@@ -1,7 +1,7 @@
 package de.govhackathon.wvsvcoronatracker.api;
 
 import de.ghwct.service.api.ReportsApi;
-import de.ghwct.service.model.ReportTrips;
+import de.ghwct.service.model.ReportTripsDto;
 import de.govhackathon.wvsvcoronatracker.services.ReportsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ public class ReportsController implements ReportsApi {
     ReportsService reportsService;
 
     @Override
-    public ResponseEntity<List<ReportTrips>> getLocations(OffsetDateTime from, OffsetDateTime to, List<String> deviceId) {
+    public ResponseEntity<List<ReportTripsDto>> getLocations(OffsetDateTime from, OffsetDateTime to, List<String> deviceId) {
         // TODO implement me
         return ResponseEntity.ok().body(Collections.emptyList());
     }
