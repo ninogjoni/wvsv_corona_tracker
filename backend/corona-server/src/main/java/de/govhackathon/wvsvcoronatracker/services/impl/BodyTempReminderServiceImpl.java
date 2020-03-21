@@ -55,7 +55,7 @@ public class BodyTempReminderServiceImpl {
         for (User user : this.usersService.getUsers()) {
             LocalDateTime last = this.bodyTempService.getLastBodyTempByUser(user.getId());
             if (last.isBefore(limit)) {
-                this.pushService.sendPushToDevice(this.TITLE, this.REMINDER, user.getDeviceToken());
+                this.pushService.sendPushToDevice(this.TITLE, this.REMINDER, user.getToken());
             }
         }
     }
