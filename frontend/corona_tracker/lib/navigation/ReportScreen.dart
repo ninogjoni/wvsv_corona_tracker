@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:developer';
 import 'package:corona_tracker/models/PhoneNumber.dart';
+import 'package:devicelocale/devicelocale.dart';
 
 
 class ReportScreen extends StatelessWidget {
@@ -39,6 +40,35 @@ class ReportScreenFormState extends State<ReportScreenForm> {
   // Create a global key that uniquely identifies the Form widget
   // and allows validation of the form.
   final _formKey = GlobalKey<FormState>();
+  String _locale;
+
+  @override
+  void initState() {
+    super.initState();
+    initPlatformState();
+  }
+
+  // Platform messages are asynchronous, so we initialize in an async method.
+  Future<void> initPlatformState() async {
+    String currentLocale;
+
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      currentLocale = await Devicelocale.currentLocale;
+      print(currentLocale);
+    } on PlatformException {
+      print("Error obtaining current locale");
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+
+    setState(() {
+      _locale = currentLocale;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,11 +97,12 @@ class ReportScreenFormState extends State<ReportScreenForm> {
               else if (value.length > 16) {
                 return "Die Mobilnummer ist zu lang";
               }
+              print(_locale);
             },
             onSaved: (String value) {
               //Hier werden die Daten an das Backend gesendet und dort weiter-
               //-bearbeitet
-              String phoneNumberE164 = PhoneNumber(value, Localizations.localeOf(context).countryCode).normalize();
+              String phoneNumberE164 = PhoneNumber(value, _locale).normalize();
               // vielleicht hier noch den String im TextFeld mit dem normalisierten ersetzen?
               print(phoneNumberE164);
             },

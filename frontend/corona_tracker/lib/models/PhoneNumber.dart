@@ -5,7 +5,44 @@ class PhoneNumber {
   PhoneNumber(String _number, String _country_code) {
     number = _number;
     //print(_country_code); TODO: Locale always giving back en-US
-    region_code = "49";
+    _country_code = _country_code.substring(_country_code.indexOf("_") + 1, _country_code.length);
+
+    region_code = "49"; // default
+    switch(_country_code) {
+      case "DE":
+        region_code = "49";
+        break;
+      case "CH":
+        region_code = "41";
+        break;
+      case "AT":
+        region_code = "43";
+        break;
+      case "FR":
+        region_code = "33";
+        break;
+      case "NL":
+        region_code = "31";
+        break;
+      case "PL":
+        region_code = "48";
+        break;
+      case "DK":
+        region_code = "45";
+        break;
+      case "BE":
+        region_code = "32";
+        break;
+      case "LU":
+        region_code = "352";
+        break;
+      case "CZ":
+        region_code = "420";
+        break;
+      case "US":
+        region_code = "1";
+        break;
+    }
   }
 
   String get_number() {
