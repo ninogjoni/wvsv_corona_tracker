@@ -6,6 +6,7 @@ import 'package:devicelocale/devicelocale.dart';
 
 
 class ReportScreen extends StatelessWidget {
+
   @override
   ReportScreenFormState createState() {
     return ReportScreenFormState();
@@ -70,37 +71,84 @@ class ReportScreenFormState extends State<ReportScreenForm> {
     });
   }
 
+  //TODO Am Besten eine User Instanz erzeugen und die gewaehlten Checkboxes in eine Liste packen
+
+  bool _feverChecked = true;
+  bool _tirednessChecked = true;
+  bool _dryCoughChecked = true;
+  bool _achesPainsChecked = true;
+
+
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
     return Form(
       key: _formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+      child: ListView(
+        //mainAxisAlignment: MainAxisAlignment.center,
+        //crossAxisAlignment: CrossAxisAlignment.center,
+        shrinkWrap: true,
+        padding: EdgeInsets.all(20.0),
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 5.0),
           ),
           Text (
-              'Wählen Sie hier Ihre Symptome aus',
+              'Haben Sie folgende Symptome?',
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 17
               )
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5.0),
+          CheckboxListTile(
+            title: Text("Fieber"),
+            value: _feverChecked,
+            onChanged: (value) {
+              setState(() {
+                _feverChecked = value;
+              });
+            },
+            controlAffinity: ListTileControlAffinity.leading, //  <-- leading Checkbox
           ),
           CheckboxListTile(
-            title: Text("title text"),
-            value: true,
-            controlAffinity: ListTileControlAffinity.leading,  //  <-- leading Checkbox
+            title: Text("Müdigkeit"),
+            value: _tirednessChecked,
+            onChanged: (value) {
+              setState(() {
+                _tirednessChecked = value;
+              });
+            },
+            controlAffinity: ListTileControlAffinity.leading, //  <-- leading Checkbox
+          ),
+          CheckboxListTile(
+            title: Text("Trockener Husten"),
+            value: _dryCoughChecked,
+            onChanged: (value) {
+              setState(() {
+                _dryCoughChecked = value;
+              });
+            },
+            controlAffinity: ListTileControlAffinity.leading, //  <-- leading Checkbox
+          ),
+          CheckboxListTile(
+            title: Text("Beschwerden/Schmerzen"),
+            value: _achesPainsChecked,
+            onChanged: (value) {
+              setState(() {
+                _achesPainsChecked = value;
+              });
+            },
+            controlAffinity: ListTileControlAffinity.leading, //  <-- leading Checkbox
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 15.0),
           ),
           Text (
             'Bitte tragen Sie ihre Mobilnummer ein',
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 17
+                    fontSize: 17,
+                    color: Colors.red
                 )
           ),
           TextFormField(
