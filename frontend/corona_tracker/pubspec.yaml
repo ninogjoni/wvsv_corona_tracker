@@ -29,6 +29,7 @@ dependencies:
   devicelocale: ^0.2.2
   contacts_service: ^0.3.10
   permission_handler: '^4.4.0+hotfix.2'
+  google_maps_flutter: ^0.5.25
 
 dev_dependencies:
   flutter_test:
