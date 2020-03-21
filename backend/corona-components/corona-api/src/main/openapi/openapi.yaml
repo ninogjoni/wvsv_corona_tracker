@@ -362,6 +362,13 @@ parameters:
     items:
       type: integer
     collectionFormat: multi
+  userIdArray:
+    name: deviceId
+    in: query
+    type: array
+    items:
+      type: string
+    collectionFormat: multi
   fromTime:
     name: from
     in: query
