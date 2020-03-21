@@ -1,6 +1,6 @@
 package de.govhackathon.wvsvcoronatracker.services.impl;
 
-import de.ghwct.service.model.Position;
+import de.govhackathon.wvsvcoronatracker.model.Position;
 import de.govhackathon.wvsvcoronatracker.services.PositionsService;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -8,6 +8,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PositionsServiceImpl implements PositionsService {
+
+  @Override
+  public Position savePosition(Position position) {
+    return null;
+  }
 
   @Override
   public List<Position> getPositions() {
