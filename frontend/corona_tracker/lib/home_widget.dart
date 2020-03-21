@@ -1,6 +1,7 @@
 import 'package:corona_tracker/navigation/HomeScreen.dart';
+import 'package:corona_tracker/navigation/MapScreen.dart';
 import 'package:corona_tracker/navigation/StatusScreen.dart';
-import 'package:corona_tracker/navigation/SettingsScreen.dart';
+import 'package:corona_tracker/navigation/ReportScreen.dart';
 
 import 'package:flutter/material.dart';
 
@@ -14,9 +15,9 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int _currentIndex = 0;
   final List<Widget> _children = [
-    HomeScreen(),
     StatusScreen(),
-    SettingsScreen()
+    MapScreen(),
+    ReportScreen()
   ];
 
   @override
@@ -31,16 +32,16 @@ class _HomeState extends State<Home> {
         currentIndex: _currentIndex, // this will be set when a new tab is tapped
         items: [
           BottomNavigationBarItem(
-            icon: new Icon(Icons.home),
-            title: new Text('Home'),
-          ),
-          BottomNavigationBarItem(
             icon: new Icon(Icons.airline_seat_individual_suite),
             title: new Text('Status'),
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              title: Text('Einstellungen')
+            icon: new Icon(Icons.map),
+            title: new Text('Karte'),
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.report),
+              title: Text('Fall melden')
           )
         ],
       ),

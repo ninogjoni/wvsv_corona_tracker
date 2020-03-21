@@ -10,7 +10,7 @@ class StatusScreen extends StatelessWidget {
       ),
       body: Center(
         child: RaisedButton(
-            child: Text('Back To HomeScreen'),
+            child: Text('Dummy'),
             color: Theme.of(context).primaryColor,
             textColor: Colors.white,
             //onPressed: () => Navigator.pop(context)
