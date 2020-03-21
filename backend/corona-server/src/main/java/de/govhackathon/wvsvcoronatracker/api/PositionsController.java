@@ -26,14 +26,14 @@ public class PositionsController implements PositionsApi {
     }
 
     @Override
-    public ResponseEntity<PositionDto> createPosition(PositionDto positionDto, Integer userId) {
+    public ResponseEntity<PositionDto> createPosition(PositionDto positionDto, String userId) {
         final Position createdPos = this.positionsService.savePosition(positionMapper.toEntity(positionDto));
         // TODO add position to User
         return ResponseEntity.ok().body(this.positionMapper.toDto(createdPos));
     }
 
     @Override
-    public ResponseEntity<List<PositionDto>> getPositions(Integer userId, OffsetDateTime from, OffsetDateTime to, Integer id) {
+    public ResponseEntity<List<PositionDto>> getPositions(String userId, OffsetDateTime from, OffsetDateTime to, Integer id) {
 
         return ResponseEntity.ok().body(positionsService.getPositions().stream().map(position -> this.positionMapper.toDto(position)).collect(Collectors.toList()));
     }

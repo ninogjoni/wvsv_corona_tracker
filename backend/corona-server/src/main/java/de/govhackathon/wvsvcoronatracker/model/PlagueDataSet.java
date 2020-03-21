@@ -1,5 +1,6 @@
 package de.govhackathon.wvsvcoronatracker.model;
 
+import de.govhackathon.wvsvcoronatracker.model.system.AppConfig;
 import lombok.Builder;
 
 import java.time.LocalDateTime;
@@ -10,7 +11,7 @@ public class PlagueDataSet {
     private User user;
 
     @Builder.Default
-    private LocalDateTime creationDate = LocalDateTime.now(ZoneOffset.UTC);
+    private LocalDateTime creationDate = LocalDateTime.now(AppConfig.TIMEZONE);
 
     private MedicalState medicalState = MedicalState.UNKNOWN;
 

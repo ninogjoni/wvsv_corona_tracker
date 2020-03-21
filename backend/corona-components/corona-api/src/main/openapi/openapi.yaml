@@ -17,7 +17,7 @@ paths:
         - name: userId
           in: query
           schema:
-            type: integer
+            type: string
         - name: from
           in: query
           description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
@@ -62,7 +62,7 @@ paths:
         - name: userId
           in: query
           schema:
-            type: integer
+            type: string
       requestBody:
         content:
           application/json:
@@ -172,7 +172,7 @@ paths:
           in: query
           description: Standard users can use this only with their own _userId_
           schema:
-            type: integer
+            type: string
         - name: refresh
           in: query
           schema:
@@ -421,7 +421,7 @@ components:
           description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
           format: date-time
         userId:
-          type: integer
+          type: string
         value:
           description: 'temp value, caution: is multiplied *100. E.g. 38.02°C gets 3802 here!'
           type: integer
@@ -449,7 +449,7 @@ components:
         geofenceId:
           type: integer
         userId:
-          type: integer
+          type: string
     ReportSummary:
       type: object
       properties:
@@ -565,7 +565,7 @@ components:
       in: query
       description: Standard users can use this only with their own _userId_
       schema:
-        type: integer
+        type: string
     deviceIdArray:
       name: deviceId
       in: query

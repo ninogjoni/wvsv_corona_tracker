@@ -20,7 +20,7 @@ public class GeoFencesController implements GeofencesApi {
     GeofenceMapper geofenceMapper;
 
     @Override
-    public ResponseEntity<List<GeofenceDto>> getGeofences(Boolean all, Integer userId, Boolean refresh) {
+    public ResponseEntity<List<GeofenceDto>> getGeofences(Boolean all, String userId, Boolean refresh) {
         return ResponseEntity.ok().body(geoFencesService.getGeoFences().stream().map(geoFence -> this.geofenceMapper.toDto(geoFence)).collect(
             Collectors.toList()));
     }
