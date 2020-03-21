@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:corona_tracker/i18n/appLocalizations.dart';
 import 'home_widget.dart';
-import 'appLocalizations.dart';
 import 'dart:async';
 
 import 'package:unique_id/unique_id.dart';

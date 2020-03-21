@@ -2,10 +2,11 @@ import 'package:corona_tracker/navigation/HelpScreen.dart';
 import 'package:corona_tracker/navigation/MapScreen.dart';
 import 'package:corona_tracker/navigation/StatusScreen.dart';
 import 'package:corona_tracker/navigation/ReportScreen.dart';
+import 'package:corona_tracker/i18n/appLocalizations.dart';
 
 import 'package:flutter/material.dart';
 
-import 'appLocalizations.dart';
+
 
 class Home extends StatefulWidget {
   @override

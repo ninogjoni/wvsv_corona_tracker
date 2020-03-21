@@ -1,3 +1,5 @@
+import 'package:corona_tracker/i18n/appLocalizations.dart';
+
 import 'package:flutter/material.dart';
 
 class StatusScreen extends StatelessWidget {
@@ -6,7 +8,7 @@ class StatusScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Status'),
+        title: Text(AppLocalizations.of(context).StatusScreen_AppBarTitleText),
       ),
       body: Center(
         child: Center(
