@@ -17,7 +17,7 @@ public class GeoFencesController implements GeofencesApi {
     GeoFencesService geoFencesService;
 
     @Override
-    public ResponseEntity<List<GeofenceDto>> getGeofences(Boolean all, Integer userId, Boolean refresh) {
+    public ResponseEntity<List<GeofenceDto>> getGeofences(Boolean all, String userId, Boolean refresh) {
         // TODO implement me
         return ResponseEntity.ok().body(Collections.emptyList());
     }

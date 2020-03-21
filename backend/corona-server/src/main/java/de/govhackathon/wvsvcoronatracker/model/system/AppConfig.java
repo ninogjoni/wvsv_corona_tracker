@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import java.time.ZoneOffset;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -19,6 +20,7 @@ public class AppConfig {
 
     public static final String FCM_KEY = "fcm.apikey";
 
+    public static final ZoneOffset TIMEZONE = ZoneOffset.UTC;
     @Id
     private String key;
 
