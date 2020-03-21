@@ -11,6 +11,7 @@ Planned features include:
 - Get notified immediately if one of your 1st/2nd/3rd grade contacts gets diagnosed or cured
 - View infected areas on a map (anonymized)
 - store data of fever measurement at least twice a day
+- check movement historys frequently to detect who had contact to (newly uncovered) infected persons
 
 ![Screenshot 1](https://raw.githubusercontent.com/beat-virus/corona_tracker/master/media/screenshot-1-small.png)
 ![Screenshot 3](https://raw.githubusercontent.com/beat-virus/corona_tracker/master/media/screenshot-3-small.png)
