@@ -12,16 +12,11 @@ public interface PositionsRepository extends JpaRepository<Position,Integer> {
 
     List<Position> findByUserId(int userId);
 
-    List<Position> findByTo(LocalDateTime to);
+    List<Position> findByTimestamp(LocalDateTime timestamp);
 
-    List<Position> findByFrom(LocalDateTime from);
 
-    List<Position> findByFromAndTo(LocalDateTime from, LocalDateTime to);
+    List<Position> findByUserIdAndTimestamp(int userId, LocalDateTime from);
 
-    List<Position> findByUserIdAndFrom(int userId, LocalDateTime from);
 
-    List<Position> findByUserIdAndTo(int userId, LocalDateTime to);
-
-    List<Position> findByUserIdAndFromAndTo(int userId,LocalDateTime from, LocalDateTime to);
 
 }

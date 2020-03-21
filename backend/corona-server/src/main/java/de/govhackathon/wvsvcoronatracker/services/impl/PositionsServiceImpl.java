@@ -26,18 +26,8 @@ public class PositionsServiceImpl implements PositionsService {
   }
 
   @Override
-  public List<Position> getPositionsFrom(final LocalDateTime from) {
-    return positionsRepository.findByFrom(from);
-  }
-
-  @Override
-  public List<Position> getPositionsTo(final LocalDateTime to) {
-    return positionsRepository.findByTo(to);
-  }
-
-  @Override
-  public List<Position> getPositionsFromTo(final LocalDateTime from, final LocalDateTime to) {
-    return positionsRepository.findByFromAndTo(from,to);
+  public List<Position> getPositionsByTimestamp(LocalDateTime timestamp) {
+    return positionsRepository.findByTimestamp(timestamp);
   }
 
   @Override
@@ -46,17 +36,9 @@ public class PositionsServiceImpl implements PositionsService {
   }
 
   @Override
-  public List<Position> getPositionsByUserIdFrom(final Integer userId, final LocalDateTime from){
-    return positionsRepository.findByUserIdAndFrom(userId,from);
+  public List<Position> getPositionsByUserIdAndTimeStamp(Integer userId, LocalDateTime timestamp) {
+    return positionsRepository.findByUserIdAndTimestamp(userId, timestamp);
   }
 
-  @Override
-  public List<Position> getPositionsByUserIdTo(final Integer userId, final LocalDateTime to) {
-    return positionsRepository.findByUserIdAndTo(userId,to);
-  }
 
-  @Override
-  public List<Position> getPositionsByUserIdFromTo(final Integer userId, final LocalDateTime from, final LocalDateTime to) {
-    return positionsRepository.findByUserIdAndFromAndTo(userId,from,to);
-  }
 }
