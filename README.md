@@ -12,20 +12,20 @@ Planned features include:
 ## Frontend
 
 ## Backend
-### Grundlegende Bestimmungen
-- Codestyle gem. https://github.com/google/styleguide
-### Systemvoraussetzungen
+### Basic instructions
+- Codestyle -> https://github.com/google/styleguide
+### System Requirements
 #### Software (Development)
 - Git
-- OpenJDK in der Version 8, aktuellstes Update -> https://openjdk.java.net/install/
+- OpenJDK Version 8, current update version -> https://openjdk.java.net/install/
 - Maven (3.6.3)
-- Lombok Plugins in der jeweiligen IDE
-- Docker zum Erstellen des Docker Images
-- pgAdmin zum Administrieren von PostgreSQL-Datenbanken ("Klicki-Bunti")
+- Lombok Plugins for the IDEs
+- Docker for creating the docker image
+- pgAdmin to administrate all postgreSQL-databases ("Klicki-Bunti")
 
 ### Vorbereitungen (Development)
-1. Im Root-Verzeichnis folgenden Befehl ausführen: `mvn clean install` -> **Wichtig**: Dies muss mit der richtigen JDK-Version ausgeführt werden, andernfalls meckert er.
-2. Gegebenenfalls in der IDE den Ordner aktualisieren.
+1. In the root folder, please execute the following command: `mvn clean install` -> **Wichtig**: You need to set the correct JDK Version either in your JAVA_HOME environment variable or in your IDE, otherwise maven will throw errors.
+2. You might need to refresh the root folder.
 
 ## Contributing
 
