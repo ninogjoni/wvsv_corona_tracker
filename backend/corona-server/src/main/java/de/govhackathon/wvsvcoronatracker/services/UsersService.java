@@ -32,7 +32,6 @@ public interface UsersService {
   /**
    * Update a user
    *
-   * @param id   users id
    * @param user user data to be changed
    * @return Updated user
    */
@@ -40,8 +39,7 @@ public interface UsersService {
 
   /**
    * Delete a user
-   *
-   * @param id users id
+   * @param user user data to be deleted
    */
   void deleteUser(final User user);
 }
