@@ -50,11 +50,14 @@ spec:
             stage('Checkout'){
                 checkout scm
             }
-			container('docker'){
 			
+			container('maven'){
 				stage('Get Versions'){
 						serverVersion = sh label: '', returnStdout: true, script: 'cd backend && $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)'
 				}
+			}
+			
+			container('docker'){
 				stage('Build Docker Image') {
                 	    sh 'cd backend && docker build --tag tommyelroy/wirvsirus:server-$serverVersion .'	
 				}
