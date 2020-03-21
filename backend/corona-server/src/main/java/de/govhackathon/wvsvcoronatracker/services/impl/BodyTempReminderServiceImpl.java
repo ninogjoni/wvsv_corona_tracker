@@ -53,7 +53,7 @@ public class BodyTempReminderServiceImpl {
      * their temperature after "afterHour" (0-23) today.
      */
     private void sendReminders(int afterHour) {
-        LOG.info("cronjob for reminders ater %d o'clock started", afterHour);
+        LOG.info("cronjob for reminders after %d o'clock started", afterHour);
 
         LocalDateTime limit = LocalDate.now().atTime(afterHour, 0);
 
@@ -64,6 +64,6 @@ public class BodyTempReminderServiceImpl {
             }
         }
 
-        LOG.info("cronjob for reminders ater %d o'clock done", afterHour);
+        LOG.info("cronjob for reminders after %d o'clock done", afterHour);
     }
 }
