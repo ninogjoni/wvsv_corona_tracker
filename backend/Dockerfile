@@ -24,6 +24,8 @@ COPY --from=builder /coronatracker ./
 
 EXPOSE 8080
 
+ARG VERSION
+
 RUN ls  corona-server/target && \
     mv corona-server/target/wvsvcoronatracker-${VERSION}-server.jar /tmp/corona-server.jar && \
     rm -R /coronatracker/* && \
