@@ -1,4 +1,7 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'home_widget.dart';
 import 'dart:async';
 
@@ -19,6 +22,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
+
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+
   @override
   void initState() {
     super.initState();
@@ -26,6 +32,7 @@ class _MyAppState extends State<MyApp> {
 
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
+        showNotification(message["notification"]);
         print("onMessage: $message");
       },
       onLaunch: (Map<String, dynamic> message) async {
@@ -35,6 +42,7 @@ class _MyAppState extends State<MyApp> {
         print("onResume: $message");
       },
     );
+
     _firebaseMessaging.requestNotificationPermissions(
         const IosNotificationSettings(
             sound: true, badge: true, alert: true, provisional: true));
@@ -46,6 +54,9 @@ class _MyAppState extends State<MyApp> {
       assert(token != null);
       print(token);
     });
+
+
+    configLocalNotification();
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -72,5 +83,29 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(primarySwatch: Colors.blueGrey), home: Home());
+  }
+  void configLocalNotification() {
+    var initializationSettingsAndroid = new AndroidInitializationSettings('app_icon');
+    var initializationSettingsIOS = new IOSInitializationSettings();
+    var initializationSettings = new InitializationSettings(initializationSettingsAndroid, initializationSettingsIOS);
+    flutterLocalNotificationsPlugin.initialize(initializationSettings);
+  }
+
+  void showNotification(message) async {
+    var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
+      'com.example.corona_tracker',
+      'Flutter chat demo',
+      'your channel description',
+      playSound: true,
+      enableVibration: true,
+      importance: Importance.Max,
+      priority: Priority.High,
+    );
+    var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
+    var platformChannelSpecifics =
+    new NotificationDetails(androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+    await flutterLocalNotificationsPlugin.show(
+        0, message['title'].toString(), message['body'].toString(), platformChannelSpecifics,
+        payload: json.encode(message));
   }
 }

@@ -28,6 +28,8 @@ dependencies:
   country_code_picker: ^1.3.6
   devicelocale: ^0.2.2
   firebase_messaging: ^6.0.13
+  http: ^0.12.0+4
+  flutter_local_notifications: ^1.3.0
 
 dev_dependencies:
   flutter_test:
