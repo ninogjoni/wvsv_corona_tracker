@@ -12,7 +12,7 @@ And start backend
 cd corona-server && mvn spring-boot:run
 ```
 
-If `spring-boot` doesn't work, try the following in `backend`:
+If `spring-boot` doesn't work (`No plugin found for prefix 'spring-boot'`), try the following in `backend`:
 
 ```
 mvn clean install
