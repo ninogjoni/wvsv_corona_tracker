@@ -40,12 +40,18 @@ spec:
 """
 ){ 
 	node(POD_LABEL) {
+	
+			def serverVersion=''
             stage('Checkout'){
                 checkout scm
             }
 			container('docker'){
+			
+				stage('Get Versions'){
+						serverVersion = sh (script: 'cd backend && $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)', returnStdout = true).trim()
+				}
 				stage('Build Docker Image') {
-                	    sh 'cd backend && docker build --tag wirvsirus/corona-tracker/server .'	
+                	    sh 'cd backend && docker build --tag tommyelroy/wirvsirus:server-$serverVersion .'	
 				}
 			}
     }
