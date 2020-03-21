@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'dart:developer';
+
 
 class ReportScreen extends StatelessWidget {
   @override
@@ -45,39 +48,50 @@ class ReportScreenFormState extends State<ReportScreenForm> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           TextFormField(
+            keyboardType: TextInputType.number,
+            inputFormatters: <TextInputFormatter>[
+              WhitelistingTextInputFormatter.digitsOnly
+            ],
             decoration: const InputDecoration(
-              icon: Icon(Icons.person),
-              labelText: 'Vorname',
-
+              icon: Icon(Icons.phone),
+              labelText: 'Mobilnummer',
             ),
             validator: (value) {
               if (value.isEmpty) {
-                return 'Please enter some text';
+                return 'Die Mobilnummer darf nicht leer bleiben';
               }
-              return null;
+              else if ('${value[0]}' == '0') {
+                return 'Bitte die Mobilnummer hinter der 0 eingeben';
+              }
+              else if (value.length < 10) {
+                return 'Die Mobilnummer ist zu kurz';
+              }
+              else if (value.length > 12) {
+                return "Die Mobilnummer ist zu lang";
+              }
             },
             onSaved: (String value) {
               //Hier werden die Daten an das Backend gesendet und dort weiter-
               //-bearbeitet
             },
           ),
-          TextFormField(
-            decoration: const InputDecoration(
-              icon: Icon(Icons.person),
-              labelText: 'Vorname',
-
-            ),
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
-            onSaved: (String value) {
-              //Hier werden die Daten an das Backend gesendet und dort weiter-
-              //-bearbeitet
-            },
-          ),
+//          TextFormField(
+//            decoration: const InputDecoration(
+//              icon: Icon(Icons.person),
+//              labelText: 'Vorname',
+//
+//            ),
+//            validator: (value) {
+//              if (value.isEmpty) {
+//                return 'Please enter some text';
+//              }
+//              return null;
+//            },
+//            onSaved: (String value) {
+//              //Hier werden die Daten an das Backend gesendet und dort weiter-
+//              //-bearbeitet
+//            },
+//          ),
 
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
