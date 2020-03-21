@@ -6,17 +6,12 @@
 
   <parent>
     <groupId>de.govhackathon</groupId>
-    <artifactId>wvsvcoronatracker-parent</artifactId>
+    <artifactId>corona-components</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <packaging>pom</packaging>
+  <artifactId>corona-core</artifactId>
+  <packaging>jar</packaging>
 
-  <artifactId>corona-components</artifactId>
-
-  <modules>
-    <module>corona-api</module>
-    <module>corona-core</module>
-  </modules>
 
 </project>
