@@ -1,4 +1,14 @@
 # Corona Tracker App
+
+During the wirvsvirushackathon.org challenge, we collaborate on Discord to create a COVID-19 tracking app.
+
+Planned features include:
+
+- Self-report health status (diagnosed/cured)
+- Upload your close contacts (anonymized, of course!) 
+- Get notified immediately if one of your 1st/2nd/3rd grade contacts gets diagnosed or cured
+- View infected areas on a map (anonymized)
+
 ## Frontend
 
 ## Backend
