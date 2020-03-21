@@ -63,7 +63,8 @@ spec:
 				}
 				
 				stage('Push Docker Images'){
-						sh "docker push tommyelroy/coronatracker-server:$serverVersion"
+						def password = credentials("dockerhub-tommyelroy-passwort")
+						sh "docker login --username tommyelroy --password $password docker push tommyelroy/coronatracker-server:$serverVersion"
 				}
 			}
     }
