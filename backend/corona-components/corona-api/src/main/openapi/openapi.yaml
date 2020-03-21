@@ -315,7 +315,7 @@ components:
       properties:
         id:
           type: integer
-        deviceId:
+        userId:
           type: integer
         protocol:
           type: string

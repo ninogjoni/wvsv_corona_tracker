@@ -1,11 +1,11 @@
 package de.govhackathon.wvsvcoronatracker.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Setter
 @Getter
@@ -14,7 +14,11 @@ public class Position {
 
     private Integer id;
 
-    private Integer deviceId;
+    private Integer userId;
+
+    private LocalDateTime from;
+
+    private LocalDateTime to;
 
     private String protocol;
 
