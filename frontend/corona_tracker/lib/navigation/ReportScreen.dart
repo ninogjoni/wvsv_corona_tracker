@@ -45,15 +45,42 @@ class ReportScreenFormState extends State<ReportScreenForm> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           TextFormField(
+            decoration: const InputDecoration(
+              icon: Icon(Icons.person),
+              labelText: 'Vorname',
+
+            ),
             validator: (value) {
               if (value.isEmpty) {
                 return 'Please enter some text';
               }
               return null;
             },
+            onSaved: (String value) {
+              //Hier werden die Daten an das Backend gesendet und dort weiter-
+              //-bearbeitet
+            },
           ),
+          TextFormField(
+            decoration: const InputDecoration(
+              icon: Icon(Icons.person),
+              labelText: 'Vorname',
+
+            ),
+            validator: (value) {
+              if (value.isEmpty) {
+                return 'Please enter some text';
+              }
+              return null;
+            },
+            onSaved: (String value) {
+              //Hier werden die Daten an das Backend gesendet und dort weiter-
+              //-bearbeitet
+            },
+          ),
+
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 162.0),
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: RaisedButton(
               onPressed: () {
                 // Validate returns true if the form is valid, or false
