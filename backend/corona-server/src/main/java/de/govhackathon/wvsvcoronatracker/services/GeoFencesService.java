@@ -34,7 +34,6 @@ public interface GeoFencesService {
     /**
      * Delete a geo fence
      *
-     * @param id geo fence id
      */
     void deleteGeoFence(final Integer id);
 }
