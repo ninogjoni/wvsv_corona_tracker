@@ -24,6 +24,7 @@ Planned features include:
 - Lombok Plugins for the IDEs
 - Docker for creating the docker image
 - pgAdmin to administrate all postgreSQL-databases ("Klicki-Bunti")
+- PostgreSQL for local develoment (11.x?)
 
 ### Preparations for development
 1. In the root folder, please execute the following command: `mvn clean install` -> **IMPORTANT**: You need to set the correct JDK Version either in your "JAVA_HOME" environment variable or in your IDE, otherwise maven will throw errors.
