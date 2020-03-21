@@ -47,7 +47,7 @@ public class BodyTempReminderServiceImpl {
      * Send reminder to all users that have not yet reported
      * their temperature after "afterHour" (0-23) today.
      */
-    private void sendReminders(afterHour int) {
+    private void sendReminders(int afterHour) {
 	LocalDateTime earlyEvening = LocalDate.now().atTime(afterHour, 0);
 
 	for(User user : this.usersService.getUsers()) {

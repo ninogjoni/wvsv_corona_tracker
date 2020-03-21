@@ -1,5 +1,7 @@
 package de.govhackathon.wvsvcoronatracker.services;
 
+import java.time.LocalDateTime;
+
 public interface BodyTempService {
 
   /**
