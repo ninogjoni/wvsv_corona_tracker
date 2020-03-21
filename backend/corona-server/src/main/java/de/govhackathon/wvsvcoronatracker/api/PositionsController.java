@@ -7,13 +7,16 @@ import de.govhackathon.wvsvcoronatracker.model.PositionMapper;
 import de.govhackathon.wvsvcoronatracker.services.PositionsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
+
+@RestController
+@RequestMapping(value = UsersController.API_PATH)
 public class PositionsController implements PositionsApi {
 
     private PositionsService positionsService;

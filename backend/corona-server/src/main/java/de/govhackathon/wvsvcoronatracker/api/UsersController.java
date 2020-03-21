@@ -12,9 +12,15 @@ import de.ghwct.service.model.UserDto;
 import de.govhackathon.wvsvcoronatracker.model.User;
 import de.govhackathon.wvsvcoronatracker.model.UserMapper;
 import de.govhackathon.wvsvcoronatracker.services.UsersService;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Component
+
+@RestController
+@RequestMapping(value = UsersController.API_PATH)
 public class UsersController implements UsersApi {
+
+  static final String API_PATH = "/api/v1"; // TODO: put this in a proper place
 
   @Autowired
   UsersService usersService;

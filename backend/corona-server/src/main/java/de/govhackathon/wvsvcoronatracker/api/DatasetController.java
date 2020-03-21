@@ -3,12 +3,14 @@ package de.govhackathon.wvsvcoronatracker.api;
 import de.ghwct.service.api.DatasetApi;
 import de.ghwct.service.model.PlagueDataSetDto;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 
-@Component
+@RestController
+@RequestMapping(value = UsersController.API_PATH)
 public class DatasetController implements DatasetApi {
 
     @Override
