@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:developer';
+import 'package:corona_tracker/models/PhoneNumber.dart';
 
 
 class ReportScreen extends StatelessWidget {
@@ -47,6 +48,31 @@ class ReportScreenFormState extends State<ReportScreenForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
+          ),
+          Text (
+              'Wählen Sie hier Ihre Symptome aus',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17
+              )
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
+          ),
+          CheckboxListTile(
+            title: Text("title text"),
+            value: true,
+            controlAffinity: ListTileControlAffinity.leading,  //  <-- leading Checkbox
+          ),
+          Text (
+            'Bitte tragen Sie ihre Mobilnummer ein',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 17
+                )
+          ),
           TextFormField(
             keyboardType: TextInputType.number,
             inputFormatters: <TextInputFormatter>[
@@ -57,42 +83,28 @@ class ReportScreenFormState extends State<ReportScreenForm> {
               labelText: 'Mobilnummer',
             ),
             validator: (value) {
+              //TODO: i18n (Localization!)
               if (value.isEmpty) {
                 return 'Die Mobilnummer darf nicht leer bleiben';
               }
-              else if ('${value[0]}' == '0') {
-                return 'Bitte die Mobilnummer hinter der 0 eingeben';
-              }
-              else if (value.length < 10) {
+              else if (value.length < 11) {
                 return 'Die Mobilnummer ist zu kurz';
               }
-              else if (value.length > 12) {
+              else if (value.length > 16) {
                 return "Die Mobilnummer ist zu lang";
               }
+              else
+                return null;
             },
             onSaved: (String value) {
               //Hier werden die Daten an das Backend gesendet und dort weiter-
               //-bearbeitet
+              String phoneNumberE164 = PhoneNumber(value, Localizations.localeOf(context).countryCode).normalize();
+              // vielleicht hier noch den String im TextFeld mit dem normalisierten ersetzen?
+              print(phoneNumberE164);
             },
           ),
-//          TextFormField(
-//            decoration: const InputDecoration(
-//              icon: Icon(Icons.person),
-//              labelText: 'Vorname',
 //
-//            ),
-//            validator: (value) {
-//              if (value.isEmpty) {
-//                return 'Please enter some text';
-//              }
-//              return null;
-//            },
-//            onSaved: (String value) {
-//              //Hier werden die Daten an das Backend gesendet und dort weiter-
-//              //-bearbeitet
-//            },
-//          ),
-
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: RaisedButton(
@@ -103,6 +115,7 @@ class ReportScreenFormState extends State<ReportScreenForm> {
                   // If the form is valid, display a Snackbar.
                   Scaffold.of(context)
                       .showSnackBar(SnackBar(content: Text('Fall wird gesendet')));
+                  _formKey.currentState.save();
                 }
               },
               child: Text('Senden'),
