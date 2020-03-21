@@ -24,9 +24,11 @@ public class Position {
 
     private BigDecimal latitude;
 
-    private BigDecimal longitude ;
+    private BigDecimal longitude;
 
     private BigDecimal altitude;
+
+    private Integer accuracy; // meters
 
     private Object network;
 }
