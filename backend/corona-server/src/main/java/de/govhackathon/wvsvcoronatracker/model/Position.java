@@ -16,9 +16,7 @@ public class Position {
 
     private Integer userId;
 
-    private LocalDateTime from;
-
-    private LocalDateTime to;
+    private LocalDateTime timestamp;
 
     private String protocol;
 
