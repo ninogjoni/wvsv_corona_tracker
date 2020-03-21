@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = UsersController.API_PATH)
 public class UsersController implements UsersApi {
 
-  static final String API_PATH = "/api/v1";
+  static final String API_PATH = "/api/v1"; // TODO: put this in a proper place
 
   @Autowired
   UsersService usersService;
