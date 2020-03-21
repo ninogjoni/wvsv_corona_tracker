@@ -33,6 +33,11 @@ spec:
       volumeMounts:
       - mountPath: /var/run/docker.sock
         name: docker-sock
+    - name: maven
+      image: maven:3.6.3-jdk-8
+      tty: true
+      command:
+      - cat
   volumes:
     - name: docker-sock
       hostPath:
@@ -40,12 +45,28 @@ spec:
 """
 ){ 
 	node(POD_LABEL) {
+	
+			def serverVersion=''
             stage('Checkout'){
                 checkout scm
             }
+			
+			container('maven'){
+				stage('Get Versions'){
+						serverVersion = sh(returnStdout: true, script: 'cd backend && mvn help:evaluate -Dexpression=project.version -q -DforceStdout').trim()
+				}
+			}
+			
 			container('docker'){
 				stage('Build Docker Image') {
-                	    sh 'cd backend && docker build --tag wirvsirus/corona-tracker/server .'	
+                	    sh "cd backend && docker build --tag tommyelroy/coronatracker-server:$serverVersion --build-arg VERSION=$serverVersion ."	
+				}
+				if(env.BRANCH_NAME=='master'){
+					stage('Push Docker Image'){
+						withCredentials([string(credentialsId: 'dockerhub-tommyelroy-passwort', variable: 'password')]) {
+										sh "docker login --username='tommyelroy' --password='$password' && docker push tommyelroy/coronatracker-server:$serverVersion"
+						}		
+					}
 				}
 			}
     }

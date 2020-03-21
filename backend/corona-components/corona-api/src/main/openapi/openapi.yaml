@@ -55,6 +55,33 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Position'
+    post:
+      summary: Create new location entry
+      operationId: createPosition
+      parameters:
+        - name: userId
+          in: query
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Position'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Position'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Position'
+            application/gpx+xml:
+              schema:
+                $ref: '#/components/schemas/Position'
   /users:
     get:
       summary: Fetch a list of Users
@@ -134,8 +161,7 @@ paths:
     get:
       summary: Fetch a list of Geofences
       operationId: getGeofences
-      description: Without params, it returns a list of Geofences the user has access
-        to
+      description: Without params, it returns a list of Geofences the user has access to
       parameters:
         - name: all
           in: query
@@ -176,7 +202,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Geofence'
-      x-codegen-request-body-name: body
   /geofences/{id}:
     put:
       summary: Update a Geofence
@@ -203,6 +228,7 @@ paths:
       x-codegen-request-body-name: body
     delete:
       summary: Delete a Geofence
+      operationId: removeGeofence
       parameters:
         - name: id
           in: path
@@ -308,32 +334,15 @@ components:
           properties: {}
     User:
       type: object
+      required:
+        - id
+        - phoneHash
       properties:
         id:
           type: integer
         name:
           type: string
-        email:
-          type: string
-        latitude:
-          type: number
-        longitude:
-          type: number
-        password:
-          type: string
-        disabled:
-          type: boolean
-        expirationTime:
-          type: string
-          description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
-          format: date-time
-        deviceLimit:
-          type: integer
-        userLimit:
-          type: integer
-        deviceReadonly:
-          type: boolean
-        poiLayer:
+        phoneHash:
           type: string
         token:
           type: string
