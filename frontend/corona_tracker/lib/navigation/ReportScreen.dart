@@ -78,6 +78,31 @@ class ReportScreenFormState extends State<ReportScreenForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
+          ),
+          Text (
+              'Wählen Sie hier Ihre Symptome aus',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17
+              )
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
+          ),
+          CheckboxListTile(
+            title: Text("title text"),
+            value: true,
+            controlAffinity: ListTileControlAffinity.leading,  //  <-- leading Checkbox
+          ),
+          Text (
+            'Bitte tragen Sie ihre Mobilnummer ein',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 17
+                )
+          ),
           TextFormField(
             keyboardType: TextInputType.number,
             inputFormatters: <TextInputFormatter>[
@@ -88,6 +113,7 @@ class ReportScreenFormState extends State<ReportScreenForm> {
               labelText: 'Mobilnummer',
             ),
             validator: (value) {
+              //TODO: i18n (Localization!)
               if (value.isEmpty) {
                 return 'Die Mobilnummer darf nicht leer bleiben';
               }
@@ -97,7 +123,8 @@ class ReportScreenFormState extends State<ReportScreenForm> {
               else if (value.length > 16) {
                 return "Die Mobilnummer ist zu lang";
               }
-              print(_locale);
+              else
+                return null;
             },
             onSaved: (String value) {
               //Hier werden die Daten an das Backend gesendet und dort weiter-
@@ -107,24 +134,7 @@ class ReportScreenFormState extends State<ReportScreenForm> {
               print(phoneNumberE164);
             },
           ),
-//          TextFormField(
-//            decoration: const InputDecoration(
-//              icon: Icon(Icons.person),
-//              labelText: 'Vorname',
 //
-//            ),
-//            validator: (value) {
-//              if (value.isEmpty) {
-//                return 'Please enter some text';
-//              }
-//              return null;
-//            },
-//            onSaved: (String value) {
-//              //Hier werden die Daten an das Backend gesendet und dort weiter-
-//              //-bearbeitet
-//            },
-//          ),
-
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: RaisedButton(
