@@ -61,11 +61,12 @@ spec:
 				stage('Build Docker Image') {
                 	    sh "cd backend && docker build --tag tommyelroy/coronatracker-server:$serverVersion ."	
 				}
-				
-				stage('Push Docker Images'){
-					withCredentials([string(credentialsId: 'dockerhub-tommyelroy-passwort', variable: 'password')]) {
-									sh "docker login --username='tommyelroy' --password='$password' && docker push tommyelroy/coronatracker-server:$serverVersion"
-					}		
+				if(env.BRANCH_NAME=='master'){
+					stage('Push Docker Image'){
+						withCredentials([string(credentialsId: 'dockerhub-tommyelroy-passwort', variable: 'password')]) {
+										sh "docker login --username='tommyelroy' --password='$password' && docker push tommyelroy/coronatracker-server:$serverVersion"
+						}		
+					}
 				}
 			}
     }
