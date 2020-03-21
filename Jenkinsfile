@@ -64,7 +64,7 @@ spec:
 				
 				stage('Push Docker Images'){
 						def password = credentials("dockerhub-tommyelroy-passwort")
-						sh "docker login --username tommyelroy --password $password docker push tommyelroy/coronatracker-server:$serverVersion"
+						sh "docker login --username='tommyelroy' --password='$password' && docker push tommyelroy/coronatracker-server:$serverVersion"
 				}
 			}
     }
