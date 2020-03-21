@@ -10,3 +10,7 @@
 - Lombok Plugins in der jeweiligen IDE
 - Docker zum Erstellen des Docker Images
 - pgAdmin zum Administrieren von PostgreSQL-Datenbanken ("Klicki-Bunti")
+
+#### Vorbereitungen (Development)
+1. Im Root-Verzeichnis folgenden Befehl ausführen: `mvn clean install` -> **Wichtig**: Dies muss mit der richtigen JDK-Version ausgeführt werden, andernfalls meckert er.
+2. Gegebenenfalls in der IDE den Ordner aktualisieren.
