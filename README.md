@@ -13,6 +13,8 @@ Planned features include:
 - store data of fever measurement at least twice a day
 - check movement historys frequently to detect who had contact to (newly uncovered) infected persons
 
+https://docs.google.com/document/d/18JaJj8r_-Dlp2q7oq3zp3X0w0M_lbIOY3HgEmqJCF-s/edit
+
 ![Screenshot 1](https://raw.githubusercontent.com/beat-virus/corona_tracker/master/media/screenshot-1-small.png)
 ![Screenshot 3](https://raw.githubusercontent.com/beat-virus/corona_tracker/master/media/screenshot-3-small.png)
 
