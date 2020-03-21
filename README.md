@@ -15,7 +15,7 @@ Planned features include:
 ### Basic instructions
 - Codestyle -> https://github.com/google/styleguide
 ### System Requirements
-#### Software (Development)
+#### Software for development
 - Git
 - OpenJDK Version 8, current update version -> https://openjdk.java.net/install/
 - Maven (3.6.3)
@@ -23,7 +23,7 @@ Planned features include:
 - Docker for creating the docker image
 - pgAdmin to administrate all postgreSQL-databases ("Klicki-Bunti")
 
-### Vorbereitungen (Development)
+### Preparations for development
 1. In the root folder, please execute the following command: `mvn clean install` -> **Wichtig**: You need to set the correct JDK Version either in your JAVA_HOME environment variable or in your IDE, otherwise maven will throw errors.
 2. You might need to refresh the root folder.
 
