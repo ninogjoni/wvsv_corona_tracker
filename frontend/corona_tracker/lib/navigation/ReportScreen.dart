@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:developer';
+import 'package:corona_tracker/models/PhoneNumber.dart';
 
 
 class ReportScreen extends StatelessWidget {
@@ -86,13 +87,10 @@ class ReportScreenFormState extends State<ReportScreenForm> {
               if (value.isEmpty) {
                 return 'Die Mobilnummer darf nicht leer bleiben';
               }
-              else if ('${value[0]}' == '0') {
-                return 'Bitte die Mobilnummer hinter der 0 eingeben';
-              }
-              else if (value.length < 10) {
+              else if (value.length < 11) {
                 return 'Die Mobilnummer ist zu kurz';
               }
-              else if (value.length > 12) {
+              else if (value.length > 16) {
                 return "Die Mobilnummer ist zu lang";
               }
               else
@@ -101,6 +99,9 @@ class ReportScreenFormState extends State<ReportScreenForm> {
             onSaved: (String value) {
               //Hier werden die Daten an das Backend gesendet und dort weiter-
               //-bearbeitet
+              String phoneNumberE164 = PhoneNumber(value, Localizations.localeOf(context).countryCode).normalize();
+              // vielleicht hier noch den String im TextFeld mit dem normalisierten ersetzen?
+              print(phoneNumberE164);
             },
           ),
 //
@@ -114,6 +115,7 @@ class ReportScreenFormState extends State<ReportScreenForm> {
                   // If the form is valid, display a Snackbar.
                   Scaffold.of(context)
                       .showSnackBar(SnackBar(content: Text('Fall wird gesendet')));
+                  _formKey.currentState.save();
                 }
               },
               child: Text('Senden'),
