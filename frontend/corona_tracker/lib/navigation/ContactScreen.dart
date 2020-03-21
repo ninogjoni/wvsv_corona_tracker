@@ -5,51 +5,15 @@ import 'package:contacts_service/contacts_service.dart';
 class ContactScreen extends StatelessWidget {
 
   @override
-  ContactScreenFormState createState() {
-    return ContactScreenFormState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final appTitle = 'Hilfe';
-    return MaterialApp(
-      theme: ThemeData(primarySwatch: Colors.blueGrey),
-      title: appTitle,
-      home: Scaffold(
+    final appTitle = 'Kontakte';
+    return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text(appTitle),
         ),
         body: ContactScreenForm(),
-      ),
     );
-    /*return Scaffold(
-      appBar: AppBar(
-        /* leading:
-        Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: const Icon(Icons.menu),
-              onPressed: () { Scaffold.of(context).openDrawer(); },
-              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-            );
-          },
-        ),*/
-        title: Text('Hilfe'),
-      ),
-      body: Center(
-        child: Center(
-          child: Text(
-            'Hilfe',
-            textDirection: TextDirection.ltr,
-            style: TextStyle(
-              fontSize: 32,
-              color: Colors.black87,
-            ),
-          ),
-        ),
-      ),
-    );*/
   }
 
 }
@@ -154,22 +118,6 @@ class ContactScreenFormState extends State<ContactScreenForm> {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        /*appBar: AppBar(
-        title: Text('Hilfe'),
-      ),
-      body: Center(
-        child: Center(
-          child: Text(
-            'Hilfe',
-            textDirection: TextDirection.ltr,
-            style: TextStyle(
-              fontSize: 32,
-              color: Colors.black87,
-            ),
-          ),
-        ),
-      ),
-    );*/
         body: Container(
             child: Column(
                 children: <Widget>[
