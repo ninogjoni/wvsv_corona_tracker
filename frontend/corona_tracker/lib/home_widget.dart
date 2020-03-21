@@ -1,5 +1,4 @@
 import 'package:corona_tracker/navigation/HelpScreen.dart';
-import 'package:corona_tracker/navigation/HomeScreen.dart';
 import 'package:corona_tracker/navigation/MapScreen.dart';
 import 'package:corona_tracker/navigation/StatusScreen.dart';
 import 'package:corona_tracker/navigation/ReportScreen.dart';
