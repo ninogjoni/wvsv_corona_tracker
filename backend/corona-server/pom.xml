@@ -134,21 +134,18 @@
 							<inputSpec>${project.build.directory}/generated-sources/openapi.yaml</inputSpec>
 							<modelPackage>de.ghwct.service.model</modelPackage>
 							<apiPackage>de.ghwct.service.api</apiPackage>
-							<generateApis>false</generateApis>
-							<generateApiTests>false</generateApiTests>
 							<generateApiDocumentation>false</generateApiDocumentation>
 							<generateModels>true</generateModels>
 							<generateModelTests>true</generateModelTests>
 							<withXml>true</withXml>
-							<generateModelDocumentation>false</generateModelDocumentation>
-							<generateSupportingFiles>false</generateSupportingFiles>
-							<generatorName>java</generatorName>
-							<library>jersey2</library>
+							<generatorName>spring</generatorName>
 							<configOptions>
 								<sourceFolder>src/gen/java/</sourceFolder>
 								<java8>true</java8>
 								<dateLibrary>java8</dateLibrary>
 								<useBeanValidation>true</useBeanValidation>
+								<delegatePattern>true</delegatePattern>
+								<interfaceOnly>true</interfaceOnly>
 							</configOptions>
 						</configuration>
 					</execution>

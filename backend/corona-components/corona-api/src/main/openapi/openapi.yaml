@@ -10,6 +10,7 @@ paths:
   /positions:
     get:
       summary: Fetches a list of Positions
+      operationId: getPositions
       description: Without any params, it returns a list of last known positions for
         all the user's Devices. _from_ and _to_ fields are not required with _id_
       parameters:
@@ -57,6 +58,7 @@ paths:
   /users:
     get:
       summary: Fetch a list of Users
+      operationId: getUsers
       parameters:
         - name: userId
           in: query
@@ -76,6 +78,7 @@ paths:
           content: {}
     post:
       summary: Create a User
+      operationId: createUser
       requestBody:
         content:
           application/json:
@@ -93,6 +96,7 @@ paths:
   /users/{id}:
     put:
       summary: Update a User
+      operationId: updateUser
       parameters:
         - name: id
           in: path
@@ -115,6 +119,7 @@ paths:
       x-codegen-request-body-name: body
     delete:
       summary: Delete a User
+      operationId: deleteUser
       parameters:
         - name: id
           in: path
@@ -128,6 +133,7 @@ paths:
   /geofences:
     get:
       summary: Fetch a list of Geofences
+      operationId: getGeofences
       description: Without params, it returns a list of Geofences the user has access
         to
       parameters:
@@ -156,6 +162,7 @@ paths:
                   $ref: '#/components/schemas/Geofence'
     post:
       summary: Create a Geofence
+      operationId: createGeofence
       requestBody:
         content:
           application/json:
@@ -173,6 +180,7 @@ paths:
   /geofences/{id}:
     put:
       summary: Update a Geofence
+      operationId: updateGeofence
       parameters:
         - name: id
           in: path
@@ -209,6 +217,7 @@ paths:
     get:
       summary: Fetch a list of  within the time period for the Device
       description: At least one userId must be passed
+      operationId: getLocations
       parameters:
         - name: deviceId
           in: query
@@ -241,6 +250,38 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ReportTrips'
+  /dataset:
+    get:
+      summary: Fetch a list of data-sets
+      operationId: getDataSets
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlagueDataSet'
+        400:
+          description: No Permission
+          content: {}
+    post:
+      summary: Add a plague dataset
+      operationId: createDataset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlagueDataSet'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlagueDataSet'
 components:
   schemas:
     Position:
@@ -323,6 +364,31 @@ components:
         geofenceId:
           type: integer
         maintenanceId:
+          type: integer
+    PlagueDataSet:
+      type: object
+      required:
+        - medicalState
+        - userId
+      properties:
+        id:
+          type: integer
+        medicalState:
+          type: string
+          enum:
+            - UNKNOWN
+            - INFECTED
+            - TREATMENT
+            - CURED
+        time:
+          type: string
+          description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
+          format: date-time
+        positionId:
+          type: integer
+        geofenceId:
+          type: integer
+        userId:
           type: integer
     ReportSummary:
       type: object

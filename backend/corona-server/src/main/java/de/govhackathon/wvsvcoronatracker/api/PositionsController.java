@@ -1,25 +1,25 @@
 package de.govhackathon.wvsvcoronatracker.api;
 
+import de.ghwct.service.api.PositionsApi;
 import de.ghwct.service.model.Position;
 import de.govhackathon.wvsvcoronatracker.services.PositionsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
+
+import java.time.OffsetDateTime;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-public class PositionsController {
+@Component
+public class PositionsController implements PositionsApi {
 
-  @Autowired
-  PositionsService positionsService;
+    @Autowired
+    PositionsService positionsService;
 
-  @GetMapping("/positions")
-  public List<Position> getPositions(@RequestParam Optional<Integer> userId) {
-
-    return Collections.emptyList();
-  }
-
+    @Override
+    public ResponseEntity<List<Position>> getPositions(Integer userId, OffsetDateTime from, OffsetDateTime to, Integer id) {
+        // TODO implement me
+        return ResponseEntity.ok().body(Collections.emptyList());
+    }
 }
