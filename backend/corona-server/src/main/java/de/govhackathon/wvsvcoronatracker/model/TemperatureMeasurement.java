@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -22,6 +23,7 @@ public class TemperatureMeasurement implements Serializable {
     @Id
     private String id;
 
+    @OneToOne
     private User user;
 
     @NonNull
