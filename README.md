@@ -70,3 +70,6 @@ Open https://github.com/USERNAME/corona_tracker in your browser (replace USERNAM
 
 Click the "Compare & Pull Request" button.
 
+## Links
+
+- Devpost: https://devpost.com/software/1_008_a_corona_tracking_coronatracking
