@@ -48,7 +48,7 @@ spec:
 			container('docker'){
 			
 				stage('Get Versions'){
-						serverVersion = sh (script: 'cd backend && $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)', returnStdout = true).trim()
+						serverVersion = sh label: '', returnStdout: true, script: 'cd backend && $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)'
 				}
 				stage('Build Docker Image') {
                 	    sh 'cd backend && docker build --tag tommyelroy/wirvsirus:server-$serverVersion .'	
