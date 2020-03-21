@@ -1,5 +1,7 @@
 # Corona Tracker App
 
+![Corona Tracker Logo](https://raw.githubusercontent.com/beat-virus/corona_tracker/master/media/CoronaTrace_Logo_V3.png)
+
 During the wirvsvirushackathon.org challenge, we collaborate on Discord to create a COVID-19 tracking app.
 
 Planned features include:
@@ -8,6 +10,10 @@ Planned features include:
 - Upload your close contacts (anonymized, of course!) 
 - Get notified immediately if one of your 1st/2nd/3rd grade contacts gets diagnosed or cured
 - View infected areas on a map (anonymized)
+- store data of fever measurement at least twice a day
+
+![Screenshot 1](https://raw.githubusercontent.com/beat-virus/corona_tracker/master/media/screenshot-1-small.png)
+![Screenshot 3](https://raw.githubusercontent.com/beat-virus/corona_tracker/master/media/screenshot-3-small.png)
 
 ## Frontend
 
@@ -22,6 +28,7 @@ Planned features include:
 - Lombok Plugins for the IDEs
 - Docker for creating the docker image
 - pgAdmin to administrate all postgreSQL-databases ("Klicki-Bunti")
+- PostgreSQL for local develoment (11.x?)
 
 ### Preparations for development
 1. In the root folder, please execute the following command: `mvn clean install` -> **IMPORTANT**: You need to set the correct JDK Version either in your "JAVA_HOME" environment variable or in your IDE, otherwise maven will throw errors.
