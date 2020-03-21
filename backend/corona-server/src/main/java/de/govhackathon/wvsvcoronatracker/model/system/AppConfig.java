@@ -1,4 +1,4 @@
-package de.govhackathon.wvsvcoronatracker.model;
+package de.govhackathon.wvsvcoronatracker.model.system;
 
 import lombok.*;
 
@@ -11,16 +11,17 @@ import javax.validation.constraints.NotNull;
 @EqualsAndHashCode(callSuper = false)
 @Builder
 @Entity
-// quote user, see https://stackoverflow.com/questions/3608420/hibernate-saving-user-model-to-postgres
-@Table(name = "\"USER\"")
+@Table(name = "APP_CONFIG")
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class AppConfig {
+
+    public static final String FCM_KEY = "fcm.apikey";
 
     @Id
-    private String id;
+    private String key;
 
     @NotNull
-    private String deviceToken;
+    private String value;
 }
