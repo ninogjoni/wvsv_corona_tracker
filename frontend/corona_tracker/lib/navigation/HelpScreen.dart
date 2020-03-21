@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 
-class StatusScreen extends StatelessWidget {
+class HelpScreen extends StatelessWidget {
+  @override
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Status'),
+        title: Text('Hilfe'),
       ),
       body: Center(
         child: Center(
           child: Text(
-            'Hello World',
+            'Hilfe',
             textDirection: TextDirection.ltr,
             style: TextStyle(
               fontSize: 32,
@@ -22,4 +23,5 @@ class StatusScreen extends StatelessWidget {
       ),
     );
   }
+
 }

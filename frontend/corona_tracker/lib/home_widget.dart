@@ -1,3 +1,4 @@
+import 'package:corona_tracker/navigation/HelpScreen.dart';
 import 'package:corona_tracker/navigation/HomeScreen.dart';
 import 'package:corona_tracker/navigation/MapScreen.dart';
 import 'package:corona_tracker/navigation/StatusScreen.dart';
@@ -17,7 +18,8 @@ class _HomeState extends State<Home> {
   final List<Widget> _children = [
     StatusScreen(),
     MapScreen(),
-    ReportScreen()
+    ReportScreen(),
+    HelpScreen()
   ];
 
   @override
@@ -28,6 +30,7 @@ class _HomeState extends State<Home> {
       ),*/
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         onTap: onTabTapped,
         currentIndex: _currentIndex, // this will be set when a new tab is tapped
         items: [
@@ -40,8 +43,12 @@ class _HomeState extends State<Home> {
             title: new Text('Karte'),
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.report),
-              title: Text('Fall melden')
+              icon: new Icon(Icons.report),
+              title: new Text('Fall melden')
+          ),
+          BottomNavigationBarItem(
+              icon: new Icon(Icons.help),
+              title: new Text('Hilfe')
           )
         ],
       ),
