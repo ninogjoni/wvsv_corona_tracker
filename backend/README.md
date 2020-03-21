@@ -12,6 +12,13 @@ And start backend
 (cd corona-server && mvn spring-boot:run)
 ```
 
+If `spring-boot` doesn't work, try:
+
+```
+mvn clean install
+java -jar .//corona-server/target/wvsvcoronatracker-0.0.1-SNAPSHOT-server.jar
+```
+
 To connect to prod db use:
 ```
 (cd corona-server && \
