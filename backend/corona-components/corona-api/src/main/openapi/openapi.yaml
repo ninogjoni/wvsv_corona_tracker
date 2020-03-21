@@ -348,7 +348,7 @@ components:
         id:
           type: integer
         userId:
-          type: integer
+          type: string
         protocol:
           type: string
         outdated:

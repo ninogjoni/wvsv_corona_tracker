@@ -10,12 +10,12 @@ import java.util.List;
 @Repository
 public interface PositionsRepository extends JpaRepository<Position,Integer> {
 
-    List<Position> findByUserId(int userId);
+    List<Position> findByUserId(String userId);
 
     List<Position> findByTimestamp(LocalDateTime timestamp);
 
 
-    List<Position> findByUserIdAndTimestamp(int userId, LocalDateTime from);
+    List<Position> findByUserIdAndTimestamp(String userId, LocalDateTime from);
 
 
 
