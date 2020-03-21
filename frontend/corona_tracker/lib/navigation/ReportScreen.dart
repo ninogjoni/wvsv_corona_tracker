@@ -1,32 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'dart:developer';
+//import 'dart:developer';
 import 'package:corona_tracker/models/PhoneNumber.dart';
-import 'package:devicelocale/devicelocale.dart';
+import 'package:corona_tracker/i18n/appLocalizations.dart';
+//import 'package:devicelocale/devicelocale.dart';
+
 
 
 class ReportScreen extends StatelessWidget {
 
-  @override
-  ReportScreenFormState createState() {
-    return ReportScreenFormState();
-  }
+  // @override
+  // ReportScreenFormState createState() {
+  //   return ReportScreenFormState();
+  // }
 
   @override
   Widget build(BuildContext context) {
-    final appTitle = 'Fall melden';
-    return MaterialApp(
-      theme: ThemeData(primarySwatch: Colors.blueGrey),
-      title: appTitle,
-      home: Scaffold(
+    return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          title: Text(appTitle),
+          title: Text(AppLocalizations.of(context).ReportScreen_AppBarTitleText),
         ),
         body: ReportScreenForm(),
-
-      ),
-    );
+      );
   }
 }
 
@@ -45,33 +41,35 @@ class ReportScreenFormState extends State<ReportScreenForm> {
   bool _enabled = true;
   String _locale;
 
-  @override
-  void initState() {
-    super.initState();
-    initPlatformState();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   // Locale is provided via Localizations.localeOf(context)
+  //   //initPlatformState();
+  //   //_locale = Localizations.localeOf(context).countryCode;
+  // }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String currentLocale;
+  // // Platform messages are asynchronous, so we initialize in an async method.
+  // Future<void> initPlatformState() async {
+  //   String currentLocale;
 
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
-      currentLocale = await Devicelocale.currentLocale;
-      print(currentLocale);
-    } on PlatformException {
-      print("Error obtaining current locale");
-    }
+  //   // Platform messages may fail, so we use a try/catch PlatformException.
+  //   try {
+  //     currentLocale = await Devicelocale.currentLocale;
+  //     print(currentLocale);
+  //   } on PlatformException {
+  //     print("Error obtaining current locale");
+  //   }
 
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
+  //   // If the widget was removed from the tree while the asynchronous platform
+  //   // message was in flight, we want to discard the reply rather than calling
+  //   // setState to update our non-existent appearance.
+  //   if (!mounted) return;
 
-    setState(() {
-      _locale = currentLocale;
-    });
-  }
+  //   setState(() {
+  //     _locale = currentLocale;
+  //   });
+  // }
 
   //TODO Am Besten eine User Instanz erzeugen und die gewaehlten Checkboxes in eine Liste packen
 
@@ -96,14 +94,14 @@ class ReportScreenFormState extends State<ReportScreenForm> {
             padding: const EdgeInsets.symmetric(vertical: 5.0),
           ),
           Text (
-              'Haben Sie folgende Symptome?',
+              AppLocalizations.of(context).ReportScreen_FormSymptomPromptText,
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 17
               )
           ),
           CheckboxListTile(
-            title: Text("Fieber"),
+            title: Text(AppLocalizations.of(context).ReportScreen_CheckboxFeverText),
             value: _feverChecked,
             onChanged: (value) {
               setState(() {
@@ -113,7 +111,7 @@ class ReportScreenFormState extends State<ReportScreenForm> {
             controlAffinity: ListTileControlAffinity.leading, //  <-- leading Checkbox
           ),
           CheckboxListTile(
-            title: Text("Müdigkeit"),
+            title: Text(AppLocalizations.of(context).ReportScreen_CheckboxFatigueText),
             value: _tirednessChecked,
             onChanged: (value) {
               setState(() {
@@ -123,7 +121,7 @@ class ReportScreenFormState extends State<ReportScreenForm> {
             controlAffinity: ListTileControlAffinity.leading, //  <-- leading Checkbox
           ),
           CheckboxListTile(
-            title: Text("Trockener Husten"),
+            title: Text(AppLocalizations.of(context).ReportScreen_CheckboxDryCoughText),
             value: _dryCoughChecked,
             onChanged: (value) {
               setState(() {
@@ -133,7 +131,7 @@ class ReportScreenFormState extends State<ReportScreenForm> {
             controlAffinity: ListTileControlAffinity.leading, //  <-- leading Checkbox
           ),
           CheckboxListTile(
-            title: Text("Beschwerden/Schmerzen"),
+            title: Text(AppLocalizations.of(context).ReportScreen_CheckboxAchesText),
             value: _achesPainsChecked,
             onChanged: (value) {
               setState(() {
@@ -146,13 +144,12 @@ class ReportScreenFormState extends State<ReportScreenForm> {
             padding: const EdgeInsets.symmetric(vertical: 15.0),
           ),
           Text (
-            'Bitte tragen Sie ihre Mobilnummer ein',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17,
-                    color: Colors.red
-                )
-
+            AppLocalizations.of(context).ReportScreen_CellphoneNumberPromptText,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 17,
+              color: Colors.red
+            ),
           ),
           TextFormField(
             enabled: _enabled,
@@ -160,20 +157,19 @@ class ReportScreenFormState extends State<ReportScreenForm> {
             inputFormatters: <TextInputFormatter>[
               WhitelistingTextInputFormatter.digitsOnly
             ],
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               icon: Icon(Icons.phone),
-              labelText: 'Mobilnummer',
+              labelText: AppLocalizations.of(context).cellphonenumberText,
             ),
             validator: (value) {
-              //TODO: i18n (Localization!)
               if (value.isEmpty) {
-                return 'Die Mobilnummer darf nicht leer bleiben';
+                return AppLocalizations.of(context).cellphoneFieldValidator_ShouldNotBeEmptyText;
               }
               else if (value.length < 11) {
-                return 'Die Mobilnummer ist zu kurz';
+                return AppLocalizations.of(context).cellphoneFieldValidator_TooShortText;
               }
               else if (value.length > 16) {
-                return "Die Mobilnummer ist zu lang";
+                return AppLocalizations.of(context).cellphoneFieldValidator_TooLongText;
               }
               else
                 return null;
@@ -181,12 +177,12 @@ class ReportScreenFormState extends State<ReportScreenForm> {
             onSaved: (String value) {
               //Hier werden die Daten an das Backend gesendet und dort weiter-
               //-bearbeitet
-              String phoneNumberE164 = PhoneNumber(value, _locale).normalize();
+              String phoneNumberE164 = PhoneNumber(value, Localizations.localeOf(context).countryCode).normalize();
               // vielleicht hier noch den String im TextFeld mit dem normalisierten ersetzen?
               print(phoneNumberE164);
             },
           ),
-//
+
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: RaisedButton(
@@ -194,15 +190,16 @@ class ReportScreenFormState extends State<ReportScreenForm> {
 
                 // Validate returns true if the form is valid, or false
                 // otherwise.
+                _locale = Localizations.localeOf(context).languageCode;
                 if (_formKey.currentState.validate() && _enabled) {
                   _enabled = !_enabled;
                   // If the form is valid, display a Snackbar.
                   Scaffold.of(context)
-                      .showSnackBar(SnackBar(content: Text('Fall wird gesendet')));
+                      .showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).ReportScreen_SendingReportText)));
                   _formKey.currentState.save();
                 }
               },
-              child: Text('Senden'),
+              child: Text(AppLocalizations.of(context).SendButtonText),
             ),
           ),
         ],

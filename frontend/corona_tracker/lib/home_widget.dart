@@ -3,8 +3,11 @@ import 'package:corona_tracker/navigation/HelpScreen.dart';
 import 'package:corona_tracker/navigation/MapScreen.dart';
 import 'package:corona_tracker/navigation/StatusScreen.dart';
 import 'package:corona_tracker/navigation/ReportScreen.dart';
+import 'package:corona_tracker/i18n/appLocalizations.dart';
 
 import 'package:flutter/material.dart';
+
+
 
 class Home extends StatefulWidget {
   @override
@@ -37,22 +40,23 @@ class _HomeState extends State<Home> {
         items: [
           BottomNavigationBarItem(
             icon: new Icon(Icons.people),
-            title: new Text('Status'),
+            title: new Text(AppLocalizations.of(context).bottomNavigationBarStatusText),
           ),
           BottomNavigationBarItem(
             icon: new Icon(Icons.map),
-            title: new Text('Karte'),
+            title: new Text(AppLocalizations.of(context).bottomNavigationBarMapText),
           ),
           BottomNavigationBarItem(
               icon: new Icon(Icons.report),
-              title: new Text('Fall melden')
+              title: new Text(AppLocalizations.of(context).bottomNavigationBarReportText),
           ),
           BottomNavigationBarItem(
               icon: new Icon(Icons.help),
-              title: new Text('Hilfe')
+              title: new Text(AppLocalizations.of(context).bottomNavigationBarHelpText)
           ),
           BottomNavigationBarItem(
               icon: new Icon(Icons.contacts),
+              // TODO: i18n
               title: new Text('Kontakte')
           )
         ],

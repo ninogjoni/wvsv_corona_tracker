@@ -1,3 +1,5 @@
+import 'package:corona_tracker/i18n/appLocalizations.dart';
+
 import 'package:flutter/material.dart';
 
 class StatusScreen extends StatelessWidget {
@@ -6,7 +8,7 @@ class StatusScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Status'),
+        title: Text(AppLocalizations.of(context).StatusScreen_AppBarTitleText),
       ),
       body: Center(
         child: Column(
@@ -21,7 +23,7 @@ class StatusScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 17.0),
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
             ),
             Column(
               children: [
@@ -33,7 +35,7 @@ class StatusScreen extends StatelessWidget {
                 Text(
                   'Anzahl der Geheilten',
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                    //fontWeight: FontWeight.bold,
                     fontSize: 34
                   )),
                 //TODO API CALL
@@ -41,7 +43,8 @@ class StatusScreen extends StatelessWidget {
                     '13022',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 34
+                        fontSize: 34,
+                        decoration: TextDecoration.underline
                     )
                 ),
               ],
@@ -56,7 +59,6 @@ class StatusScreen extends StatelessWidget {
                 Text(
                     'Anzahl der Benutzer',
                     style: TextStyle(
-                        fontWeight: FontWeight.bold,
                         fontSize: 34
                     )),
                 //TODO API CALL
@@ -64,6 +66,7 @@ class StatusScreen extends StatelessWidget {
                     '13022',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.underline,
                         fontSize: 34
                     )
                 ),
