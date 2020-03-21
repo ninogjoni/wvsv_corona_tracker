@@ -1,3 +1,4 @@
+import 'package:corona_tracker/navigation/ContactScreen.dart';
 import 'package:corona_tracker/navigation/HelpScreen.dart';
 import 'package:corona_tracker/navigation/MapScreen.dart';
 import 'package:corona_tracker/navigation/StatusScreen.dart';
@@ -18,7 +19,8 @@ class _HomeState extends State<Home> {
     StatusScreen(),
     MapScreen(),
     ReportScreen(),
-    HelpScreen()
+    HelpScreen(),
+    ContactScreen()
   ];
 
   @override
@@ -48,6 +50,10 @@ class _HomeState extends State<Home> {
           BottomNavigationBarItem(
               icon: new Icon(Icons.help),
               title: new Text('Hilfe')
+          ),
+          BottomNavigationBarItem(
+              icon: new Icon(Icons.contacts),
+              title: new Text('Kontakte')
           )
         ],
       ),
