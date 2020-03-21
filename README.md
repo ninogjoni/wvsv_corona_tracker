@@ -1,5 +1,7 @@
 # Corona Tracker App
 
+![Corona Tracker Logo](https://raw.githubusercontent.com/beatvirus/corona_tracker/master/media/CoronaTrace_Logo_V3.png)
+
 During the wirvsvirushackathon.org challenge, we collaborate on Discord to create a COVID-19 tracking app.
 
 Planned features include:
