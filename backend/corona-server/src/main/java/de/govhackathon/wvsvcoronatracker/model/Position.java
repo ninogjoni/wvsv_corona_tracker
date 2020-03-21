@@ -1,20 +1,31 @@
 package de.govhackathon.wvsvcoronatracker.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 @Setter
 @Getter
 @Builder
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Position {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer deviceId;
+    private Integer userId;
+
+    @Builder.Default
+    private LocalDateTime timestamp = LocalDateTime.now(ZoneOffset.UTC);
 
     private String protocol;
 

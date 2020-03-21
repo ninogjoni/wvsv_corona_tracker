@@ -10,8 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.time.OffsetDateTime;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class PositionsController implements PositionsApi {
@@ -35,6 +35,6 @@ public class PositionsController implements PositionsApi {
     @Override
     public ResponseEntity<List<PositionDto>> getPositions(String userId, OffsetDateTime from, OffsetDateTime to, Integer id) {
 
-        return ResponseEntity.ok().body(Collections.emptyList());
+        return ResponseEntity.ok().body(positionsService.getPositions().stream().map(position -> this.positionMapper.toDto(position)).collect(Collectors.toList()));
     }
 }

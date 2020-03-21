@@ -1,32 +1,36 @@
 package de.govhackathon.wvsvcoronatracker.services.impl;
 
 import de.govhackathon.wvsvcoronatracker.model.GeoFence;
-import de.govhackathon.wvsvcoronatracker.model.User;
+import de.govhackathon.wvsvcoronatracker.repositories.GeoFenceRepository;
 import de.govhackathon.wvsvcoronatracker.services.GeoFencesService;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
+import org.apache.commons.collections4.IterableUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class GeoFencesServiceImpl implements GeoFencesService {
 
+    @Autowired
+    GeoFenceRepository geoFenceRepository;
+
     @Override
     public List<GeoFence> getGeoFences() {
-        return null;
+        return IterableUtils.toList(geoFenceRepository.findAll());
     }
 
     @Override
-    public GeoFence createGeoFence(GeoFence geofence) {
-        return null;
+    public GeoFence createGeoFence(final GeoFence geofence) {
+        return geoFenceRepository.save(geofence);
     }
 
     @Override
-    public User updateGeoFence(Integer id, GeoFence geoFence) {
-        return null;
+    public GeoFence updateGeoFence(final GeoFence geoFence) {
+        return geoFenceRepository.save(geoFence);
     }
 
     @Override
-    public void deleteGeoFence(Integer id) {
-
+    public void deleteGeoFence(final GeoFence geoFence) {
+        geoFenceRepository.delete(geoFence);
     }
 }
