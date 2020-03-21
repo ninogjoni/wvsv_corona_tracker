@@ -370,7 +370,7 @@ components:
     User:
       type: object
       required:
-        - id
+        - token
         - phoneHash
       properties:
         id:

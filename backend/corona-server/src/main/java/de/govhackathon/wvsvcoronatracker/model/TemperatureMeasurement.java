@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 public class TemperatureMeasurement implements Serializable {
 
     @Id
-    private String id;
+    private Integer id;
 
     @OneToOne
     private User user;

@@ -2,9 +2,7 @@ package de.govhackathon.wvsvcoronatracker.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Data
@@ -19,8 +17,12 @@ import javax.validation.constraints.NotNull;
 public class User {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @NotNull
-    private String deviceToken;
+    private String token;
+
+    @NotNull
+    private String phoneHash;
 }

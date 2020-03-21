@@ -9,7 +9,7 @@ public interface BodyTempService {
   /**
    * Get the timestamp of last reported temperature.
    */
-  LocalDateTime getLastBodyTempByUser(String userId);
+  LocalDateTime getLastBodyTempByUser(Integer userId);
 
   /**
    * Add new self reported temperature for user.
