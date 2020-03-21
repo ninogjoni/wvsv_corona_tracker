@@ -10,5 +10,5 @@ public interface BodyTempService {
   /**
    * Add new self reported temperature for user.
    */
-  LocalDateTime addBodyTemperature(String userId, LocalDateTime timestamp, int temperature);
+  void addBodyTemperature(String userId, LocalDateTime timestamp, int temperature);
 }
