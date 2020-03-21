@@ -10,4 +10,5 @@ public class WvsvCoronaTrackerApplication {
 		SpringApplication.run(WvsvCoronaTrackerApplication.class, args);
 	}
 
+
 }
