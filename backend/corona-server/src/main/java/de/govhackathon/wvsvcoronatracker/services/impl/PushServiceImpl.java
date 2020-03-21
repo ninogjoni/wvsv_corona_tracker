@@ -1,5 +1,7 @@
 package de.govhackathon.wvsvcoronatracker.services.impl;
 
+import de.govhackathon.wvsvcoronatracker.model.system.AppConfig;
+import de.govhackathon.wvsvcoronatracker.repositories.AppConfigRepository;
 import de.govhackathon.wvsvcoronatracker.services.PushService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,26 +18,33 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.Serializable;
 import java.util.Collections;
+import java.util.Optional;
 
 
 @Service("pushService")
 public class PushServiceImpl implements PushService {
     private static final Logger LOG = LoggerFactory.getLogger(PushServiceImpl.class);
 
-    private AppRepository appRepository;
+    private AppConfigRepository configRepository;
 
     private static final String FCM_URL = "https://fcm.googleapis.com/fcm/send";
 
+    private String fcmApiKey;
+
     @Autowired
     public PushServiceImpl(AppConfigRepository configRepository) {
-        this.appRepository = appRepository;
-        this.consumerRepository = consumerRepository;
+        this.configRepository = configRepository;
+        Optional<AppConfig> fcmKey = this.configRepository.findById(AppConfig.FCM_KEY);
+        if (fcmKey.isPresent()) {
+            this.fcmApiKey = fcmKey.get().getValue();
+        } else {
+            LOG.error("No FCM API Key given");
+        }
     }
-
 
     @Override
     public void sendPushToDevice(String title, String msg, String deviceToken) {
-
+        this.sendFirebaseNotification(this.fcmApiKey, title, msg, deviceToken, "");
     }
 
     private void sendFirebaseNotification(String apiKey, String title, String msg, String deviceToken, String typeId) {

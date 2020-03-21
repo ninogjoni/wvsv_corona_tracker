@@ -17,5 +17,7 @@ import javax.persistence.*;
 public class User {
 
     @Id
-    private String userId;
+    private String id;
+
+    private String deviceToken;
 }

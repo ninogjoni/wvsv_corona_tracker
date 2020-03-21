@@ -1,13 +1,15 @@
 package de.govhackathon.wvsvcoronatracker.services.impl;
 
+import de.govhackathon.wvsvcoronatracker.model.User;
+import de.govhackathon.wvsvcoronatracker.services.BodyTempService;
+import de.govhackathon.wvsvcoronatracker.services.PushService;
+import de.govhackathon.wvsvcoronatracker.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-
-import de.govhackathon.wvsvcoronatracker.model.User;
-import de.govhackathon.wvsvcoronatracker.services.UsersService;
 
 /**
  * Send body temperature measurement reminder to users if
@@ -26,9 +28,9 @@ public class BodyTempReminderServiceImpl {
 
     @Autowired
     public BodyTempReminderServiceImpl(UsersService usersService, BodyTempService bodyTempService, PushService pushService) {
-	this.usersService = usersService;
-	this.bodyTempService = bodyTempService;
-	this.pushService = pushService;
+        this.usersService = usersService;
+        this.bodyTempService = bodyTempService;
+        this.pushService = pushService;
     }
 
     // Run at 08:00 daily
@@ -48,13 +50,13 @@ public class BodyTempReminderServiceImpl {
      * their temperature after "afterHour" (0-23) today.
      */
     private void sendReminders(int afterHour) {
-	LocalDateTime earlyEvening = LocalDate.now().atTime(afterHour, 0);
+        LocalDateTime limit = LocalDate.now().atTime(afterHour, 0);
 
-	for(User user : this.usersService.getUsers()) {
-	    LocalDateTime last = this.bodyTempService.getLastBodyTempByUser(user.getId());
-	    if(last.isBefore(earlyMorning)) {
-		this.pushService.sendPushToOneDevice(appId, this.TITLE, this.MESSAGE, user.getDeviceToken());
-	    }
-	}
+        for (User user : this.usersService.getUsers()) {
+            LocalDateTime last = this.bodyTempService.getLastBodyTempByUser(user.getId());
+            if (last.isBefore(limit)) {
+                this.pushService.sendPushToDevice( this.TITLE, this.REMINDER, user.getDeviceToken());
+            }
+        }
     }
 }
