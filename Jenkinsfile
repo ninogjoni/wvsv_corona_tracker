@@ -33,11 +33,11 @@ spec:
       volumeMounts:
       - mountPath: /var/run/docker.sock
         name: docker-sock
-	- name: maven
-	  image: maven:3.6.3-jdk-8
-	  tty: true
-	  command:
-	  - cat
+    - name: maven
+      image: maven:3.6.3-jdk-8
+      tty: true
+      command:
+      - cat
   volumes:
     - name: docker-sock
       hostPath:
