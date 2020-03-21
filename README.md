@@ -24,7 +24,7 @@ Planned features include:
 - pgAdmin to administrate all postgreSQL-databases ("Klicki-Bunti")
 
 ### Preparations for development
-1. In the root folder, please execute the following command: `mvn clean install` -> **Wichtig**: You need to set the correct JDK Version either in your JAVA_HOME environment variable or in your IDE, otherwise maven will throw errors.
+1. In the root folder, please execute the following command: `mvn clean install` -> **IMPORTANT**: You need to set the correct JDK Version either in your "JAVA_HOME" environment variable or in your IDE, otherwise maven will throw errors.
 2. You might need to refresh the root folder.
 
 ## Contributing
