@@ -1,0 +1,569 @@
+openapi: 3.0.1
+info:
+  title: Corona Tracker API
+  version: "0.1"
+servers:
+  - url: http://localhost/api/v1
+security:
+  - basicAuth: []
+paths:
+  /positions:
+    get:
+      summary: Fetches a list of Positions
+      operationId: getPositions
+      description: Without any params, it returns a list of last known positions for
+        all the user's Devices. _from_ and _to_ fields are not required with _id_
+      parameters:
+        - name: userId
+          in: query
+          schema:
+            type: integer
+        - name: from
+          in: query
+          description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
+          schema:
+            type: string
+            format: date-time
+        - name: to
+          in: query
+          description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
+          schema:
+            type: string
+            format: date-time
+        - name: id
+          in: query
+          description: To fetch one or more positions. Multiple params can be passed
+            like `id=31&id=42`
+          schema:
+            type: integer
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Position'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Position'
+            application/gpx+xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Position'
+    post:
+      summary: Create new location entry
+      operationId: createPosition
+      parameters:
+        - name: userId
+          in: query
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Position'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Position'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Position'
+            application/gpx+xml:
+              schema:
+                $ref: '#/components/schemas/Position'
+  /users:
+    get:
+      summary: Fetch a list of Users
+      operationId: getUsers
+      parameters:
+        - name: userId
+          in: query
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        400:
+          description: No Permission
+          content: {}
+    post:
+      summary: Create a User
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      x-codegen-request-body-name: body
+  /users/{id}:
+    put:
+      summary: Update a User
+      operationId: updateUser
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      x-codegen-request-body-name: body
+    delete:
+      summary: Delete a User
+      operationId: deleteUser
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        204:
+          description: No Content
+          content: {}
+  /geofences:
+    get:
+      summary: Fetch a list of Geofences
+      operationId: getGeofences
+      description: Without params, it returns a list of Geofences the user has access to
+      parameters:
+        - name: all
+          in: query
+          description: Can only be used by admins or managers to fetch all entities
+          schema:
+            type: boolean
+        - name: userId
+          in: query
+          description: Standard users can use this only with their own _userId_
+          schema:
+            type: integer
+        - name: refresh
+          in: query
+          schema:
+            type: boolean
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Geofence'
+    post:
+      summary: Create a Geofence
+      operationId: createGeofence
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Geofence'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Geofence'
+  /geofences/{id}:
+    put:
+      summary: Update a Geofence
+      operationId: updateGeofence
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Geofence'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Geofence'
+      x-codegen-request-body-name: body
+    delete:
+      summary: Delete a Geofence
+      operationId: removeGeofence
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        204:
+          description: No Content
+          content: {}
+  /reports/locations:
+    get:
+      summary: Fetch a list of  within the time period for the Device
+      description: At least one userId must be passed
+      operationId: getLocations
+      parameters:
+        - name: deviceId
+          in: query
+          style: form
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: from
+          in: query
+          description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
+          required: true
+          schema:
+            type: string
+            format: date-time
+        - name: to
+          in: query
+          description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
+          required: true
+          schema:
+            type: string
+            format: date-time
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ReportTrips'
+  /dataset:
+    get:
+      summary: Fetch a list of data-sets
+      operationId: getDataSets
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlagueDataSet'
+        400:
+          description: No Permission
+          content: {}
+    post:
+      summary: Add a plague dataset
+      operationId: createDataset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlagueDataSet'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlagueDataSet'
+components:
+  schemas:
+    Position:
+      type: object
+      properties:
+        id:
+          type: integer
+        deviceId:
+          type: integer
+        protocol:
+          type: string
+        outdated:
+          type: boolean
+        valid:
+          type: boolean
+        latitude:
+          type: number
+        longitude:
+          type: number
+        altitude:
+          type: number
+        network:
+          type: object
+          properties: {}
+    User:
+      type: object
+      required:
+        - id
+        - phoneHash
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        phoneHash:
+          type: string
+        token:
+          type: string
+    Geofence:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        area:
+          type: string
+    Event:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+        serverTime:
+          type: string
+          description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
+          format: date-time
+        positionId:
+          type: integer
+        geofenceId:
+          type: integer
+        maintenanceId:
+          type: integer
+    PlagueDataSet:
+      type: object
+      required:
+        - medicalState
+        - userId
+      properties:
+        id:
+          type: integer
+        medicalState:
+          type: string
+          enum:
+            - UNKNOWN
+            - INFECTED
+            - TREATMENT
+            - CURED
+        time:
+          type: string
+          description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
+          format: date-time
+        positionId:
+          type: integer
+        geofenceId:
+          type: integer
+        userId:
+          type: integer
+    ReportSummary:
+      type: object
+      properties:
+        deviceName:
+          type: string
+        maxSpeed:
+          type: number
+          description: in knots
+        averageSpeed:
+          type: number
+          description: in knots
+        distance:
+          type: number
+          description: in meters
+        spentFuel:
+          type: number
+          description: in liters
+        engineHours:
+          type: integer
+    ReportTrips:
+      type: object
+      properties:
+        deviceName:
+          type: string
+        maxSpeed:
+          type: number
+          description: in knots
+        averageSpeed:
+          type: number
+          description: in knots
+        distance:
+          type: number
+          description: in meters
+        spentFuel:
+          type: number
+          description: in liters
+        duration:
+          type: integer
+        startTime:
+          type: string
+          description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
+          format: date-time
+        startAddress:
+          type: string
+        startLat:
+          type: number
+        startLon:
+          type: number
+        endTime:
+          type: string
+          description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
+          format: date-time
+        endAddress:
+          type: string
+        endLat:
+          type: number
+        endLon:
+          type: number
+    ReportStops:
+      type: object
+      properties:
+        deviceName:
+          type: string
+        duration:
+          type: integer
+        startTime:
+          type: string
+          description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
+          format: date-time
+        address:
+          type: string
+        lat:
+          type: number
+        lon:
+          type: number
+        endTime:
+          type: string
+          description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
+          format: date-time
+        spentFuel:
+          type: number
+          description: in liters
+        engineHours:
+          type: integer
+    DeviceAccumulators:
+      type: object
+      properties:
+        totalDistance:
+          type: number
+          description: in meters
+        hours:
+          type: number
+  parameters:
+    entityId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    all:
+      name: all
+      in: query
+      description: Can only be used by admins or managers to fetch all entities
+      schema:
+        type: boolean
+    refresh:
+      name: refresh
+      in: query
+      schema:
+        type: boolean
+    userId:
+      name: userId
+      in: query
+      description: Standard users can use this only with their own _userId_
+      schema:
+        type: integer
+    deviceIdArray:
+      name: deviceId
+      in: query
+      style: form
+      explode: true
+      schema:
+        type: array
+        items:
+          type: integer
+    userIdArray:
+      name: deviceId
+      in: query
+      style: form
+      explode: true
+      schema:
+        type: array
+        items:
+          type: string
+    fromTime:
+      name: from
+      in: query
+      description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
+      required: true
+      schema:
+        type: string
+        format: date-time
+    toTime:
+      name: to
+      in: query
+      description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
+      required: true
+      schema:
+        type: string
+        format: date-time
+  requestBodies:
+    User:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/User'
+      required: true
+    Geofence:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Geofence'
+      required: true
+  securitySchemes:
+    basicAuth:
+      type: http
+      description: Basic HTTP authorization with _email_ and _password_
+      scheme: basic
