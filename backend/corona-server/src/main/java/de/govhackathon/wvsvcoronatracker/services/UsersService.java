@@ -28,18 +28,17 @@ public interface UsersService {
      */
     User createUser(final User user);
 
-    /**
-     * Update a user
-     *
-     * @param user user data to be changed
-     * @return Updated user
-     */
-    User updateUser(final User user);
+  /**
+   * Update a user
+   *
+   * @param user user data to be changed
+   * @return Updated user
+   */
+  User updateUser(final User user);
 
-    /**
-     * Delete a user
-     *
-     * @param id users id
-     */
-    void deleteUser(final User user);
+  /**
+   * Delete a user
+   * @param user user data to be deleted
+   */
+  void deleteUser(final User user);
 }
