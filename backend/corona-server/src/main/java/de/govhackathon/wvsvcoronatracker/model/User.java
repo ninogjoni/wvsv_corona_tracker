@@ -16,9 +16,9 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class User {
 
+    //TODO BUG no uniqueness enforced on this id yet (entities with same id will be overwritten)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String id;
 
     @NotNull
     private String token;

@@ -45,9 +45,9 @@ public class UsersController implements UsersApi {
     return ResponseEntity.noContent().build();
   }
 
-  @Override
-  public ResponseEntity<UserDto> updateUser(Integer id, UserDto body) {
+/*  @Override
+  public ResponseEntity<UserDto> updateUser(String id, UserDto body) {
     User user = usersService.updateUser(userMapper.toEntity(body));
     return ResponseEntity.ok().body(userMapper.toDto(user));
-  }
+  }*/
 }

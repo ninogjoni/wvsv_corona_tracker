@@ -22,7 +22,7 @@ public class BodyTempServiceImpl implements BodyTempService {
     }
 
     @Override
-    public LocalDateTime getLastBodyTempByUser(Integer userId) {
+    public LocalDateTime getLastBodyTempByUser(String userId) {
         List<TemperatureMeasurement> measurements = this.temperatureMeasurementRepository.getTemperatureMeasurementsByUser_idOrderByTimeAsc(userId);
         return measurements.get(measurements.size() - 1).getTime();
     }

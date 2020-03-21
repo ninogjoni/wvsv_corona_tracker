@@ -120,30 +120,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/User'
       x-codegen-request-body-name: body
-  /users/{id}:
-    put:
-      summary: Update a User
-      operationId: updateUser
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/User'
-        required: true
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-      x-codegen-request-body-name: body
     delete:
       summary: Delete a User
       operationId: deleteUser
@@ -370,11 +346,12 @@ components:
     User:
       type: object
       required:
-        - token
+        - id
+        - deviceToken
         - phoneHash
       properties:
         id:
-          type: integer
+          type: string
         name:
           type: string
         phoneHash:
