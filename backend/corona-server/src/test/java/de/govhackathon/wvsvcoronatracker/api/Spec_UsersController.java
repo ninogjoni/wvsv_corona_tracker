@@ -1,7 +1,6 @@
 package de.govhackathon.wvsvcoronatracker.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.ghwct.service.model.PositionDto;
 import de.ghwct.service.model.UserDto;
 import de.govhackathon.wvsvcoronatracker.repositories.PositionsRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -27,8 +28,10 @@ class Spec_UsersController {
 
     @Nested
     @SpringBootTest
-    @AutoConfigureMockMvc
+    @AutoConfigureMockMvc(addFilters = false)
+    @TestPropertySource(locations = "classpath:application-test.properties")
     @ExtendWith(SpringExtension.class)
+    @WithMockUser(username = "Test", roles = "APP_USER")
     class User_Registration {
 
         @Autowired

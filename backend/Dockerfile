@@ -32,4 +32,4 @@ RUN ls  corona-server/target && \
     mv /tmp/corona-server.jar ./ && \
     chmod 755 corona-server.jar
 
-CMD java -jar corona-server.jar
+CMD spring_profiles_active=prod java -Djava.security.egd=file:/dev/./urandom -jar corona-server.jar
