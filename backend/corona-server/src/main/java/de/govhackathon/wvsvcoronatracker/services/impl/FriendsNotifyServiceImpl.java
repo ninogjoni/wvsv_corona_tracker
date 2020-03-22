@@ -2,6 +2,7 @@ package de.govhackathon.wvsvcoronatracker.services.impl;
 
 import de.govhackathon.wvsvcoronatracker.model.MedicalState;
 import de.govhackathon.wvsvcoronatracker.model.User;
+import de.govhackathon.wvsvcoronatracker.services.FriendsService;
 import de.govhackathon.wvsvcoronatracker.services.PushService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,10 +17,12 @@ public class FriendsNotifyServiceImpl implements FriendsNotifyService {
   private static final String TITLE = "Meldung in deinem Freundeskreis"; // TODO: text/i18n
 
   private PushService pushService;
+  private FriendsService, friendsService;
 
   @Autowired
-  public FriendsNotifyServiceImpl(PushService pushService) {
+  public FriendsNotifyServiceImpl(PushService pushService, FriendsService friendsService) {
     this.pushService = pushService;
+    this.friendsService = friendsService;
   }
 
   public void onMedicalStateChanged(User user, MedicalState state) {
@@ -27,7 +30,7 @@ public class FriendsNotifyServiceImpl implements FriendsNotifyService {
   }
 
   private void iterateFriends(User user, MedicalState state) {
-    List<User> friends = this.friendsRepo.getByUser(user.getUserId());
+    List<User> friends = this.friendsService.getUsersFriends(user);
 
     for(User friend : friends) {
       this.pushService.sendPushToDevice(TITLE, String.format("Hallo %s, Dein Freund %s ist %s", friend.getName(), user.getName(), state), friend.getDeviceToken(),);
@@ -39,7 +42,7 @@ public class FriendsNotifyServiceImpl implements FriendsNotifyService {
   }
 
   private void iterateFriendsRecursion(User user, MedicalState state, User friend, Integer degree) {
-    List<User> friends2 = this.friendsRepo.getByUser(friend.getUserId());
+    List<User> friends2 = this.friendsService.getUsersFriends(friend);
 
     for(User friend2 : friends2) {
       if(degree < 2) {
