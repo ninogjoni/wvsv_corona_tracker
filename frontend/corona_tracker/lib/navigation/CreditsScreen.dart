@@ -14,13 +14,8 @@ const String _documentPath = 'pdfs/datenschutz.pdf';
 class CreditsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-          primarySwatch: Colors.blueGrey,
-          fontFamily: 'BebasNeue'
-      ),
-      home: MyHomePage(),
-
+    return Scaffold(
+      body: MyHomePage(),
     );
   }
 }
@@ -52,6 +47,9 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Credits"),
+        automaticallyImplyLeading: true,
+        leading: IconButton(icon: Icon(Icons.arrow_back),
+        onPressed: () => Navigator.pop(context)),
       ),
       body: Center(
         child: ListView(
