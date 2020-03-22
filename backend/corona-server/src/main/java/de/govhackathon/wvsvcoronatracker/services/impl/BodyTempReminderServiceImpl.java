@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
  */
 @Component
 public class BodyTempReminderServiceImpl {
-    private static final Logger LOG = LoggerFactory.getLogger(PushServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BodyTempReminderServiceImpl.class);
 
     // TODO: i18n
     private static final String TITLE = "Fiebermessen";
