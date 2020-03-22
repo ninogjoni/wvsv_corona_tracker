@@ -9,7 +9,7 @@ cd backend && docker-compose up -d
 ```
 And start backend
 ```
-cd corona-server && mvn spring-boot:run
+(cd corona-server && mvn spring-boot:run)
 ```
 
 If `spring-boot` doesn't work (`No plugin found for prefix 'spring-boot'`), try the following in `backend`:

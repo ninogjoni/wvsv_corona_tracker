@@ -37,7 +37,7 @@ public class PositionsController implements PositionsApi {
     }
 
     @Override
-    public ResponseEntity<List<PositionDto>> getPositions(String userId, OffsetDateTime from, OffsetDateTime to, Integer id) {
+    public ResponseEntity<List<PositionDto>> getPositions(String userId, OffsetDateTime from, OffsetDateTime to, String id) {
 
         return ResponseEntity.ok().body(positionsService.getPositions().stream().map(position -> this.positionMapper.toDto(position)).collect(Collectors.toList()));
     }

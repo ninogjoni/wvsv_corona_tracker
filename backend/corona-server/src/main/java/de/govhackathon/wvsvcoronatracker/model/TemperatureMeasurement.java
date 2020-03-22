@@ -2,11 +2,9 @@ package de.govhackathon.wvsvcoronatracker.model;
 
 import de.govhackathon.wvsvcoronatracker.model.system.AppConfig;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -21,7 +19,12 @@ import java.time.LocalDateTime;
 public class TemperatureMeasurement implements Serializable {
 
     @Id
-    private Integer id;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
+    private String id;
 
     @OneToOne
     private User user;

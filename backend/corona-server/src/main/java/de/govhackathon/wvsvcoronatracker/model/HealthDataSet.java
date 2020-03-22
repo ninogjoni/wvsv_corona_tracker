@@ -2,6 +2,7 @@ package de.govhackathon.wvsvcoronatracker.model;
 
 import de.govhackathon.wvsvcoronatracker.model.system.AppConfig;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.OffsetDateTime;
@@ -19,8 +20,12 @@ import java.time.OffsetDateTime;
 public class HealthDataSet {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
+    private String id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;

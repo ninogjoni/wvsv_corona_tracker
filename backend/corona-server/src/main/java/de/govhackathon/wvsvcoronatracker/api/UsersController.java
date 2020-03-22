@@ -47,7 +47,7 @@ public class UsersController implements UsersApi {
   }
 
   @Override
-  public ResponseEntity<Void> deleteUser(Integer id) {
+  public ResponseEntity<Void> deleteUser(String id) {
     usersService.getUser(String.valueOf(id)).ifPresent(usersService::deleteUser);
     return ResponseEntity.noContent().build();
   }

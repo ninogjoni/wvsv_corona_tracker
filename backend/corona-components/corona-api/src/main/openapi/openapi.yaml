@@ -35,7 +35,7 @@ paths:
           description: To fetch one or more positions. Multiple params can be passed
             like `id=31&id=42`
           schema:
-            type: integer
+            type: string
       responses:
         200:
           description: OK
@@ -128,7 +128,7 @@ paths:
           in: path
           required: true
           schema:
-            type: integer
+            type: string
       responses:
         204:
           description: No Content
@@ -208,7 +208,7 @@ paths:
           in: path
           required: true
           schema:
-            type: integer
+            type: string
       requestBody:
         content:
           application/json:
@@ -231,7 +231,7 @@ paths:
           in: path
           required: true
           schema:
-            type: integer
+            type: string
       responses:
         204:
           description: No Content
@@ -328,7 +328,7 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
         userId:
           type: string
         protocol:
@@ -373,7 +373,7 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
         name:
           type: string
         description:
@@ -384,7 +384,7 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
         type:
           type: string
         serverTime:
@@ -392,11 +392,11 @@ components:
           description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
           format: date-time
         positionId:
-          type: integer
+          type: string
         geofenceId:
-          type: integer
+          type: string
         maintenanceId:
-          type: integer
+          type: string
     TempMeasurement:
       type: object
       required:
@@ -433,9 +433,9 @@ components:
           description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
           format: date-time
         positionId:
-          type: integer
+          type: string
         geofenceId:
-          type: integer
+          type: string
     ReportSummary:
       type: object
       properties:
@@ -534,7 +534,7 @@ components:
       in: path
       required: true
       schema:
-        type: integer
+        type: string
     all:
       name: all
       in: query
@@ -560,7 +560,7 @@ components:
       schema:
         type: array
         items:
-          type: integer
+          type: string
     userIdArray:
       name: deviceId
       in: query
