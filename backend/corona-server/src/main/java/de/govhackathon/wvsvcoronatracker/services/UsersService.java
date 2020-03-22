@@ -34,7 +34,7 @@ public interface UsersService {
      * @param list of phone hashes
      * @return set of users
      */
-    Set<User> getUsersByPhoneHash(List<String> collect);
+    Set<User> getUsersByPhoneHashes(List<String> collect);
 
   /**
    * Update a user

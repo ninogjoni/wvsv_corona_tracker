@@ -70,7 +70,7 @@ public class UsersController implements UsersApi {
 
     User user = usersService.getUser(userId).orElseThrow(getUserNotFoundException());
 
-    Set<User> friends = usersService.getUsersByPhoneHash(friendDtoList
+    Set<User> friends = usersService.getUsersByPhoneHashes(friendDtoList
             .stream().map(FriendDto::getPhoneHash).collect(Collectors.toList()));
 
     //MVP: overwrite the friends list

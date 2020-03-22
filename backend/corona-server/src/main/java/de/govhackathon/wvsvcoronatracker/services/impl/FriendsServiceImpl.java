@@ -18,7 +18,9 @@ public class FriendsServiceImpl implements FriendsService {
     public void addFriendsForUser(User user, Set<User> friends) {
 
         //TODO find a better solution
-        friends.forEach(f -> f.getFriends().add(user));
+        friends.forEach(
+                f -> f.getUsers().add(user)
+        );
 
         userRepository.saveAll(friends);
     }

@@ -3,6 +3,8 @@ package de.govhackathon.wvsvcoronatracker.services.impl;
 import de.govhackathon.wvsvcoronatracker.model.User;
 import de.govhackathon.wvsvcoronatracker.repositories.UserRepository;
 import de.govhackathon.wvsvcoronatracker.services.UsersService;
+
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -33,9 +35,16 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public Set<User> getUsersByPhoneHash(List<String> collect) {
-        //TODO WIP
-        return null;
+    public Set<User> getUsersByPhoneHashes(List<String> friendsPhoneHashes) {
+
+        Set<User> users = new HashSet<>();
+        //TODO find better, DB-based solution
+        friendsPhoneHashes.forEach(f -> {
+            users.add(userRepository.findByPhoneHash(f));
+
+        });
+
+        return users;
     }
 
     @Override
