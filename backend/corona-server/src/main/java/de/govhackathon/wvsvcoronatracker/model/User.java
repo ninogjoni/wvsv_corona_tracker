@@ -19,15 +19,8 @@ import java.util.List;
 @NoArgsConstructor
 public class User {
 
-    @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator"
-    )
-    private String id;
-
     @NotNull
+    @Id
     private String token;
 
     @NotNull
