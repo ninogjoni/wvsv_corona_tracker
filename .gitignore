@@ -32,3 +32,4 @@ build/
 frontend/corona_tracker/android/app/src/main/AndroidManifest.xml
 
 frontend/corona_tracker/android/app/src/main/AndroidManifest.xml
+frontend/corona_tracker/lib/main.dart

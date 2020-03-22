@@ -64,7 +64,7 @@ class _HomeState extends State<Home> {
 //          BottomNavigationBarItem(
 //              icon: new Icon(Icons.settings),
 //              // TODO: i18n
-//              title: new Text('Settings')
+//              title: new Text('Dev_Push')
 //          )
         ],
       ),

@@ -12,6 +12,7 @@ import 'package:flutter/services.dart';
 import 'globals.dart' as globals;
 
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:openapi/api.dart';
 
 void main() => runApp(MyApp());
 
@@ -23,6 +24,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  var apiInstance = DefaultApi();
 
 
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
@@ -31,6 +33,9 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     initPlatformState();
+
+    defaultApiClient.getAuthentication<HttpBasicAuth>('basicAuth').username = "API_USER";
+    defaultApiClient.getAuthentication<HttpBasicAuth>('basicAuth').password = "API_PASSWORD";
 
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
@@ -54,7 +59,21 @@ class _MyAppState extends State<MyApp> {
     });
     _firebaseMessaging.getToken().then((String token) {
       assert(token != null);
-      print(token);
+      print("my token: " + token);
+      globals.deviceId = token;
+
+      User myUser = User();
+      myUser.id = "12345";
+      myUser.name = "Test User";
+      //myUser.phoneHash = sha256.convert(utf8.encode("Eine Telefonnummer")).toString();
+      //myUser.phoneHash = DateTime.now().toUtc().toIso8601String();
+      myUser.phoneHash = "0";
+      myUser.token = token;
+      apiInstance.createUser(myUser).then((User u){
+        print("added User with token: " + u.token);
+      }).catchError((e){
+        print("error registering user");
+      });
     });
 
 
@@ -77,7 +96,7 @@ class _MyAppState extends State<MyApp> {
     if (!mounted) return;
 
     setState(() {
-      globals.deviceId = uniqueID;
+      //globals.deviceId = uniqueID;
     });
   }
 

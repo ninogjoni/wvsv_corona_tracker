@@ -3,7 +3,7 @@
 enum Status {
   unknown,
   suspicion,
-  diseased,
+  infected,
   cured
 }
 
@@ -32,7 +32,7 @@ class User {
       case Status.suspicion:
         return 'Verdacht';
         break;
-      case Status.diseased:
+      case Status.infected:
         return 'Erkrankt';
         break;
       case Status.cured:
