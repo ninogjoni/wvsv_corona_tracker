@@ -199,16 +199,20 @@ class StatusScreen extends StatelessWidget {
                       ),
                     ),
                     FutureBuilder(
-                      initialData: "",
                       future: getUsersCuredCount(),
-                      builder: (context, data) {
-                        return Text(
-                            data.data.toString(),
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 34,
-                              color: Colors.green[500],
-                            ));
+                      builder: (context, AsyncSnapshot<String> snapshot) {
+                        if (snapshot.hasData) {
+                          return Text(
+                              snapshot.data.toString(),
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 34,
+                                color: Colors.green[500],
+                              ));
+                        }
+                        else {
+                          return CircularProgressIndicator();
+                        }
                       },
                     )
                   ],
@@ -231,16 +235,20 @@ class StatusScreen extends StatelessWidget {
                       ),
                     ),
                     FutureBuilder(
-                      initialData: "",
                       future: getUsersInfectedCount(),
-                      builder: (context, data) {
-                        return Text(
-                            data.data.toString(),
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 34,
-                              color: Colors.red[500],
-                            ));
+                      builder: (context, AsyncSnapshot<String> snapshot) {
+                        if (snapshot.hasData) {
+                          return Text(
+                              snapshot.data.toString(),
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 34,
+                                color: Colors.red[500],
+                              ));
+                        }
+                        else {
+                          return CircularProgressIndicator();
+                        }
                       },
                     )
                   ],
