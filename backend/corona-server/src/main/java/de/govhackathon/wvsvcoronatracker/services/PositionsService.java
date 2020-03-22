@@ -2,7 +2,7 @@ package de.govhackathon.wvsvcoronatracker.services;
 
 import de.govhackathon.wvsvcoronatracker.model.Position;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 public interface PositionsService {
@@ -27,7 +27,7 @@ public interface PositionsService {
      * @param from date to get positions from
      * @return List of all positions, starting from date specified, empty collection if none available
      */
-    List<Position> getPositionsByTimestamp(final LocalDateTime from);
+    List<Position> getPositionsByTimestamp(final OffsetDateTime from);
 
 
     /**
@@ -45,7 +45,7 @@ public interface PositionsService {
      * @param timestamp   date to get positions from
      * @return List of all positions for a specific user, starting from date specified, empty collection if none available
      */
-    List<Position> getPositionsByUserIdAndTimeStamp(final String userId, final LocalDateTime timestamp);
+    List<Position> getPositionsByUserIdAndTimeStamp(final String userId, final OffsetDateTime timestamp);
 
 
 }
