@@ -5,6 +5,8 @@ import de.govhackathon.wvsvcoronatracker.services.BodyTempService;
 import de.govhackathon.wvsvcoronatracker.services.PushService;
 import de.govhackathon.wvsvcoronatracker.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -16,11 +18,15 @@ import java.time.LocalDateTime;
  * they didn't already report their temperature recently.
  */
 @Component
+@Configuration
 public class BodyTempReminderServiceImpl {
 
     // TODO: i18n
     private static final String TITLE = "Fiebermessen";
     private static final String REMINDER = "Bitte trage deine Körpertemperatur in die App ein";
+
+    @Value("${BODYTEMPREMINDER_ENABLED:false}")
+    private boolean enabled;
 
     private UsersService usersService;
     private BodyTempService bodyTempService;
@@ -36,13 +42,17 @@ public class BodyTempReminderServiceImpl {
     // Run at 08:00 daily
     @Scheduled(cron = "0 0 8 * * *")
     public void morningReminder() {
-        this.sendReminders(4);
+        if(this.enabled) {
+            this.sendReminders(4);
+	}
     }
 
     // Run at 20:00 daily
     @Scheduled(cron = "0 0 20 * * *")
     public void eveningReminder() {
-        this.sendReminders(16);
+        if(this.enabled) {
+            this.sendReminders(16);
+	}
     }
 
     /**
