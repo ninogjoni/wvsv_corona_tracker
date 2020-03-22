@@ -1,7 +1,6 @@
 package de.govhackathon.wvsvcoronatracker.model;
 
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -22,6 +21,8 @@ public class User {
     @NotNull
     @Id
     private String token;
+
+    private String name;
 
     @NotNull
     private String phoneHash;

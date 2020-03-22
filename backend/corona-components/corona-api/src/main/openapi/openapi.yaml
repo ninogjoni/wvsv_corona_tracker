@@ -401,17 +401,14 @@ components:
     User:
       type: object
       required:
-        - id
-        - deviceToken
+        - token
         - phoneHash
       properties:
-        id:
+        token:
           type: string
         name:
           type: string
         phoneHash:
-          type: string
-        token:
           type: string
         healthHistory:
           type: array

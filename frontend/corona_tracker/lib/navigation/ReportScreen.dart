@@ -97,11 +97,17 @@ class ReportScreenFormState extends State<ReportScreenForm> {
               AppLocalizations.of(context).ReportScreen_FormSymptomPromptText,
               style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 17
+                  fontSize: 25
               )
           ),
           CheckboxListTile(
-            title: Text(AppLocalizations.of(context).ReportScreen_CheckboxFeverText),
+            title: Text(
+                AppLocalizations.of(context).ReportScreen_CheckboxFeverText,
+                style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20
+                )
+            ),
             value: _feverChecked,
             onChanged: (value) {
               setState(() {
@@ -111,7 +117,13 @@ class ReportScreenFormState extends State<ReportScreenForm> {
             controlAffinity: ListTileControlAffinity.leading, //  <-- leading Checkbox
           ),
           CheckboxListTile(
-            title: Text(AppLocalizations.of(context).ReportScreen_CheckboxFatigueText),
+            title: Text(
+                AppLocalizations.of(context).ReportScreen_CheckboxFatigueText,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20
+                )
+            ),
             value: _tirednessChecked,
             onChanged: (value) {
               setState(() {
@@ -121,7 +133,12 @@ class ReportScreenFormState extends State<ReportScreenForm> {
             controlAffinity: ListTileControlAffinity.leading, //  <-- leading Checkbox
           ),
           CheckboxListTile(
-            title: Text(AppLocalizations.of(context).ReportScreen_CheckboxDryCoughText),
+            title: Text(
+                AppLocalizations.of(context).ReportScreen_CheckboxDryCoughText,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20
+                )),
             value: _dryCoughChecked,
             onChanged: (value) {
               setState(() {
@@ -131,7 +148,13 @@ class ReportScreenFormState extends State<ReportScreenForm> {
             controlAffinity: ListTileControlAffinity.leading, //  <-- leading Checkbox
           ),
           CheckboxListTile(
-            title: Text(AppLocalizations.of(context).ReportScreen_CheckboxAchesText),
+            title: Text(
+                AppLocalizations.of(context).ReportScreen_CheckboxAchesText,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20
+                )
+            ),
             value: _achesPainsChecked,
             onChanged: (value) {
               setState(() {
@@ -147,7 +170,7 @@ class ReportScreenFormState extends State<ReportScreenForm> {
             AppLocalizations.of(context).ReportScreen_CellphoneNumberPromptText,
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 17,
+              fontSize: 25,
               color: Colors.red
             ),
           ),
@@ -160,6 +183,7 @@ class ReportScreenFormState extends State<ReportScreenForm> {
             decoration: InputDecoration(
               icon: Icon(Icons.phone),
               labelText: AppLocalizations.of(context).cellphonenumberText,
+
             ),
             validator: (value) {
               if (value.isEmpty) {

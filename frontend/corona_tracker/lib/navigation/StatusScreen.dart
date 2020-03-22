@@ -2,6 +2,7 @@ import 'package:corona_tracker/i18n/appLocalizations.dart';
 import 'package:flutter/material.dart';
 import 'package:openapi/api.dart';
 import '../globals.dart' as globals;
+import 'package:corona_tracker/navigation/CreditsScreen.dart';
 
 class StatusScreen extends StatelessWidget {
 
@@ -81,6 +82,14 @@ class StatusScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context).StatusScreen_AppBarTitleText),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.info_outline),
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => CreditsScreen()));
+            },
+          )
+        ],
       ),
       body: Center(
         child: ListView(

@@ -19,6 +19,11 @@ https://docs.google.com/document/d/18JaJj8r_-Dlp2q7oq3zp3X0w0M_lbIOY3HgEmqJCF-s/
 ![Screenshot 3](https://raw.githubusercontent.com/beat-virus/corona_tracker/master/media/screenshot-3-small.png)
 
 ## Frontend
+### Setup
+
+Choose the platform for further instructions:
+
+- Installation -> https://flutter.dev/docs/get-started/install
 
 ## Backend
 ### Basic instructions
@@ -36,6 +41,10 @@ https://docs.google.com/document/d/18JaJj8r_-Dlp2q7oq3zp3X0w0M_lbIOY3HgEmqJCF-s/
 ### Preparations for development
 1. In the root folder, please execute the following command: `mvn clean install` -> **IMPORTANT**: You need to set the correct JDK Version either in your "JAVA_HOME" environment variable or in your IDE, otherwise maven will throw errors.
 2. You might need to refresh the root folder.
+
+### Setup
+
+See [backend/README.md](https://github.com/beat-virus/corona_tracker/blob/master/backend/README.md)
 
 ## Contributing
 
