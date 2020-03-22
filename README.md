@@ -19,6 +19,11 @@ https://docs.google.com/document/d/18JaJj8r_-Dlp2q7oq3zp3X0w0M_lbIOY3HgEmqJCF-s/
 ![Screenshot 3](https://raw.githubusercontent.com/beat-virus/corona_tracker/master/media/screenshot-3-small.png)
 
 ## Frontend
+### Setup
+
+Choose the platform for further instructions:
+
+https://flutter.dev/docs/get-started/install
 
 ## Backend
 ### Basic instructions
