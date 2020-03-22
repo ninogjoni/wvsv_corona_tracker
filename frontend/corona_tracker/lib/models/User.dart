@@ -3,7 +3,7 @@
 enum Status {
   unknown,
   suspicion,
-  diseased,
+  infected,
   cured
 }
 
