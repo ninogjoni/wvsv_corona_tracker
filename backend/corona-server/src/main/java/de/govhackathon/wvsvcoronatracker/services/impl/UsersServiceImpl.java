@@ -5,6 +5,8 @@ import de.govhackathon.wvsvcoronatracker.repositories.UserRepository;
 import de.govhackathon.wvsvcoronatracker.services.UsersService;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+
 import org.apache.commons.collections4.IterableUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,12 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public User createUser(final User user) {
         return userRepository.save(user);
+    }
+
+    @Override
+    public Set<User> getUsersByPhoneHash(List<String> collect) {
+        //TODO WIP
+        return null;
     }
 
     @Override

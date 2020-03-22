@@ -1,7 +1,7 @@
 package de.govhackathon.wvsvcoronatracker.model.mapper;
 
 import de.ghwct.service.model.FriendDto;
-import de.govhackathon.wvsvcoronatracker.model.Friend;
+import de.govhackathon.wvsvcoronatracker.model.User;
 import org.mapstruct.*;
 
 
@@ -10,10 +10,6 @@ import org.mapstruct.*;
     nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
 public interface FriendMapper {
 
-
-  Friend toEntity(FriendDto dto);
-
-  @InheritInverseConfiguration
-  FriendDto toDto(Friend entity);
+  FriendDto toDto(User entity);
 
 }

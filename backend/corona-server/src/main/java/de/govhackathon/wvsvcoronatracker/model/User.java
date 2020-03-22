@@ -6,7 +6,9 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Data
@@ -36,6 +38,17 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<HealthDataSet> healthDataSetList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Friend> friends = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(name = "user_friend",
+            joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
+            inverseJoinColumns={@JoinColumn(name="friend_id", referencedColumnName="id")}
+    )
+    private Set<User> users;
+
+    @Builder.Default
+    @ManyToMany(mappedBy = "users", cascade = CascadeType.PERSIST)
+    private Set<User> friends = new HashSet<>();
+
+
 }

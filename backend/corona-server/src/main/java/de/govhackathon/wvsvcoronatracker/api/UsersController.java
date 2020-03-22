@@ -1,11 +1,11 @@
 package de.govhackathon.wvsvcoronatracker.api;
 
 import java.util.List;
+import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import de.ghwct.service.model.FriendDto;
-import de.govhackathon.wvsvcoronatracker.model.Friend;
 import de.govhackathon.wvsvcoronatracker.model.mapper.FriendMapper;
 import de.govhackathon.wvsvcoronatracker.model.system.AppConfig;
 import de.govhackathon.wvsvcoronatracker.services.FriendsService;
@@ -70,8 +70,8 @@ public class UsersController implements UsersApi {
 
     User user = usersService.getUser(userId).orElseThrow(getUserNotFoundException());
 
-    List<Friend> friends = friendDtoList.stream().
-            map(friendMapper::toEntity).collect(Collectors.toList());
+    Set<User> friends = usersService.getUsersByPhoneHash(friendDtoList
+            .stream().map(FriendDto::getPhoneHash).collect(Collectors.toList()));
 
     //MVP: overwrite the friends list
     friendsService.deleteUsersFriends(user);
@@ -79,6 +79,16 @@ public class UsersController implements UsersApi {
     friendsService.addFriendsForUser(user, friends);
 
     return ResponseEntity.ok().build();
+  }
+
+  @Override
+  public ResponseEntity<List<FriendDto>> getFriends(String userId) {
+
+    User user = usersService.getUser(userId).orElseThrow(getUserNotFoundException());
+
+    return ResponseEntity.ok().body(friendsService.getUsersFriends(user)
+            .stream().map(friendMapper::toDto).collect(Collectors.toList()));
+
   }
 
   private Supplier<EntityNotFoundException> getUserNotFoundException() {

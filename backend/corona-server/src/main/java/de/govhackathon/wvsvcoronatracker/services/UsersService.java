@@ -3,6 +3,7 @@ package de.govhackathon.wvsvcoronatracker.services;
 import de.govhackathon.wvsvcoronatracker.model.User;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface UsersService {
 
@@ -27,6 +28,13 @@ public interface UsersService {
      * @return Created user
      */
     User createUser(final User user);
+
+    /**
+     * Returns users by their phone hashes
+     * @param list of phone hashes
+     * @return set of users
+     */
+    Set<User> getUsersByPhoneHash(List<String> collect);
 
   /**
    * Update a user

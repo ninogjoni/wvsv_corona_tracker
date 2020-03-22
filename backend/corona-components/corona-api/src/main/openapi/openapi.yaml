@@ -179,6 +179,30 @@ paths:
         400:
           description: No Permission
           content: {}
+    get:
+      summary: Get users friends
+      operationId: getFriends
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Friend'
+        400:
+          description: No Permission
+          content: {}
+
+
+
   /geofences:
     get:
       summary: Fetch a list of Geofences
