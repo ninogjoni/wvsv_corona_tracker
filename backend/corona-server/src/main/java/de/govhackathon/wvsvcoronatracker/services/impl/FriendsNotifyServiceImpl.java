@@ -2,6 +2,7 @@ package de.govhackathon.wvsvcoronatracker.services.impl;
 
 import de.govhackathon.wvsvcoronatracker.model.MedicalState;
 import de.govhackathon.wvsvcoronatracker.model.User;
+import de.govhackathon.wvsvcoronatracker.services.FriendsNotifyService;
 import de.govhackathon.wvsvcoronatracker.services.FriendsService;
 import de.govhackathon.wvsvcoronatracker.services.PushService;
 import java.util.List;
@@ -20,7 +21,7 @@ public class FriendsNotifyServiceImpl implements FriendsNotifyService {
   private static final String TITLE = "Meldung in deinem Freundeskreis"; // TODO: text/i18n
 
   private PushService pushService;
-  private FriendsService, friendsService;
+  private FriendsService friendsService;
 
   @Autowired
   public FriendsNotifyServiceImpl(PushService pushService, FriendsService friendsService) {
@@ -40,7 +41,7 @@ public class FriendsNotifyServiceImpl implements FriendsNotifyService {
     List<User> friends = this.friendsService.getUsersFriends(user);
 
     for(User friend : friends) {
-      this.pushService.sendPushToDevice(this.TITLE, String.format("Hallo %s, Dein Freund %s ist %s", friend.getName(), user.getName(), state), friend.getDeviceToken(),);
+      this.pushService.sendPushToDevice(this.TITLE, String.format("Hallo %s, Dein Freund %s ist %s", friend.getName(), user.getName(), state), friend.getToken());
     }
 
     for(User friend : friends) {
@@ -53,9 +54,9 @@ public class FriendsNotifyServiceImpl implements FriendsNotifyService {
 
     for(User friend2 : friends2) {
       if(degree < 2) {
-        this.pushService.sendPushToDevice(this.TITLE, String.format("Hallo %s, ein Freund von %s ist %s", friend2.getName(), friend.getName(), state), friend2.getDeviceToken());
+        this.pushService.sendPushToDevice(this.TITLE, String.format("Hallo %s, ein Freund von %s ist %s", friend2.getName(), friend.getName(), state), friend2.getToken());
       } else {
-        this.pushService.sendPushToDevice(this.TITLE, String.format("Hallo %s, ein Freund %d. Grades von %s ist %s", friend2.getName(), degree, friend.getName(), state), friend2.getDeviceToken());
+        this.pushService.sendPushToDevice(this.TITLE, String.format("Hallo %s, ein Freund %d. Grades von %s ist %s", friend2.getName(), degree, friend.getName(), state), friend2.getToken());
       }
     }
 
