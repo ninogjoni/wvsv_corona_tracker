@@ -35,7 +35,14 @@ public class FriendsServiceImpl implements FriendsService {
     public void deleteUsersFriends(User user) {
 
         Set<User> usersFriends = userRepository.findByUsers(user);
-        usersFriends.forEach(f -> f.getFriends().remove(user));
 
+        //TODO find a better way
+        usersFriends.forEach(f -> {
+            user.getFriends().remove(f);
+
+            f.getFriends().remove(user);
+        });
+
+        userRepository.save(user);
     }
 }
