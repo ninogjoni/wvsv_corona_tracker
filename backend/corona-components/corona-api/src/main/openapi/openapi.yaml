@@ -284,30 +284,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TempMeasurement'
-  /dataset/status:
-    get:
-      summary: Fetch a list of data-sets
-      operationId: getDataSets
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PlagueDataSet'
-        400:
-          description: No Permission
-          content: {}
+  /healthDataSet:
     post:
-      summary: Add a plague dataset
-      operationId: createDataset
+      summary: Add a health dataset
+      operationId: createDataSet
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PlagueDataSet'
+              $ref: '#/components/schemas/HealthDataSet'
         required: true
       responses:
         200:
@@ -315,7 +300,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PlagueDataSet'
+                $ref: '#/components/schemas/HealthDataSet'
 components:
   schemas:
     Position:
@@ -358,6 +343,11 @@ components:
           type: string
         token:
           type: string
+        healthHistory:
+          type: array
+          items:
+            $ref: '#/components/schemas/HealthDataSet'
+
     Geofence:
       type: object
       properties:
@@ -402,14 +392,14 @@ components:
         value:
           description: 'temp value, caution: is multiplied *100. E.g. 38.02°C gets 3802 here!'
           type: integer
-    PlagueDataSet:
+    HealthDataSet:
       type: object
       required:
         - medicalState
         - userId
       properties:
-        id:
-          type: integer
+        userId:
+          type: string
         medicalState:
           type: string
           enum:
@@ -425,8 +415,6 @@ components:
           type: integer
         geofenceId:
           type: integer
-        userId:
-          type: string
     ReportSummary:
       type: object
       properties:

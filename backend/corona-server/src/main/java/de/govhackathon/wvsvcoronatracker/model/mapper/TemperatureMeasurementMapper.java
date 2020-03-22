@@ -1,6 +1,8 @@
-package de.govhackathon.wvsvcoronatracker.model;
+package de.govhackathon.wvsvcoronatracker.model.mapper;
 
 import de.ghwct.service.model.TempMeasurementDto;
+import de.govhackathon.wvsvcoronatracker.model.TemperatureMeasurement;
+import de.govhackathon.wvsvcoronatracker.model.User;
 import de.govhackathon.wvsvcoronatracker.repositories.UserRepository;
 import org.mapstruct.CollectionMappingStrategy;
 import org.mapstruct.Mapper;

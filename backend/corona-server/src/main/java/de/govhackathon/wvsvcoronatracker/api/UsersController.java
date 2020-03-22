@@ -5,12 +5,11 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 
 import de.ghwct.service.api.UsersApi;
 import de.ghwct.service.model.UserDto;
 import de.govhackathon.wvsvcoronatracker.model.User;
-import de.govhackathon.wvsvcoronatracker.model.UserMapper;
+import de.govhackathon.wvsvcoronatracker.model.mapper.UserMapper;
 import de.govhackathon.wvsvcoronatracker.services.UsersService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
