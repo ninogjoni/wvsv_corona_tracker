@@ -18,85 +18,130 @@ class StatusScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              padding: const EdgeInsets.symmetric(vertical: 25.0),
             ),
-            Column(
-              children: [
-                Icon(
-                  Icons.people,
-                  color: Colors.blueGrey,
-                  size: 50.0,
+            Row (
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Column(
+                  children: [
+                    Icon(
+                      Icons.people,
+                      color: Colors.blueGrey,
+                      size: 50.0,
+                    ),
+                    // TODO i18n
+                    Text(
+                      'Benutzer',
+                      style: TextStyle(
+                          fontSize: 34,
+                          decoration: TextDecoration.underline,
+                      ),
+
+                    ),
+                    // TODO API CALL
+                    Text(
+                      '13022',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 34,
+                      ),
+                    ),
+                  ],
                 ),
-                // TODO i18n
-                Text(
-                  'Benutzer',
-                  style: TextStyle(fontSize: 34),
-                ),
-                // TODO API CALL
-                Text(
-                  '13022',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    decoration: TextDecoration.underline,
-                    fontSize: 34,
-                  ),
+                Column(
+                  children: [
+                    Icon(
+                      Icons.person,
+                      color: Colors.green[500],
+                      size: 50.0,
+                    ),
+                    // TODO i18n
+                    Text(
+                      'Status',
+                      style: TextStyle(
+                        //fontWeight: FontWeight.bold,
+                        fontSize: 34,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                    // TODO API CALL
+                    Text(
+                      'Gesund',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 34,
+                        color: Colors.green[500],
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
-            Column(
-              children: [
-                Icon(
-                  Icons.person,
-                  color: Colors.green[500],
-                  size: 50.0,
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 25.0),
+            ),
+            Row (
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Column(
+                  children: [
+                    Icon(
+                      Icons.healing,
+                      color: Colors.green[500],
+                      size: 50.0,
+                    ),
+                    // TODO i18n
+                    Text(
+                      'Geheilt',
+                      style: TextStyle(
+                        //fontWeight: FontWeight.bold,
+                        fontSize: 34,
+                        color: Colors.green[500],
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                    // TODO API CALL
+                    Text(
+                      '12446',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 34,
+                        color: Colors.green[500],
+                      ),
+                    ),
+                  ],
                 ),
-                // TODO i18n
-                Text(
-                  'Eigener Status',
-                  style: TextStyle(
-                    //fontWeight: FontWeight.bold,
-                    fontSize: 34,
-                  ),
-                ),
-                // TODO API CALL
-                Text(
-                  'Gesund',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 34,
-                    decoration: TextDecoration.underline,
-                  ),
+                Column(
+                  children: [
+                    Icon(
+                      Icons.info_outline,
+                      color: Colors.red[500],
+                      size: 50.0,
+                    ),
+                    // TODO i18n
+                    Text(
+                      'Infiziert',
+                      style: TextStyle(
+                        //fontWeight: FontWeight.bold,
+                        fontSize: 34,
+                        color: Colors.red[500],
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                    // TODO API CALL
+                    Text(
+                      '6662',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 34,
+                        color: Colors.red[500],
+                      ),
+                    ),
+                  ],
                 ),
               ],
-            ),
-            Column(
-              children: [
-                Icon(
-                  Icons.healing,
-                  color: Colors.green[500],
-                  size: 50.0,
-                ),
-                // TODO i18n
-                Text(
-                  'Geheilt',
-                  style: TextStyle(
-                    //fontWeight: FontWeight.bold,
-                    fontSize: 34,
-                    color: Colors.green[500],
-                  ),
-                ),
-                // TODO API CALL
-                Text(
-                  '13022',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 34,
-                    decoration: TextDecoration.underline,
-                    color: Colors.green[500],
-                  ),
-                ),
-              ],
-            ),
+            )
           ],
         ),
       ),
