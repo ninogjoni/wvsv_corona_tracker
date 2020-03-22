@@ -120,32 +120,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/User'
       x-codegen-request-body-name: body
-  /users/{id}:
-    put:
-      summary: Update a User
-      operationId: updateUser
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/User'
-        required: true
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-      x-codegen-request-body-name: body
     delete:
-      summary: Delete a User
+      summary: Delete a User TODO move to /users/id
       operationId: deleteUser
       parameters:
         - name: id
@@ -157,6 +133,27 @@ paths:
         204:
           description: No Content
           content: {}
+  /users/{id}:
+    get:
+      summary: Get a single users
+      operationId: getUser
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          description: No Permission
+          content: {}
+
   /geofences:
     get:
       summary: Fetch a list of Geofences
@@ -308,30 +305,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TempMeasurement'
-  /dataset/status:
-    get:
-      summary: Fetch a list of data-sets
-      operationId: getDataSets
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PlagueDataSet'
-        400:
-          description: No Permission
-          content: {}
+  /healthDataSet:
     post:
-      summary: Add a plague dataset
-      operationId: createDataset
+      summary: Add a health dataset
+      operationId: createDataSet
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PlagueDataSet'
+              $ref: '#/components/schemas/HealthDataSet'
         required: true
       responses:
         200:
@@ -339,7 +321,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PlagueDataSet'
+                $ref: '#/components/schemas/HealthDataSet'
 components:
   schemas:
     Position:
@@ -370,17 +352,23 @@ components:
     User:
       type: object
       required:
-        - token
+        - id
+        - deviceToken
         - phoneHash
       properties:
         id:
-          type: integer
+          type: string
         name:
           type: string
         phoneHash:
           type: string
         token:
           type: string
+        healthHistory:
+          type: array
+          items:
+            $ref: '#/components/schemas/HealthDataSet'
+
     Geofence:
       type: object
       properties:
@@ -425,14 +413,14 @@ components:
         value:
           description: 'temp value, caution: is multiplied *100. E.g. 38.02°C gets 3802 here!'
           type: integer
-    PlagueDataSet:
+    HealthDataSet:
       type: object
       required:
         - medicalState
         - userId
       properties:
-        id:
-          type: integer
+        userId:
+          type: string
         medicalState:
           type: string
           enum:
@@ -448,8 +436,6 @@ components:
           type: integer
         geofenceId:
           type: integer
-        userId:
-          type: string
     ReportSummary:
       type: object
       properties:

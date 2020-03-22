@@ -4,6 +4,9 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -11,18 +14,20 @@ import javax.validation.constraints.NotNull;
 @Entity
 // quote user, see https://stackoverflow.com/questions/3608420/hibernate-saving-user-model-to-postgres
 @Table(name = "\"USER\"")
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
 
+    //TODO BUG no uniqueness enforced on this id yet (entities with same id will be overwritten)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String id;
 
     @NotNull
     private String token;
 
     @NotNull
     private String phoneHash;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<HealthDataSet> healthDataSetList = new ArrayList<>();
 }

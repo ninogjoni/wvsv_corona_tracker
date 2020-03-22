@@ -2,7 +2,7 @@ package de.govhackathon.wvsvcoronatracker.api;
 
 import de.ghwct.service.api.MeasurementApi;
 import de.ghwct.service.model.TempMeasurementDto;
-import de.govhackathon.wvsvcoronatracker.model.TemperatureMeasurementMapper;
+import de.govhackathon.wvsvcoronatracker.model.mapper.TemperatureMeasurementMapper;
 import de.govhackathon.wvsvcoronatracker.services.BodyTempService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

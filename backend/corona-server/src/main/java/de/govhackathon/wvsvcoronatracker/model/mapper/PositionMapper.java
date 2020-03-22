@@ -1,6 +1,7 @@
-package de.govhackathon.wvsvcoronatracker.model;
+package de.govhackathon.wvsvcoronatracker.model.mapper;
 
 import de.ghwct.service.model.PositionDto;
+import de.govhackathon.wvsvcoronatracker.model.Position;
 import org.mapstruct.CollectionMappingStrategy;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;

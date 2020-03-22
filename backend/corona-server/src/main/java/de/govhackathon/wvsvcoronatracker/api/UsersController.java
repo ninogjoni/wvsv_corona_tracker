@@ -5,15 +5,16 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 
 import de.ghwct.service.api.UsersApi;
 import de.ghwct.service.model.UserDto;
 import de.govhackathon.wvsvcoronatracker.model.User;
-import de.govhackathon.wvsvcoronatracker.model.UserMapper;
+import de.govhackathon.wvsvcoronatracker.model.mapper.UserMapper;
 import de.govhackathon.wvsvcoronatracker.services.UsersService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.persistence.EntityNotFoundException;
 
 
 @RestController
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsersController implements UsersApi {
 
   static final String API_PATH = "/api/v1"; // TODO: put this in a proper place
+  public static final String ERRMSG_USER_NOT_FOUND = "user.not.found";
 
   @Autowired
   UsersService usersService;
@@ -34,6 +36,11 @@ public class UsersController implements UsersApi {
   }
 
   @Override
+  public ResponseEntity<UserDto> getUser(String id) {
+    return ResponseEntity.ok().body(usersService.getUser(id).map(userMapper::toDto)
+            .orElseThrow(() -> new EntityNotFoundException(ERRMSG_USER_NOT_FOUND)));
+  }
+  @Override
   public ResponseEntity<UserDto> createUser(UserDto body) {
     User user = usersService.createUser(userMapper.toEntity(body));
     return ResponseEntity.ok().body(userMapper.toDto(user));
@@ -45,9 +52,9 @@ public class UsersController implements UsersApi {
     return ResponseEntity.noContent().build();
   }
 
-  @Override
-  public ResponseEntity<UserDto> updateUser(Integer id, UserDto body) {
+/*  @Override
+  public ResponseEntity<UserDto> updateUser(String id, UserDto body) {
     User user = usersService.updateUser(userMapper.toEntity(body));
     return ResponseEntity.ok().body(userMapper.toDto(user));
-  }
+  }*/
 }

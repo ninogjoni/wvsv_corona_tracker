@@ -2,7 +2,7 @@ package de.govhackathon.wvsvcoronatracker.api;
 
 import de.ghwct.service.api.GeofencesApi;
 import de.ghwct.service.model.GeofenceDto;
-import de.govhackathon.wvsvcoronatracker.model.GeofenceMapper;
+import de.govhackathon.wvsvcoronatracker.model.mapper.GeofenceMapper;
 import de.govhackathon.wvsvcoronatracker.services.GeoFencesService;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;

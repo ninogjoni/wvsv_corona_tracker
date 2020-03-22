@@ -3,7 +3,7 @@ package de.govhackathon.wvsvcoronatracker.api;
 import de.ghwct.service.api.PositionsApi;
 import de.ghwct.service.model.PositionDto;
 import de.govhackathon.wvsvcoronatracker.model.Position;
-import de.govhackathon.wvsvcoronatracker.model.PositionMapper;
+import de.govhackathon.wvsvcoronatracker.model.mapper.PositionMapper;
 import de.govhackathon.wvsvcoronatracker.services.PositionsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
