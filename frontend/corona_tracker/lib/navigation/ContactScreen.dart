@@ -3,8 +3,10 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:corona_tracker/models/ContactEntry.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:openapi/api.dart';
 
 class ContactScreen extends StatelessWidget {
+
 
   List<PopupMenuItem> choices = <PopupMenuItem>[
     PopupMenuItem(
@@ -60,8 +62,43 @@ class ContactScreenFormState extends State<ContactScreenForm> {
     initPlatformState();
   }
 
+  void addUserTest() {
+    defaultApiClient.getAuthentication<HttpBasicAuth>('basicAuth').username = "API_USER";
+    defaultApiClient.getAuthentication<HttpBasicAuth>('basicAuth').password = "API_PASSWORD";
+    var api_instance = DefaultApi();
+    print("adding new user");
+    User myUser = User();
+    myUser.id = "12345";
+    myUser.name = "Test User";
+    myUser.phoneHash = "sfhsdef4kxfddr4ft4x";
+    myUser.token = "token3";
+    try {
+      //var result = api_instance.createUser(myUser);
+      //print(result..toString());
+
+
+      var result = api_instance.getUser("token6").then((User u) {
+        print("got user: " + u.phoneHash);
+        Friend();
+      }).catchError((error) {
+        print("error getting user");
+      });
+    } catch (e) {
+      print("Exception when calling DefaultApi->createUser: $e\n");
+    }
+
+
+    /*String id = "token3"; // String |
+    try {
+      api_instance.deleteUser("");
+    } catch (e) {
+      print("Exception when calling DefaultApi->deleteUser: $e\n");
+    }*/
+  }
+
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
+
     setState(() {
       _saving = true;
     });
@@ -219,7 +256,8 @@ class ContactScreenFormState extends State<ContactScreenForm> {
         ),
         inAsyncCall: _saving,),
       floatingActionButton: FloatingActionButton(
-        onPressed: uploadContacts,
+        //onPressed: uploadContacts,
+        onPressed: addUserTest,
         tooltip: 'Hochladen',
         child: Icon(Icons.cloud_upload),
       ), // This trailing comma makes auto-formatting nicer for build methods.

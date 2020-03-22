@@ -37,6 +37,10 @@ dependencies:
   google_maps_flutter: ^0.5.25
   modal_progress_hud: ^0.1.3
 
+  openapi:
+    path: ./corona-api
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
