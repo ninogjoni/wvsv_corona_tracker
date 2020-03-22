@@ -1,14 +1,15 @@
 package de.govhackathon.wvsvcoronatracker.api;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import de.ghwct.service.model.FriendDto;
-import de.govhackathon.wvsvcoronatracker.model.mapper.FriendMapper;
+import de.govhackathon.wvsvcoronatracker.model.mapper.ContactMapper;
 import de.govhackathon.wvsvcoronatracker.model.system.AppConfig;
-import de.govhackathon.wvsvcoronatracker.services.FriendsService;
+import de.govhackathon.wvsvcoronatracker.services.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
@@ -33,13 +34,13 @@ public class UsersController implements UsersApi {
   UsersService usersService;
 
   @Autowired
-  FriendsService friendsService;
+  ContactService contactService;
 
   @Autowired
   UserMapper userMapper;
 
   @Autowired
-  FriendMapper friendMapper;
+  ContactMapper friendMapper;
 
 
   @Override
@@ -47,12 +48,12 @@ public class UsersController implements UsersApi {
     return ResponseEntity.ok().body(usersService.getUsers().stream().map(userMapper::toDto).collect(Collectors.toList()));
   }
 
+
   @Override
   public ResponseEntity<UserDto> getUser(String id) {
     return ResponseEntity.ok().body(usersService.getUser(id).map(userMapper::toDto)
             .orElseThrow(getUserNotFoundException()));
   }
-
   @Override
   public ResponseEntity<UserDto> createUser(UserDto body) {
     User user = usersService.createUser(userMapper.toEntity(body));
@@ -66,6 +67,14 @@ public class UsersController implements UsersApi {
   }
 
   @Override
+  public ResponseEntity<Void> addFriend(String userId, FriendDto friendDto) {
+    User user = usersService.getUser(userId).orElseThrow(getUserNotFoundException());
+    user.getFriends().add(friendMapper.toEntity(friendDto));
+    usersService.updateUser(user);
+    return ResponseEntity.ok().build();
+  }
+
+  @Override
   public ResponseEntity<Void> uploadFriends(String userId, List<FriendDto> friendDtoList) {
 
     User user = usersService.getUser(userId).orElseThrow(getUserNotFoundException());
@@ -73,16 +82,16 @@ public class UsersController implements UsersApi {
     Set<User> friends = usersService.getUsersByPhoneHashes(friendDtoList
             .stream().map(FriendDto::getPhoneHash).collect(Collectors.toList()));
 
-    if (friends.isEmpty()) {
-      //TODO we should add the phoneHashes for which no user has been found to a "userCandidate" repo
-      //to establish friends connections if a new user registers
-      throw new IllegalStateException("no friends found");
+    if (user.getFriends() == null){
+      user.setFriends(new HashSet<>());
     }
 
-    //MVP: overwrite the friends list
-    friendsService.deleteUsersFriends(user);
-
-    friendsService.addFriendsForUser(user, friends);
+    if (friends.isEmpty()) {
+      //  add the phoneHashes for which no user has been found as candidate
+      friendDtoList.forEach(dto ->  user.getFriends().add(contactService.createContact(friendMapper.toEntity(dto))));
+      // TODO compare delta of list
+    }
+    usersService.updateUser(user);
 
     return ResponseEntity.ok().build();
   }
@@ -91,9 +100,8 @@ public class UsersController implements UsersApi {
   public ResponseEntity<List<FriendDto>> getFriends(String userId) {
 
     User user = usersService.getUser(userId).orElseThrow(getUserNotFoundException());
-
-    return ResponseEntity.ok().body(friendsService.getUsersFriends(user)
-            .stream().map(friendMapper::toDto).collect(Collectors.toList()));
+    // TODO rename FriendDto to Contact
+    return ResponseEntity.ok().body(friendMapper.toDto(user.getFriends()));
 
   }
 

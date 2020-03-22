@@ -1,5 +1,6 @@
 package de.govhackathon.wvsvcoronatracker.repositories;
 
+import de.govhackathon.wvsvcoronatracker.model.Contact;
 import de.govhackathon.wvsvcoronatracker.model.HealthDataSet;
 import de.govhackathon.wvsvcoronatracker.model.MedicalState;
 import de.govhackathon.wvsvcoronatracker.model.User;
@@ -38,7 +39,7 @@ public class HealthDataSetRepositoryTest {
         entityManager.clear();
         User user = new User();
         user.setToken(DEFAULT_TOKEN);
-        user.setPhoneHash("hash");
+        user.setContactDetails(Contact.builder().phoneHash("hash").build());
         defaultUser = entityManager.persist(user);
     }
 
@@ -95,7 +96,7 @@ public class HealthDataSetRepositoryTest {
         if(!userId.equals(DEFAULT_TOKEN)) {
             user = new User();
             user.setToken(userId);
-            user.setPhoneHash("test");
+            user.setContactDetails(Contact.builder().phoneHash("hash").build());
             user = entityManager.persist(user);
         }
         HealthDataSet healthDataSet = new HealthDataSet();

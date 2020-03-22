@@ -22,27 +22,25 @@ public class User {
     @Id
     private String token;
 
-    private String name;
-
-    @NotNull
-    private String phoneHash;
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    private Contact contactDetails;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<HealthDataSet> healthDataSetList = new ArrayList<>();
 
 
     @ManyToMany
-    @JoinTable(name="tbl_friends",
-            joinColumns=@JoinColumn(name="userId"),
-            inverseJoinColumns=@JoinColumn(name="friendId")
+    @JoinTable(name = "tbl_friends",
+            joinColumns = @JoinColumn(name = "userId"),
+            inverseJoinColumns = @JoinColumn(name = "friendId")
     )
     @EqualsAndHashCode.Exclude
-    private Set<User> friends;
+    private Set<Contact> friends;
 
     @ManyToMany
-    @JoinTable(name="tbl_friends",
-            joinColumns=@JoinColumn(name="friendId"),
-            inverseJoinColumns=@JoinColumn(name="userId")
+    @JoinTable(name = "tbl_friends",
+            joinColumns = @JoinColumn(name = "friendId"),
+            inverseJoinColumns = @JoinColumn(name = "userId")
     )
     @EqualsAndHashCode.Exclude
     private Set<User> users;
