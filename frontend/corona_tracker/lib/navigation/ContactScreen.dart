@@ -1,3 +1,5 @@
+import 'package:corona_tracker/navigation/CreditsScreen.dart';
+import 'package:corona_tracker/navigation/StatusScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:contacts_service/contacts_service.dart';
@@ -6,13 +8,6 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class ContactScreen extends StatelessWidget {
 
-  List<PopupMenuItem> choices = <PopupMenuItem>[
-    PopupMenuItem(
-      value: Text("InfoV"),
-      child: Text("Info"),
-    )
-  ];
-
   @override
   Widget build(BuildContext context) {
     final appTitle = 'Freunde';
@@ -20,18 +15,6 @@ class ContactScreen extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text(appTitle),
-          actions: <Widget>[
-            PopupMenuButton(
-              itemBuilder: (BuildContext context) {
-                return choices.map((PopupMenuItem choice) {
-                  return choice;
-                  /*return PopupMenuItem(
-                    value: choi,
-                  )*/
-                }).toList();
-              },
-            )
-          ],
         ),
         body: ContactScreenForm(),
     );
