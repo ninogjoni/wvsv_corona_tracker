@@ -14,6 +14,8 @@ public class FriendsNotifyServiceImpl implements FriendsNotifyService {
 
   private static final Logger LOG = LoggerFactory.getLogger(FriendsNotifyServiceImpl.class);
 
+  private static final Integer MAX_DEGREES = 2;
+
   private static final String TITLE = "Meldung in deinem Freundeskreis"; // TODO: text/i18n
 
   private PushService pushService;
@@ -33,7 +35,7 @@ public class FriendsNotifyServiceImpl implements FriendsNotifyService {
     List<User> friends = this.friendsService.getUsersFriends(user);
 
     for(User friend : friends) {
-      this.pushService.sendPushToDevice(TITLE, String.format("Hallo %s, Dein Freund %s ist %s", friend.getName(), user.getName(), state), friend.getDeviceToken(),);
+      this.pushService.sendPushToDevice(this.TITLE, String.format("Hallo %s, Dein Freund %s ist %s", friend.getName(), user.getName(), state), friend.getDeviceToken(),);
     }
 
     for(User friend : friends) {
@@ -46,15 +48,15 @@ public class FriendsNotifyServiceImpl implements FriendsNotifyService {
 
     for(User friend2 : friends2) {
       if(degree < 2) {
-        this.pushService.sendPushToDevice(TITLE, String.format("Hallo %s, ein Freund von %s ist %s", friend2.getName(), friend.getName(), state), friend2.getDeviceToken());
+        this.pushService.sendPushToDevice(this.TITLE, String.format("Hallo %s, ein Freund von %s ist %s", friend2.getName(), friend.getName(), state), friend2.getDeviceToken());
       } else {
-        this.pushService.sendPushToDevice(TITLE, String.format("Hallo %s, ein Freund %d. Grades von %s ist %s", friend2.getName(), degree, friend.getName(), state), friend2.getDeviceToken());
+        this.pushService.sendPushToDevice(this.TITLE, String.format("Hallo %s, ein Freund %d. Grades von %s ist %s", friend2.getName(), degree, friend.getName(), state), friend2.getDeviceToken());
       }
     }
 
     for(User friend2 : friends2) {
-      if(degree < 2) {
-	this.iterateFriendsRecursion(user, state, friend2, degree+1);
+      if(degree < tihs.MAX_DEGREES) {
+        this.iterateFriendsRecursion(user, state, friend2, degree+1);
       }
     }
   }
