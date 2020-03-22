@@ -1,5 +1,7 @@
 part of openapi.api;
 
+enum MedicalStateEnum { UNKNOWN, INFECTED, TREATMENT, CURED }
+
 class HealthDataSet {
   
   String userId = null;
@@ -7,6 +9,7 @@ class HealthDataSet {
   String medicalState = null;
   //enum medicalStateEnum {  UNKNOWN,  INFECTED,  TREATMENT,  CURED,  };{
   /* in IS0 8601 format. eg. `1963-11-22T18:30:00Z` */
+  //DateTime time = null;
   DateTime time = null;
   
   String positionId = null;
