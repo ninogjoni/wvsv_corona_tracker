@@ -39,7 +39,7 @@ public class User {
     private List<HealthDataSet> healthDataSetList = new ArrayList<>();
 
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_friend",
             joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
             inverseJoinColumns={@JoinColumn(name="friend_id", referencedColumnName="id")}
@@ -47,7 +47,7 @@ public class User {
     private Set<User> users;
 
     @Builder.Default
-    @ManyToMany(mappedBy = "users", cascade = CascadeType.PERSIST)
+    @ManyToMany(mappedBy = "users", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private Set<User> friends = new HashSet<>();
 
 

@@ -17,6 +17,7 @@ import de.ghwct.service.model.UserDto;
 import de.govhackathon.wvsvcoronatracker.model.User;
 import de.govhackathon.wvsvcoronatracker.model.mapper.UserMapper;
 import de.govhackathon.wvsvcoronatracker.services.UsersService;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -72,6 +73,12 @@ public class UsersController implements UsersApi {
 
     Set<User> friends = usersService.getUsersByPhoneHashes(friendDtoList
             .stream().map(FriendDto::getPhoneHash).collect(Collectors.toList()));
+
+    if (friends.isEmpty()) {
+      //TODO we should add the phoneHashes for which no user has been found to a "userCandidate" repo
+      //to establish friends connections if a new user registers
+      throw new IllegalStateException("no friends found");
+    }
 
     //MVP: overwrite the friends list
     friendsService.deleteUsersFriends(user);

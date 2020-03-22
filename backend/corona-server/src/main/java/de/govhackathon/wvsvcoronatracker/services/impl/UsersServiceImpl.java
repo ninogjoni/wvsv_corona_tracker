@@ -40,7 +40,10 @@ public class UsersServiceImpl implements UsersService {
         Set<User> users = new HashSet<>();
         //TODO find better, DB-based solution
         friendsPhoneHashes.forEach(f -> {
-            users.add(userRepository.findByPhoneHash(f));
+            User byPhoneHash = userRepository.findByPhoneHash(f);
+            if (byPhoneHash != null) {
+                users.add(byPhoneHash);
+            }
 
         });
 
