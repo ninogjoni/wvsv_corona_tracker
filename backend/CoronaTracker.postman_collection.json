@@ -1,0 +1,343 @@
+{
+	"info": {
+		"_postman_id": "b9328085-6e03-473c-a239-dfb3c2da68c8",
+		"name": "CoronaTracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "69977b8e-efa8-4b2f-a434-e0c636fb06ed",
+						"exec": [
+							"pm.test(\"Status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    ",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.phoneHash).to.eql(\"SOME_PHONEHASH\");",
+							"    pm.expect(jsonData.token).to.eql(\"SOME_DEVICETOKEN\");",
+							"    ",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"postman.setEnvironmentVariable(\"lastUserId\", jsonData.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \n\t\"id\":\"SOME_USERID\",\n\t\"token\": \"SOME_DEVICETOKEN\",\n\t\"phoneHash\":\"SOME_PHONEHASH3\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get friends for user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "69977b8e-efa8-4b2f-a434-e0c636fb06ed",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n\t{\n\t\t\"phoneHash\":\"SOME_PHONEHASH1\"\n\t},\n\t{\n\t\t\"phoneHash\":\"SOME_PHONEHASH2\"\n\t}\n]\t"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/users/{{lastUserId}}/friends",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"{{lastUserId}}",
+						"friends"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add friends to user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "69977b8e-efa8-4b2f-a434-e0c636fb06ed",
+						"exec": [
+							"pm.test(\"Status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    ",
+							"    ",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n\t{\n\t\t\"phoneHash\":\"SOME_PHONEHASH1\"\n\t},\n\t{\n\t\t\"phoneHash\":\"SOME_PHONEHASH2\"\n\t}\n]\t"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/users/{{lastUserId}}/friends",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"{{lastUserId}}",
+						"friends"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create heathdataset",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1b15243c-8a92-49d8-9f59-4a9f2f6135af",
+						"exec": [
+							"pm.test(\"Status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    ",
+							"    var jsonData = pm.response.json();",
+							"    ",
+							"    pm.expect(jsonData.medicalState).to.eql(\"INFECTED\");",
+							"    ",
+							"    var expected = postman.getEnvironmentVariable(\"lastUserId\");",
+							"    pm.expect(jsonData.userId).to.eql(expected);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \n\t\"userId\":\"{{lastUserId}}\",\n\t\"medicalState\": \"INFECTED\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/healthDataSet",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"healthDataSet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "93396c8c-05ad-4209-b884-8dc8fed42c70",
+						"exec": [
+							"pm.test(\"Status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    ",
+							"    var jsonData = pm.response.json()[0];",
+							"    pm.expect(jsonData.phoneHash).to.eql(\"SOME_PHONEHASH\");",
+							"    pm.expect(jsonData.token).to.eql(\"SOME_DEVICETOKEN\");",
+							"    ",
+							"    ",
+							"    var expected = postman.getEnvironmentVariable(\"lastUserId\");",
+							"    pm.expect(jsonData.id).to.eql(expected);",
+							"    ",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get single user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ba856c3a-82f5-4147-b8f2-492eb892f41f",
+						"exec": [
+							"pm.test(\"Status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    ",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.phoneHash).to.eql(\"SOME_PHONEHASH\");",
+							"    pm.expect(jsonData.token).to.eql(\"SOME_DEVICETOKEN\");",
+							"    ",
+							"    var expected = postman.getEnvironmentVariable(\"lastUserId\");",
+							"    pm.expect(jsonData.id).to.eql(expected);",
+							"    ",
+							"    pm.expect(jsonData.healthHistory[0].medicalState).to.eql(\"INFECTED\");",
+							"    ",
+							"    ",
+							"    pm.expect(jsonData.healthHistory[0].userId).to.eql(expected);",
+							"    ",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/users/{{lastUserId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"{{lastUserId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "7f58985a-1315-4da6-b50a-560abc74803a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "2c2906f4-a80a-41d1-81c3-27a22d963cf7",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

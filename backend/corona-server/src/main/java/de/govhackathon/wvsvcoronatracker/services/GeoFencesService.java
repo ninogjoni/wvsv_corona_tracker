@@ -1,8 +1,6 @@
 package de.govhackathon.wvsvcoronatracker.services;
 
 import de.govhackathon.wvsvcoronatracker.model.GeoFence;
-import de.govhackathon.wvsvcoronatracker.model.User;
-
 import java.util.List;
 
 public interface GeoFencesService {
@@ -25,16 +23,15 @@ public interface GeoFencesService {
     /**
      * Update a geo fence
      *
-     * @param id       geo fence id
      * @param geoFence geo fence data to be changed
      * @return Updated geo fence
      */
-    User updateGeoFence(final Integer id, final GeoFence geoFence);
+    GeoFence updateGeoFence(final GeoFence geoFence);
 
     /**
      * Delete a geo fence
      *
-     * @param id geo fence id
+     * @param geoFence geo fence to delete
      */
-    void deleteGeoFence(final Integer id);
+    void deleteGeoFence(final GeoFence geoFence);
 }

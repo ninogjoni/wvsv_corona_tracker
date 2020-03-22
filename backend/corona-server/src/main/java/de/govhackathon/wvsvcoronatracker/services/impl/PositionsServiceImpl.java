@@ -1,61 +1,44 @@
 package de.govhackathon.wvsvcoronatracker.services.impl;
 
 import de.govhackathon.wvsvcoronatracker.model.Position;
+import de.govhackathon.wvsvcoronatracker.repositories.PositionsRepository;
 import de.govhackathon.wvsvcoronatracker.services.PositionsService;
-import java.time.LocalDateTime;
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.OffsetDateTime;
+import java.util.List;
 
 @Service
 public class PositionsServiceImpl implements PositionsService {
 
+  @Autowired
+  private PositionsRepository positionsRepository;
+
   @Override
   public Position savePosition(Position position) {
-    return null;
+    return positionsRepository.save(position);
   }
 
   @Override
   public List<Position> getPositions() {
-    return null;
+    return positionsRepository.findAll();
   }
 
   @Override
-  public List<Position> getPositionsFrom(final LocalDateTime from) {
-    return null;
+  public List<Position> getPositionsByTimestamp(OffsetDateTime timestamp) {
+    return positionsRepository.findByTimestamp(timestamp);
   }
 
   @Override
-  public List<Position> getPositionsTo(final LocalDateTime to) {
-    return null;
+  public List<Position> getPositionsByUserId(final String userId) {
+    return positionsRepository.findByUserId(userId);
   }
 
   @Override
-  public List<Position> getPositionsFromTo(final LocalDateTime from, final LocalDateTime to) {
-    return null;
+  public List<Position> getPositionsByUserIdAndTimeStamp(String userId, OffsetDateTime timestamp) {
+    return positionsRepository.findByUserIdAndTimestamp(userId, timestamp);
   }
 
-  @Override
-  public List<Position> getPositionsTo(final List<Integer> id) {
-    return null;
-  }
 
-  @Override
-  public List<Position> getPositionsByUserId(final Integer userId) {
-    return null;
-  }
-
-  @Override
-  public List<Position> getPositionsByUserIdFrom(final Integer userId, final LocalDateTime from) {
-    return null;
-  }
-
-  @Override
-  public List<Position> getPositionsByUserIdTo(final Integer userId, final LocalDateTime to) {
-    return null;
-  }
-
-  @Override
-  public List<Position> getPositionsByUserIdFromTo(final Integer userId, final LocalDateTime from, final LocalDateTime to) {
-    return null;
-  }
 }
