@@ -13,4 +13,4 @@ jobs:
       - name: Bundle APK
         run: cd frontend/corona_tracker/ && flutter build appbundle --target-platform android-arm,android-arm64,android-x64
       - name: Bundle IPA
-         run: cd frontend/corona_tracker/ && flutter build ios
+        run: cd frontend/corona_tracker/ && flutter build ios
