@@ -6,7 +6,7 @@ import de.govhackathon.wvsvcoronatracker.services.PositionsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @Service
@@ -26,7 +26,7 @@ public class PositionsServiceImpl implements PositionsService {
   }
 
   @Override
-  public List<Position> getPositionsByTimestamp(LocalDateTime timestamp) {
+  public List<Position> getPositionsByTimestamp(OffsetDateTime timestamp) {
     return positionsRepository.findByTimestamp(timestamp);
   }
 
@@ -36,7 +36,7 @@ public class PositionsServiceImpl implements PositionsService {
   }
 
   @Override
-  public List<Position> getPositionsByUserIdAndTimeStamp(String userId, LocalDateTime timestamp) {
+  public List<Position> getPositionsByUserIdAndTimeStamp(String userId, OffsetDateTime timestamp) {
     return positionsRepository.findByUserIdAndTimestamp(userId, timestamp);
   }
 

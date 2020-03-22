@@ -1,15 +1,14 @@
 package de.govhackathon.wvsvcoronatracker.model;
 
+import de.govhackathon.wvsvcoronatracker.model.system.AppConfig;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
+import java.time.OffsetDateTime;
 
 @Setter
 @Getter
@@ -30,7 +29,7 @@ public class Position {
     private String userId;
 
     @Builder.Default
-    private LocalDateTime timestamp = LocalDateTime.now(ZoneOffset.UTC);
+    private OffsetDateTime timestamp = OffsetDateTime.now(AppConfig.TIMEZONE);
 
     private String protocol;
 
