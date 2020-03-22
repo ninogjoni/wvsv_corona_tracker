@@ -18,8 +18,11 @@ public class FriendsServiceImpl implements FriendsService {
     public void addFriendsForUser(User user, Set<User> friends) {
 
         //TODO find a better solution
-        friends.forEach(
-                f -> f.getUsers().add(user)
+        friends.stream()
+                //you may be friends with yourself, but not here
+                .filter(f -> f != user)
+                .forEach(
+                        f -> f.getUsers().add(user)
         );
 
         userRepository.saveAll(friends);
