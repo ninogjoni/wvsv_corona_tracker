@@ -40,7 +40,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{   \n\t\"id\":\"SOME_USERID\",\n\t\"token\": \"SOME_DEVICETOKEN\",\n\t\"phoneHash\":\"SOME_PHONEHASH3\"\n}"
+					"raw": "{   \n\t\"id\":\"SOME_USERID\",\n\t\"token\": \"SOME_DEVICETOKEN\",\n\t\"phoneHash\":\"SOME_PHONEHASH\"\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/api/v1/users",
@@ -53,104 +53,6 @@
 						"api",
 						"v1",
 						"users"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "add friends to user",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "69977b8e-efa8-4b2f-a434-e0c636fb06ed",
-						"exec": [
-							"pm.test(\"Status test\", function () {",
-							"    pm.response.to.have.status(200);",
-							"    ",
-							"    ",
-							"});",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "[\n\t{\n\t\t\"phoneHash\":\"SOME_PHONEHASH1\"\n\t},\n\t{\n\t\t\"phoneHash\":\"SOME_PHONEHASH2\"\n\t}\n]\t"
-				},
-				"url": {
-					"raw": "http://localhost:8080/api/v1/users/{{lastUserId}}/friends",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"v1",
-						"users",
-						"{{lastUserId}}",
-						"friends"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "get friends for user",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "69977b8e-efa8-4b2f-a434-e0c636fb06ed",
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "[\n\t{\n\t\t\"phoneHash\":\"SOME_PHONEHASH1\"\n\t},\n\t{\n\t\t\"phoneHash\":\"SOME_PHONEHASH2\"\n\t}\n]\t"
-				},
-				"url": {
-					"raw": "http://localhost:8080/api/v1/users/{{lastUserId}}/friends",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"v1",
-						"users",
-						"{{lastUserId}}",
-						"friends"
 					]
 				}
 			},
@@ -290,6 +192,9 @@
 					}
 				}
 			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [
@@ -299,6 +204,10 @@
 						"value": "application/json"
 					}
 				],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \n\t\"healthStatus\":\"fsdbfgs6d\",\n\t\"token\": \"some_deviceToken\",\n\t\"phoneHash\":\"some_phoneHash\"\n}"
+				},
 				"url": {
 					"raw": "http://localhost:8080/api/v1/users/{{lastUserId}}",
 					"protocol": "http",

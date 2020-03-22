@@ -25,7 +25,7 @@ class _HomeState extends State<Home> {
     ReportScreen(),
     HelpScreen(),
     ContactScreen(),
-    SettingsScreen()
+    //SettingsScreen()
   ];
 
   @override
@@ -61,11 +61,11 @@ class _HomeState extends State<Home> {
               // TODO: i18n
               title: new Text('Freunde')
           ),
-          BottomNavigationBarItem(
-              icon: new Icon(Icons.settings),
-              // TODO: i18n
-              title: new Text('Settings')
-          )
+//          BottomNavigationBarItem(
+//              icon: new Icon(Icons.settings),
+//              // TODO: i18n
+//              title: new Text('Settings')
+//          )
         ],
       ),
     );

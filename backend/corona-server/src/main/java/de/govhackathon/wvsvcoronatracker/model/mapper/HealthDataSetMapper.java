@@ -21,7 +21,7 @@ public abstract class HealthDataSetMapper {
     abstract public HealthDataSet toEntity(HealthDataSetDto dto);
 
     @InheritInverseConfiguration
-    @Mapping(target = "userId", source = "user.id")
+    @Mapping(target = "userId", source = "user.token")
     abstract public HealthDataSetDto toDto(HealthDataSet entity);
 
     public User getUser(String userId) {

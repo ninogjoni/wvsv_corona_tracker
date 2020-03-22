@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface TemperatureMeasurementRepository extends CrudRepository<TemperatureMeasurement, String> {
 
-    List<TemperatureMeasurement> getTemperatureMeasurementsByUser_idOrderByTimeAsc(String userId);
+    List<TemperatureMeasurement> getTemperatureMeasurementsByUser_tokenOrderByTimeAsc(String userId);
 }

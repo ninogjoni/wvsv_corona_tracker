@@ -98,9 +98,11 @@ class _MyAppState extends State<MyApp> {
           GlobalCupertinoLocalizations.delegate
         ],
         supportedLocales: [
-          const Locale('en', ''), // English 
+          const Locale('en', ''), // English
           const Locale('de', ''), // German
-        ]);
+        ],
+        debugShowCheckedModeBanner: false,
+    );
   }
   void configLocalNotification() {
     var initializationSettingsAndroid = new AndroidInitializationSettings('app_icon');
