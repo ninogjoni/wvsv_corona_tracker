@@ -42,7 +42,16 @@ final List<Entry> data = <Entry>[
     <SubEntry>[
       SubEntry(
         'Wie wasche ich meine Hände richtig?',
-        'Beschreibung1'
+        'Laut Robert Koch-Institut (RKI) zählt das Händewaschen "zu den wichtigsten'
+            ' Infektionspräventionsmaßnahmen" in der aktuellen Coronavirus-Krise.'
+            ' Neben der körperlichen Distanz, die man nun aufgrund der'
+            ' Infektionsgefahr einhalten soll, ist Händewaschen extrem wichtig'
+            ' - und jeder kann es einfach und regelmäßig durchführen.'
+            ' Denn das Waschen unterbricht den Übertragungsweg des Coronavirus'
+            ' von den Händen zu den Schleimhäuten, beispielsweise an Mund,'
+            ' Augen oder Nase. Dabei betonen führende Wissenschaftler, Ärzte und'
+            ' auch Gesundheitsminister Spahn immer wieder, sich gründlich -'
+            ' das bedeutet 20 bis 30 Sekunden lang - die Hände zu waschen.',
       ),
       SubEntry(
       'Was ist wichtig beim husten oder niesen?',
@@ -54,8 +63,13 @@ final List<Entry> data = <Entry>[
       'Soziale Distanzierung',
       <SubEntry>[
         SubEntry(
-            'Wie passe ich mein privates und Familienleben an? ',
-            'Beschreibung3'
+            'Defintion',
+          'Auch räumliche Trennung oder physische Distanzierung genannt, ist eine Reihe von'
+              'nicht-pharmazeutischen Maßnahmen zur Infektionskontrolle, die die'
+              ' Ausbreitung einer ansteckenden Krankheit stoppen oder verlangsamen sollen.'
+              'Die Maßnahmen bezwecken, den Abstand zwischen Menschen zu vergrößern'
+              ' und so die Anzahl von Infektionen etwa durch Tröpfcheninfektionen'
+              ' zu verringern.',
         ),
         SubEntry(
             'Wie passe ich das an meine Arbeit an? ',
