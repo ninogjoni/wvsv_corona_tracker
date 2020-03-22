@@ -20,7 +20,7 @@ class SettingsScreen extends StatelessWidget {
       ),
       body: Center(
           child: RaisedButton(
-            child: Text('Go to Home'),
+            child: Text('Ping me'),
             onPressed: () {
               sendAndRetrieveMessage();
             },
@@ -45,8 +45,8 @@ class SettingsScreen extends StatelessWidget {
       body: jsonEncode(
         <String, dynamic>{
           'notification': <String, dynamic>{
-            'body': 'this is a body',
-            'title': 'this is a title'
+            'body': 'World :D',
+            'title': 'Hello'
           },
           'priority': 'high',
           'data': <String, dynamic>{
