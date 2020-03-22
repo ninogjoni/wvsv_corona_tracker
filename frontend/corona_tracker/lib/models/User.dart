@@ -1,9 +1,10 @@
 //https://www.who.int/news-room/q-a-detail/q-a-coronaviruses#:~:text=symptoms
 
 enum Status {
-  uninfectious,
-  infectious,
-  suspicion
+  unknown,
+  suspicion,
+  diseased,
+  cured
 }
 
 enum Symptoms {
@@ -25,17 +26,20 @@ class User {
 // Which isn't available here
   String typesOfStatus(Status status) {
     switch(status) {
-      case Status.uninfectious:
-        return "Nicht ansteckend";
-        break;
-      case Status.infectious:
-        return 'Ansteckend';
+      case Status.unknown:
+        return "Unbekannt";
         break;
       case Status.suspicion:
         return 'Verdacht';
         break;
+      case Status.diseased:
+        return 'Erkrankt';
+        break;
+      case Status.cured:
+        return 'Geheilt';
+        break;
       default:
-        return 'uninfectious';
+        return 'Unbekannt';
     }
   }
 }
