@@ -7,6 +7,8 @@ class StatusScreen extends StatelessWidget {
 
   var api_instance = DefaultApi();
 
+  CurrentHealthState defaultHealthState = CurrentHealthState();
+
   Future<String> getUserCount() async {
     String userCount = "0";
     await api_instance.getUsers().then((List<User> users) {
@@ -45,6 +47,9 @@ class StatusScreen extends StatelessWidget {
   }
 
   Future<CurrentHealthState> getCurrentHealthstate() async {
+    defaultHealthState.text = "Gesund";
+    defaultHealthState.color = Colors.green[500];
+
     CurrentHealthState healthState = CurrentHealthState();
     healthState.text = "Gesund";
     healthState.color = Colors.green[500];
@@ -141,7 +146,7 @@ class StatusScreen extends StatelessWidget {
                       ),
                     ),
                     FutureBuilder(
-                      initialData: "",
+                      initialData: defaultHealthState,
                       future: getCurrentHealthstate(),
                       builder: (context, data) {
                         return Text(
