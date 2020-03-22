@@ -3,8 +3,8 @@ package de.govhackathon.wvsvcoronatracker.api;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.ghwct.service.model.UserDto;
 import de.govhackathon.wvsvcoronatracker.repositories.PositionsRepository;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,7 +20,6 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.Collections;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -66,7 +65,6 @@ class Spec_UsersController {
         }
 
         @Test
-        @Disabled
         void should_read_saved_user() throws Exception {
             UserDto dto = new UserDto()
                     .name("Max")
@@ -82,8 +80,8 @@ class Spec_UsersController {
                     .andExpect(status().isOk());
             result.andDo(mvcResult -> {
                 UserDto savedItem = new ObjectMapper().readValue(mvcResult.getResponse().getContentAsString(), UserDto.class);
-                assertThat(savedItem.getId()).isNotNull();
-                this.mockMvc.perform(get("/api/v1/users/" + savedItem.getId())
+                Assertions.assertThat(savedItem.getToken()).isNotNull();
+                this.mockMvc.perform(get("/api/v1/users/" + savedItem.getToken())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(content))
                         .andExpect(status().isOk());
