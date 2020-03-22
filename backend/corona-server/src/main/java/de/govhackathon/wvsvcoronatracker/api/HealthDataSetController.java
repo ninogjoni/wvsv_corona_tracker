@@ -4,6 +4,7 @@ import de.ghwct.service.api.HealthDataSetApi;
 import de.ghwct.service.model.HealthDataSetDto;
 import de.govhackathon.wvsvcoronatracker.model.*;
 import de.govhackathon.wvsvcoronatracker.model.mapper.HealthDataSetMapper;
+import de.govhackathon.wvsvcoronatracker.model.system.AppConfig;
 import de.govhackathon.wvsvcoronatracker.services.HealthDataSetService;
 import de.govhackathon.wvsvcoronatracker.services.UsersService;
 import lombok.AllArgsConstructor;
@@ -17,7 +18,7 @@ import static de.govhackathon.wvsvcoronatracker.api.UsersController.ERRMSG_USER_
 
 
 @RestController
-@RequestMapping(value = UsersController.API_PATH)
+@RequestMapping(value = AppConfig.API_PATH)
 @AllArgsConstructor
 public class HealthDataSetController implements HealthDataSetApi {
 

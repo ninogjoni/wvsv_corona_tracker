@@ -2,13 +2,13 @@ version: '2.1'
 
 services:
   swagger-editor-editor:
-    container_name: rulebook_api-editor
+    container_name: ct_api-editor
     image: swaggerapi/swagger-editor
     ports:
       - '8888:8080'
 
   database:
-    container_name: rulebook_db
+    container_name: ct_db
     image: postgres:11
     environment:
       POSTGRES_DB: corona
@@ -23,4 +23,3 @@ services:
 volumes:
   mysqldata:
   pgdata:
-

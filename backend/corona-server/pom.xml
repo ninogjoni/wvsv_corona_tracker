@@ -86,6 +86,11 @@
 			<version>4.2</version>
 		</dependency>
 
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
+        </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -168,7 +173,7 @@
                 <sourceFolder>src/gen/java/</sourceFolder>
                 <java8>true</java8>
                 <dateLibrary>java8</dateLibrary>
-                <useBeanValidation>true</useBeanValidation>
+                <useBeanValidation>false</useBeanValidation>
                 <delegatePattern>true</delegatePattern>
                 <interfaceOnly>true</interfaceOnly>
               </configOptions>

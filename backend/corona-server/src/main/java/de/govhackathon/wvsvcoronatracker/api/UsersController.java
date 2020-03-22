@@ -3,6 +3,7 @@ package de.govhackathon.wvsvcoronatracker.api;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import de.govhackathon.wvsvcoronatracker.model.system.AppConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
@@ -18,10 +19,9 @@ import javax.persistence.EntityNotFoundException;
 
 
 @RestController
-@RequestMapping(value = UsersController.API_PATH)
+@RequestMapping(value = AppConfig.API_PATH)
 public class UsersController implements UsersApi {
 
-  static final String API_PATH = "/api/v1"; // TODO: put this in a proper place
   public static final String ERRMSG_USER_NOT_FOUND = "user.not.found";
 
   @Autowired

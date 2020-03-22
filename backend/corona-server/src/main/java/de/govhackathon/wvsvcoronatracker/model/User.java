@@ -1,6 +1,7 @@
 package de.govhackathon.wvsvcoronatracker.model;
 
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -18,8 +19,12 @@ import java.util.List;
 @NoArgsConstructor
 public class User {
 
-    //TODO BUG no uniqueness enforced on this id yet (entities with same id will be overwritten)
     @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
     private String id;
 
     @NotNull

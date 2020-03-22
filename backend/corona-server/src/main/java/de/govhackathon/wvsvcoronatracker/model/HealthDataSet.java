@@ -13,7 +13,7 @@ import java.time.OffsetDateTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "\"HEALTH_DATASET\"")
+@Table(name = "HEALTH_DATASET")
 @AllArgsConstructor
 @NoArgsConstructor
 public class HealthDataSet {
