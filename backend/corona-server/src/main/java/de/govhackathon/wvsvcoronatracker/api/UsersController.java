@@ -14,12 +14,15 @@ import de.govhackathon.wvsvcoronatracker.services.UsersService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.EntityNotFoundException;
+
 
 @RestController
 @RequestMapping(value = UsersController.API_PATH)
 public class UsersController implements UsersApi {
 
   static final String API_PATH = "/api/v1"; // TODO: put this in a proper place
+  public static final String ERRMSG_USER_NOT_FOUND = "user.not.found";
 
   @Autowired
   UsersService usersService;
@@ -32,6 +35,11 @@ public class UsersController implements UsersApi {
     return ResponseEntity.ok().body(usersService.getUsers().stream().map(userMapper::toDto).collect(Collectors.toList()));
   }
 
+  @Override
+  public ResponseEntity<UserDto> getUser(String id) {
+    return ResponseEntity.ok().body(usersService.getUser(id).map(userMapper::toDto)
+            .orElseThrow(() -> new EntityNotFoundException(ERRMSG_USER_NOT_FOUND)));
+  }
   @Override
   public ResponseEntity<UserDto> createUser(UserDto body) {
     User user = usersService.createUser(userMapper.toEntity(body));

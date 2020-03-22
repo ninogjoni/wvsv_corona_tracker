@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.persistence.EntityNotFoundException;
 
+import static de.govhackathon.wvsvcoronatracker.api.UsersController.ERRMSG_USER_NOT_FOUND;
+
 
 @RestController
 @RequestMapping(value = UsersController.API_PATH)
@@ -28,7 +30,7 @@ public class HealthDataSetController implements HealthDataSetApi {
     @Override
     public ResponseEntity<HealthDataSetDto> createDataSet(HealthDataSetDto healthDataSetDto) {
         User user = usersService.getUser(healthDataSetDto.getUserId())
-                .orElseThrow(() -> new EntityNotFoundException("user.not.found"));
+                .orElseThrow(() -> new EntityNotFoundException(ERRMSG_USER_NOT_FOUND));
 
         HealthDataSet healthDataSet = new HealthDataSet();
         healthDataSet.setUser(user);

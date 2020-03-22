@@ -121,7 +121,7 @@ paths:
                 $ref: '#/components/schemas/User'
       x-codegen-request-body-name: body
     delete:
-      summary: Delete a User
+      summary: Delete a User TODO move to /users/id
       operationId: deleteUser
       parameters:
         - name: id
@@ -133,6 +133,27 @@ paths:
         204:
           description: No Content
           content: {}
+  /users/{id}:
+    get:
+      summary: Get a single users
+      operationId: getUser
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          description: No Permission
+          content: {}
+
   /geofences:
     get:
       summary: Fetch a list of Geofences
