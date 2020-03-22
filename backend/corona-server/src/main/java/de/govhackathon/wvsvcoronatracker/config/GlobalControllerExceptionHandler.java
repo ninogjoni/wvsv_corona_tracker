@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.RollbackException;
 import javax.validation.ConstraintViolationException;
 import java.util.UUID;
@@ -45,7 +46,7 @@ public class GlobalControllerExceptionHandler {
             String errorID = UUID.randomUUID().toString();
             LOG.error("Got unknown error with id {} ", errorID, ex);
             // fallback to server error
-            return new ResponseEntity<>(new String("An unknown error occurred (ID: " + errorID + ")"), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("An unknown error occurred (ID: " + errorID + ")", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     // VALIDATION ERROR HANDLING
@@ -55,6 +56,14 @@ public class GlobalControllerExceptionHandler {
     public ResponseEntity<?> handleValidationError(DataIntegrityViolationException ex) {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    @ResponseBody
+    public ResponseEntity<?> handleEntityNotFoundException(EntityNotFoundException ex) {
+        //TODO add id here
+        return new ResponseEntity<>("Could not find entity by id", HttpStatus.NOT_FOUND);
+    }
+
 
 
 }
