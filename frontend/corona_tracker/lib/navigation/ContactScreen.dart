@@ -5,6 +5,9 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:corona_tracker/models/ContactEntry.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:openapi/api.dart';
+import 'package:crypto/crypto.dart';
+import 'dart:convert'; // for the utf8.encode method
 
 class ContactScreen extends StatelessWidget {
 
@@ -36,6 +39,7 @@ class ContactScreenFormState extends State<ContactScreenForm> {
   TextEditingController editingController = TextEditingController();
   bool _saving = false;
   String selectionToggleText = "Alle nicht auswählen";
+  var api_instance = DefaultApi();
 
   @override
   void initState() {
@@ -43,8 +47,90 @@ class ContactScreenFormState extends State<ContactScreenForm> {
     initPlatformState();
   }
 
+  void addUserTest() {
+    User myUser = User();
+    myUser.id = "12345";
+    myUser.name = "Test User";
+    myUser.phoneHash = sha256.convert(utf8.encode("Eine Telefonnummer")).toString();
+    //myUser.phoneHash = DateTime.now().toUtc().toIso8601String();
+    myUser.token = "token4";
+
+    /*HealthDataSet healthDataSet = HealthDataSet();
+    healthDataSet.medicalState = MedicalStateEnum.UNKNOWN.toString();
+    healthDataSet.userId = myUser.token;
+    healthDataSet.time = DateTime.now(); //1963-11-22T18:30:00Z;*/
+    //myUser.healthHistory.add(healthDataSet);
+    try {
+
+      HealthDataSet healthDataSet = HealthDataSet();
+      healthDataSet.medicalState = MedicalStateEnum.CURED.toString();
+      healthDataSet.userId = myUser.token;
+      healthDataSet.time = DateTime.now(); //1963-11-22T18:30:00Z;
+      healthDataSet.geofenceId = "geoid";
+      healthDataSet.positionId = "posid";
+      api_instance.createDataSet(healthDataSet).then((HealthDataSet hds) {
+        print("added healtDataSet with status: " + hds.medicalState);
+      }).catchError((e) {
+        print("error when creating health data set");
+      });
+
+      //var res = api_instance.createUser(myUser);
+
+      /*api_instance.createUser(myUser).then((User u) {
+        print("created user: " + u.token);
+      });*/
+
+      /*List<Friend> _friends = List<Friend>();
+      Friend _friend1 = Friend();
+      _friend1.id = "f1";
+      _friend1.phoneHash = "hash1";
+      Friend _friend2 = Friend();
+      _friend2.id = "f2";
+      _friend2.phoneHash = "hash2";
+
+      _friends.add(_friend1);
+      _friends.add(_friend2);
+
+      var result = api_instance.uploadFriends("token1", _friends).then((dynamic d) {
+        api_instance.getFriends("token1").then((List<Friend> list) {
+          print("User token1 got " + list.length.toString() + "friends:");
+          for(Friend f in list) {
+            print(f.id);
+            print(f.phoneHash);
+          }
+        }).catchError((error) {
+          print("error getting friends");
+          print(error);
+        });
+      }).catchError((error) {
+        print("error uploading friends");
+        print(error);
+      });*/
+
+
+
+      /*var result = api_instance.getUser("token6").then((User u) {
+        print("got user: " + u.phoneHash);
+        Friend();
+      }).catchError((error) {
+        print("error getting user");
+      });*/
+    } catch (e) {
+      print("Exception when calling DefaultApi->createUser: $e\n");
+    }
+
+
+    /*String id = "token3"; // String |
+    try {
+      api_instance.deleteUser("");
+    } catch (e) {
+      print("Exception when calling DefaultApi->deleteUser: $e\n");
+    }*/
+  }
+
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
+
     setState(() {
       _saving = true;
     });
@@ -202,7 +288,8 @@ class ContactScreenFormState extends State<ContactScreenForm> {
         ),
         inAsyncCall: _saving,),
       floatingActionButton: FloatingActionButton(
-        onPressed: uploadContacts,
+        //onPressed: uploadContacts,
+        onPressed: addUserTest,
         tooltip: 'Hochladen',
         child: Icon(Icons.cloud_upload),
       ), // This trailing comma makes auto-formatting nicer for build methods.
