@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import de.ghwct.service.model.UserDto;
 import de.govhackathon.wvsvcoronatracker.repositories.PositionsRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -65,6 +66,7 @@ class Spec_UsersController {
         }
 
         @Test
+        @Disabled
         void should_read_saved_user() throws Exception {
             UserDto dto = new UserDto()
                     .name("Max")

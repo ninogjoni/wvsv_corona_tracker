@@ -63,7 +63,7 @@ public class BodyTempReminderServiceImpl {
         LocalDateTime limit = LocalDate.now().atTime(afterHour, 0);
 
         for (User user : this.usersService.getUsers()) {
-            LocalDateTime last = this.bodyTempService.getLastBodyTempByUser(user.getId());
+            LocalDateTime last = this.bodyTempService.getLastBodyTempByUser(user.getToken());
             if (last.isBefore(limit)) {
                 this.pushService.sendPushToDevice(this.TITLE, this.REMINDER, user.getToken());
             }
