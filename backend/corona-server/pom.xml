@@ -11,7 +11,6 @@
   </parent>
 
   <artifactId>wvsvcoronatracker</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   <name>wvsvcoronatracker</name>
   <description>Demo project for Spring Boot</description>
 
