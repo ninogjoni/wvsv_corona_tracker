@@ -55,7 +55,7 @@ public class FriendsNotifyServiceImpl implements FriendsNotifyService {
     }
 
     for(User friend2 : friends2) {
-      if(degree < tihs.MAX_DEGREES) {
+      if(degree < this.MAX_DEGREES) {
         this.iterateFriendsRecursion(user, state, friend2, degree+1);
       }
     }
