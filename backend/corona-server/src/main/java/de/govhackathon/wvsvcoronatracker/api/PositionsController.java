@@ -4,6 +4,7 @@ import de.ghwct.service.api.PositionsApi;
 import de.ghwct.service.model.PositionDto;
 import de.govhackathon.wvsvcoronatracker.model.Position;
 import de.govhackathon.wvsvcoronatracker.model.mapper.PositionMapper;
+import de.govhackathon.wvsvcoronatracker.model.system.AppConfig;
 import de.govhackathon.wvsvcoronatracker.services.PositionsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 
 
 @RestController
-@RequestMapping(value = UsersController.API_PATH)
+@RequestMapping(value = AppConfig.API_PATH)
 public class PositionsController implements PositionsApi {
 
     private PositionsService positionsService;

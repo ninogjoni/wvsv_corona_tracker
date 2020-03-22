@@ -18,6 +18,9 @@ public interface UserMapper {
   User toEntity(UserDto dto);
 
   @InheritInverseConfiguration
+  @Mappings({
+          @Mapping(target = "healthHistory", source = "healthDataSetList")
+  })
   UserDto toDto(User entity);
 
 }

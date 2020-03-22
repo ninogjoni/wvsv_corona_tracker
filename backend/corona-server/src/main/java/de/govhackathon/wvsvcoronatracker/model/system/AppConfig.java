@@ -20,6 +20,8 @@ public class AppConfig {
 
     public static final String FCM_KEY = "fcm.apikey";
 
+    public static final String API_PATH = "/api/v1";
+
     public static final ZoneOffset TIMEZONE = ZoneOffset.UTC;
     @Id
     private String key;
