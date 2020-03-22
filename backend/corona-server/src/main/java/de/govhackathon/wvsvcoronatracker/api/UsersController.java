@@ -17,7 +17,6 @@ import de.ghwct.service.model.UserDto;
 import de.govhackathon.wvsvcoronatracker.model.User;
 import de.govhackathon.wvsvcoronatracker.model.mapper.UserMapper;
 import de.govhackathon.wvsvcoronatracker.services.UsersService;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

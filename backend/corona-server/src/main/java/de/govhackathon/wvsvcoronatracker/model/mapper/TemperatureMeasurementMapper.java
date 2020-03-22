@@ -10,8 +10,6 @@ import org.mapstruct.Mapping;
 import org.mapstruct.NullValueCheckStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 import java.util.Optional;
 
 @Mapper(componentModel = "spring",
