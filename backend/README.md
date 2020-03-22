@@ -9,12 +9,12 @@ cd backend && docker-compose up -d
 ```
 And start backend
 ```
-(cd corona-server && mvn spring-boot:run)
+(mvn clean install && cd corona-server && mvn spring-boot:run)
 ```
 
 To run local with prod config, e.g. for testing API AUTH:
 ```
-(cd corona-server && \
+( mvn clean install && cd corona-server && \
     DB_SERVER=localhost \
     DB_NAME=corona DB_USER=corona \
     DB_PASSWORD=password \
