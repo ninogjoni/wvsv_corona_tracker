@@ -1,10 +1,14 @@
+import 'package:corona_tracker/navigation/ContactScreen.dart';
 import 'package:corona_tracker/navigation/HelpScreen.dart';
 import 'package:corona_tracker/navigation/MapScreen.dart';
 import 'package:corona_tracker/navigation/SettingsScreen.dart';
 import 'package:corona_tracker/navigation/StatusScreen.dart';
 import 'package:corona_tracker/navigation/ReportScreen.dart';
+import 'package:corona_tracker/i18n/appLocalizations.dart';
 
 import 'package:flutter/material.dart';
+
+
 
 class Home extends StatefulWidget {
   @override
@@ -20,7 +24,7 @@ class _HomeState extends State<Home> {
     MapScreen(),
     ReportScreen(),
     HelpScreen(),
-    SettingsScreen(),
+    ContactScreen()
   ];
 
   @override
@@ -36,24 +40,25 @@ class _HomeState extends State<Home> {
         currentIndex: _currentIndex, // this will be set when a new tab is tapped
         items: [
           BottomNavigationBarItem(
-            icon: new Icon(Icons.airline_seat_individual_suite),
-            title: new Text('Status'),
+            icon: new Icon(Icons.people),
+            title: new Text(AppLocalizations.of(context).bottomNavigationBarStatusText),
           ),
           BottomNavigationBarItem(
             icon: new Icon(Icons.map),
-            title: new Text('Karte'),
+            title: new Text(AppLocalizations.of(context).bottomNavigationBarMapText),
           ),
           BottomNavigationBarItem(
               icon: new Icon(Icons.report),
-              title: new Text('Fall melden')
+              title: new Text(AppLocalizations.of(context).bottomNavigationBarReportText),
           ),
           BottomNavigationBarItem(
               icon: new Icon(Icons.help),
-              title: new Text('Hilfe')
+              title: new Text(AppLocalizations.of(context).bottomNavigationBarHelpText)
           ),
           BottomNavigationBarItem(
-              icon: new Icon(Icons.settings),
-              title: new Text('Settings')
+              icon: new Icon(Icons.person_add),
+              // TODO: i18n
+              title: new Text('Freunde')
           )
         ],
       ),

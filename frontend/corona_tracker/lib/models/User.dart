@@ -21,10 +21,12 @@ class User {
   static const String status = '';
 
 
+// TODO: Needs an alternative as internationalization depends on context
+// Which isn't available here
   String typesOfStatus(Status status) {
     switch(status) {
       case Status.uninfectious:
-        return 'Nicht ansteckend';
+        return "Nicht ansteckend";
         break;
       case Status.infectious:
         return 'Ansteckend';

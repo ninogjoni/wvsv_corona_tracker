@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:corona_tracker/i18n/appLocalizations.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -15,7 +16,7 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Einstellungen'),
+        title: Text(AppLocalizations.of(context).SettingsScreen_AppBarTitleText),
       ),
       body: Center(
           child: RaisedButton(

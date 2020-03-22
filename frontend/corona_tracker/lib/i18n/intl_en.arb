@@ -1,0 +1,147 @@
+{
+  "@@last_modified": "2020-03-21T15:55:12.129128",
+  "cellphonenumberText": "cellphone number",
+  "@cellphonenumberText": {
+    "description": "The text for any mention of cellphone number",
+    "type": "text",
+    "placeholders": {}
+  },
+  "cellphoneFieldValidator_ShouldNotBeEmptyText": "The cellphone number field cannot be left blank",
+  "@cellphoneFieldValidator_ShouldNotBeEmptyText": {
+    "description": "Validator message if field is empty",
+    "type": "text",
+    "placeholders": {}
+  },
+  "cellphoneFieldValidator_TooShortText": "The cellphone number is too short",
+  "@cellphoneFieldValidator_TooShortText": {
+    "description": "Validator message if field is too short",
+    "type": "text",
+    "placeholders": {}
+  },
+  "cellphoneFieldValidator_TooLongText": "The cellphone number is too long",
+  "@cellphoneFieldValidator_TooLongText": {
+    "description": "Validator message if number entered is too long",
+    "type": "text",
+    "placeholders": {}
+  },
+  "SendButtonText": "Send",
+  "@SendButtonText": {
+    "description": "Text for Send Buttons",
+    "type": "text",
+    "placeholders": {}
+  },
+  "bottomNavigationBarStatusText": "Status",
+  "@bottomNavigationBarStatusText": {
+    "description": "The text for the status button",
+    "type": "text",
+    "placeholders": {}
+  },
+  "bottomNavigationBarMapText": "Map",
+  "@bottomNavigationBarMapText": {
+    "description": "The Text for the map button",
+    "type": "text",
+    "placeholders": {}
+  },
+  "bottomNavigationBarReportText": "Send Report",
+  "@bottomNavigationBarReportText": {
+    "description": "The Text for the report button",
+    "type": "text",
+    "placeholders": {}
+  },
+  "bottomNavigationBarHelpText": "Help",
+  "@bottomNavigationBarHelpText": {
+    "description": "The Text for the help button",
+    "type": "text",
+    "placeholders": {}
+  },
+  "HelpScreen_AppBarTitleText": "Help",
+  "@HelpScreen_AppBarTitleText": {
+    "description": "Title of the App Bar on Help page",
+    "type": "text",
+    "placeholders": {}
+  },
+  "MapScreen_AppBarTitleText": "Map",
+  "@MapScreen_AppBarTitleText": {
+    "description": "Title of the App Bar on Map page",
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportScreen_AppBarTitleText": "Send Report",
+  "@ReportScreen_AppBarTitleText": {
+    "description": "The Text for the Report page",
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportScreen_FormSymptomPromptText": "Do you have any of the following symptoms?",
+  "@ReportScreen_FormSymptomPromptText": {
+    "description": "Asking if the user has any of the symptoms in the following text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportScreen_CheckboxFeverText": "Fever",
+  "@ReportScreen_CheckboxFeverText": {
+    "description": "Fever",
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportScreen_CheckboxFatigueText": "Fatigue",
+  "@ReportScreen_CheckboxFatigueText": {
+    "description": "Symptoms include Fever",
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportScreen_CheckboxDryCoughText": "Dry Cough",
+  "@ReportScreen_CheckboxDryCoughText": {
+    "description": "Symptoms include dry coughing",
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportScreen_CheckboxAchesText": "Aches/Joint pain",
+  "@ReportScreen_CheckboxAchesText": {
+    "description": "Symptoms include joint pain/aches",
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportScreen_CellphoneNumberPromptText": "Please insert your cellphone number here",
+  "@ReportScreen_CellphoneNumberPromptText": {
+    "description": "asks the user for cellphone number",
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReportScreen_SendingReportText": "Sending Report...",
+  "@ReportScreen_SendingReportText": {
+    "description": "Message when report is sent",
+    "type": "text",
+    "placeholders": {}
+  },
+  "SettingsScreen_AppBarTitleText": "Settings",
+  "@SettingsScreen_AppBarTitleText": {
+    "description": "Title of the App Bar on Settings page",
+    "type": "text",
+    "placeholders": {}
+  },
+  "StatusScreen_AppBarTitleText": "Status",
+  "@StatusScreen_AppBarTitleText": {
+    "description": "Title of the App Bar on Status page",
+    "type": "text",
+    "placeholders": {}
+  },
+  "User_StatusUninfectious": "Not infectious",
+  "@User_StatusUninfectious": {
+    "description": "Status if a user is not infected",
+    "type": "text",
+    "placeholders": {}
+  },
+  "User_StatusInfectious": "Infectious",
+  "@User_StatusInfectious": {
+    "description": "Status if a user is infected",
+    "type": "text",
+    "placeholders": {}
+  },
+  "User_StatusSuspected": "Suspected",
+  "@User_StatusSuspected": {
+    "description": "Status if a user is suspected of being infected",
+    "type": "text",
+    "placeholders": {}
+  }
+}
