@@ -28,7 +28,11 @@ public class FriendsNotifyServiceImpl implements FriendsNotifyService {
   }
 
   public void onMedicalStateChanged(User user, MedicalState state) {
-    this.iterateFriends(user, state);
+    switch(state) {
+      case INFECTED:
+      case CURED:
+        this.iterateFriends(user, state);
+    }
   }
 
   private void iterateFriends(User user, MedicalState state) {
