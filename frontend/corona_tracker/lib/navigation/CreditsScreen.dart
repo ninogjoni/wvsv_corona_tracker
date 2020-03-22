@@ -5,6 +5,7 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'dart:typed_data';
 
+
 import 'package:flutter/material.dart';
 
 const String _documentPath = 'pdfs/datenschutz.pdf';
@@ -19,6 +20,7 @@ class CreditsScreen extends StatelessWidget {
           fontFamily: 'BebasNeue'
       ),
       home: MyHomePage(),
+
     );
   }
 }
@@ -52,7 +54,27 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text("Credits"),
       ),
       body: Center(
-        child: Column(
+        child: ListView(
+          shrinkWrap: true,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Text (
+                'Kontakt: info@coronatrackerapp.org' ,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25
+
+                )
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20.0),
+          ),
+          Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             RaisedButton(
@@ -66,10 +88,17 @@ class _MyHomePageState extends State<MyHomePage> {
                   );
                 })
               },
-              child: const Text('Datenschutzerklärung'),
+              child: const Text(
+                  'Datenschutzerklärung',
+                  style: TextStyle(
+                      fontSize: 25
+                  )
+              ),
             ),
           ],
         ),
+      ],
+      )
       ),
     );
   }
@@ -84,7 +113,7 @@ class FullPdfViewerScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return PDFViewerScaffold(
         appBar: AppBar(
-          title: Text("Document"),
+          title: Text("Datenschutzerklärung"),
         ),
         path: pdfPath);
   }
