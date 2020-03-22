@@ -154,6 +154,31 @@ paths:
           description: No Permission
           content: {}
 
+
+  /users/{id}/friends:
+    post:
+      summary: Upload users friends
+      operationId: uploadFriends
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Friend'
+        required: true
+      responses:
+        200:
+          description: OK
+        400:
+          description: No Permission
+          content: {}
   /geofences:
     get:
       summary: Fetch a list of Geofences
@@ -369,6 +394,16 @@ components:
           items:
             $ref: '#/components/schemas/HealthDataSet'
 
+    Friend:
+      type: object
+      required:
+        - phoneHash
+      properties:
+        id:
+          type: string
+        phoneHash:
+          type: string
+          
     Geofence:
       type: object
       properties:

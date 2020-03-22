@@ -1,9 +1,14 @@
 package de.govhackathon.wvsvcoronatracker.api;
 
 import java.util.List;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+import de.ghwct.service.model.FriendDto;
+import de.govhackathon.wvsvcoronatracker.model.Friend;
+import de.govhackathon.wvsvcoronatracker.model.mapper.FriendMapper;
 import de.govhackathon.wvsvcoronatracker.model.system.AppConfig;
+import de.govhackathon.wvsvcoronatracker.services.FriendsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
@@ -28,7 +33,14 @@ public class UsersController implements UsersApi {
   UsersService usersService;
 
   @Autowired
+  FriendsService friendsService;
+
+  @Autowired
   UserMapper userMapper;
+
+  @Autowired
+  FriendMapper friendMapper;
+
 
   @Override
   public ResponseEntity<List<UserDto>> getUsers(String userId) {
@@ -38,8 +50,9 @@ public class UsersController implements UsersApi {
   @Override
   public ResponseEntity<UserDto> getUser(String id) {
     return ResponseEntity.ok().body(usersService.getUser(id).map(userMapper::toDto)
-            .orElseThrow(() -> new EntityNotFoundException(ERRMSG_USER_NOT_FOUND)));
+            .orElseThrow(getUserNotFoundException()));
   }
+
   @Override
   public ResponseEntity<UserDto> createUser(UserDto body) {
     User user = usersService.createUser(userMapper.toEntity(body));
@@ -50,6 +63,26 @@ public class UsersController implements UsersApi {
   public ResponseEntity<Void> deleteUser(String id) {
     usersService.getUser(String.valueOf(id)).ifPresent(usersService::deleteUser);
     return ResponseEntity.noContent().build();
+  }
+
+  @Override
+  public ResponseEntity<Void> uploadFriends(String userId, List<FriendDto> friendDtoList) {
+
+    User user = usersService.getUser(userId).orElseThrow(getUserNotFoundException());
+
+    List<Friend> friends = friendDtoList.stream().
+            map(friendMapper::toEntity).collect(Collectors.toList());
+
+    //MVP: overwrite the friends list
+    friendsService.deleteUsersFriends(user);
+
+    friendsService.addFriendsForUser(user, friends);
+
+    return ResponseEntity.ok().build();
+  }
+
+  private Supplier<EntityNotFoundException> getUserNotFoundException() {
+    return () -> new EntityNotFoundException(ERRMSG_USER_NOT_FOUND);
   }
 
 /*  @Override
