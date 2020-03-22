@@ -29,6 +29,9 @@ dependencies:
   grouped_buttons: ^1.0.3
   country_code_picker: ^1.3.6
   devicelocale: ^0.2.2
+  firebase_messaging: ^6.0.13
+  http: ^0.12.0+4
+  flutter_local_notifications: ^1.3.0
   contacts_service: ^0.3.10
   permission_handler: '^4.4.0+hotfix.2'
   google_maps_flutter: ^0.5.25

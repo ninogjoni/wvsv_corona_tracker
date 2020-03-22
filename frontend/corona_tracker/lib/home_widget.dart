@@ -1,6 +1,7 @@
 import 'package:corona_tracker/navigation/ContactScreen.dart';
 import 'package:corona_tracker/navigation/HelpScreen.dart';
 import 'package:corona_tracker/navigation/MapScreen.dart';
+import 'package:corona_tracker/navigation/SettingsScreen.dart';
 import 'package:corona_tracker/navigation/StatusScreen.dart';
 import 'package:corona_tracker/navigation/ReportScreen.dart';
 import 'package:corona_tracker/i18n/appLocalizations.dart';
