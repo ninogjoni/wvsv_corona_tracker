@@ -18,6 +18,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.Serializable;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -48,12 +50,22 @@ public class PushServiceImpl implements PushService {
         this.sendFirebaseNotification(this.fcmApiKey, title, msg, deviceToken, "");
     }
 
+    @Override
+    public void sendPushToDevice(String title, String msg, String deviceToken, Map<String, String> data) {
+        this.sendFirebaseNotification(this.fcmApiKey, title, msg, deviceToken, "", data);
+    }
+
+
     private void sendFirebaseNotification(String apiKey, String title, String msg, String deviceToken, String typeId) {
+        this.sendFirebaseNotification(apiKey, title, msg, deviceToken, typeId, new HashMap<>());
+    }
+
+    private void sendFirebaseNotification(String apiKey, String title, String msg, String deviceToken, String typeId, Map<String, String> data) {
         LOG.trace("Starting send android push message to device with token {}", deviceToken);
 
         // Prepare JSON containing the GCM message content. What to send and where to send.
         final GoogleCloudMessage message = new GoogleCloudMessage(deviceToken,
-                new GoogleCloudMessageData(title, msg, "icon", "icon", "icon", typeId));
+                new GoogleCloudMessageData(title, msg, "icon", "icon", "icon", typeId, data));
 
         // setup request to GCM
         RestTemplate restTemplate = new RestTemplate();
@@ -97,5 +109,7 @@ class GoogleCloudMessageData implements Serializable {
     private String largeIcon;
 
     private String typeId;
+
+    private Map<String, String> data;
 
 }
