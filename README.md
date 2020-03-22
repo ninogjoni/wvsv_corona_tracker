@@ -23,7 +23,7 @@ https://docs.google.com/document/d/18JaJj8r_-Dlp2q7oq3zp3X0w0M_lbIOY3HgEmqJCF-s/
 
 Choose the platform for further instructions:
 
-https://flutter.dev/docs/get-started/install
+- Installation -> https://flutter.dev/docs/get-started/install
 
 ## Backend
 ### Basic instructions
