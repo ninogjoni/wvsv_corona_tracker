@@ -33,7 +33,7 @@ class StatusScreen extends StatelessWidget {
                   size: 50.0 ,
                 ),
                 Text(
-                    'Anzahl der Benutzer',
+                    'Benutzer',
                     style: TextStyle(
                         fontSize: 34
                     )),
@@ -80,7 +80,7 @@ class StatusScreen extends StatelessWidget {
                   size: 50.0 ,
                 ),
                 Text(
-                    'Anzahl der Geheilten',
+                    'Geheilt',
                     style: TextStyle(
                       //fontWeight: FontWeight.bold,
                       fontSize: 34,
