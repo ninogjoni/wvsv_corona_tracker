@@ -23,6 +23,7 @@ import java.util.Optional;
 
 @Service("pushService")
 public class PushServiceImpl implements PushService {
+
     private static final Logger LOG = LoggerFactory.getLogger(PushServiceImpl.class);
 
     private AppConfigRepository configRepository;

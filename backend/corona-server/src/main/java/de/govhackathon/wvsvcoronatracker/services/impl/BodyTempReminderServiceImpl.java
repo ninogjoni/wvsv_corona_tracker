@@ -5,6 +5,8 @@ import de.govhackathon.wvsvcoronatracker.services.BodyTempService;
 import de.govhackathon.wvsvcoronatracker.services.PushService;
 import de.govhackathon.wvsvcoronatracker.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
