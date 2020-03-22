@@ -57,20 +57,28 @@ class StatusScreen extends StatelessWidget {
     await api_instance.getUsers().then((List<User> users) {
       for(User u in users) {
         if(u.token == globals.deviceId) {
-          if(u.healthHistory.last.medicalState.isNotEmpty)
-            healthState.text = u.healthHistory.last.medicalState;
+          if(u.healthHistory.last.medicalState.isNotEmpty) {
+            if (u.healthHistory.last.medicalState == MedicalStateEnum.UNKNOWN.toString())
+              healthState.text = "Gesund";
+            else if(u.healthHistory.last.medicalState == MedicalStateEnum.SUSPECTED.toString())
+              healthState.text = "Verdacht";
+            else if(u.healthHistory.last.medicalState == MedicalStateEnum.INFECTED.toString())
+              healthState.text = "Infiziert";
+            else if(u.healthHistory.last.medicalState == MedicalStateEnum.CURED.toString())
+              healthState.text = "Immun";
+          }
         }
       }
     }).catchError((error) {
-      print("error getting healt state of current user");
+      print("error getting health state of current user");
     });
 
     if(healthState.text == MedicalStateEnum.INFECTED.toString()) {
       healthState.color = Colors.red[500];
-    } else if(healthState.text == MedicalStateEnum.TREATMENT.toString()) {
+    } else if(healthState.text == MedicalStateEnum.SUSPECTED.toString()) {
       healthState.color = Colors.orange[500];
     } else if(healthState.text == MedicalStateEnum.UNKNOWN.toString()) {
-      healthState.color = Colors.black12;
+      healthState.color = Colors.green[500];
     } else if(healthState.text == MedicalStateEnum.CURED.toString()) {
       healthState.color = Colors.green[500];
     }
