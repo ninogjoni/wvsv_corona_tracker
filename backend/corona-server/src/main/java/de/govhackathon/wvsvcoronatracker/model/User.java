@@ -4,8 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -27,7 +26,7 @@ public class User {
     private Contact contactDetails;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<HealthDataSet> healthDataSetList = new ArrayList<>();
+    private Set<HealthDataSet> healthDataSetList = new HashSet<>();
 
 
     @ManyToMany
