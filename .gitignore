@@ -29,8 +29,7 @@ build/
 
 ### VS Code ###
 .vscode/
+frontend/corona_tracker/android/app/src/main/AndroidManifest.xml
 
-######################
-# OSX
-######################
-.DS_Store
+frontend/corona_tracker/android/app/src/main/AndroidManifest.xml
+frontend/corona_tracker/lib/main.dart

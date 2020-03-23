@@ -1,20 +1,35 @@
 package de.govhackathon.wvsvcoronatracker.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import de.govhackathon.wvsvcoronatracker.model.system.AppConfig;
+import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 
 @Setter
 @Getter
 @Builder
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Position {
 
-    private Integer id;
+    @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
+    private String id;
 
-    private Integer deviceId;
+    private String userId;
+
+    @Builder.Default
+    private OffsetDateTime timestamp = OffsetDateTime.now(AppConfig.TIMEZONE);
 
     private String protocol;
 
@@ -24,9 +39,12 @@ public class Position {
 
     private BigDecimal latitude;
 
-    private BigDecimal longitude ;
+    private BigDecimal longitude;
 
     private BigDecimal altitude;
 
-    private Object network;
+    private Integer accuracy; // meters
+
+    //TODO add correct jpa annotation
+    //private Object network;
 }
