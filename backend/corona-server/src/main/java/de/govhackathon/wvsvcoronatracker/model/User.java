@@ -4,8 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -22,29 +21,20 @@ public class User {
     @Id
     private String token;
 
-    private String name;
-
-    @NotNull
-    private String phoneHash;
+    @OneToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Contact contactDetails;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<HealthDataSet> healthDataSetList = new ArrayList<>();
+    private Set<HealthDataSet> healthDataSetList = new HashSet<>();
 
 
     @ManyToMany
-    @JoinTable(name="tbl_friends",
-            joinColumns=@JoinColumn(name="userId"),
-            inverseJoinColumns=@JoinColumn(name="friendId")
+    @JoinTable(name = "tbl_friends",
+            joinColumns = @JoinColumn(name = "userId"),
+            inverseJoinColumns = @JoinColumn(name = "friendId")
     )
     @EqualsAndHashCode.Exclude
-    private Set<User> friends;
-
-    @ManyToMany
-    @JoinTable(name="tbl_friends",
-            joinColumns=@JoinColumn(name="friendId"),
-            inverseJoinColumns=@JoinColumn(name="userId")
-    )
-    @EqualsAndHashCode.Exclude
-    private Set<User> users;
+    private Set<Contact> friends;
 
 }

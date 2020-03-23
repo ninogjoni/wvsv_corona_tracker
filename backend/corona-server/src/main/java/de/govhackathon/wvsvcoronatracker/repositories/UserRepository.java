@@ -8,7 +8,8 @@ import java.util.Set;
 
 public interface UserRepository extends CrudRepository<User, String> {
 
-    User findByPhoneHash(String phoneHash);
+    User findByContactDetailsPhoneHash(String phoneHash);
 
-    Set<User> findByUsers(User user);
+    User findByToken(String token);
+
 }

@@ -1,9 +1,10 @@
 package de.govhackathon.wvsvcoronatracker.services.impl;
 
+import de.govhackathon.wvsvcoronatracker.model.Contact;
 import de.govhackathon.wvsvcoronatracker.model.MedicalState;
 import de.govhackathon.wvsvcoronatracker.model.User;
+import de.govhackathon.wvsvcoronatracker.repositories.UserRepository;
 import de.govhackathon.wvsvcoronatracker.services.FriendsNotifyService;
-import de.govhackathon.wvsvcoronatracker.services.FriendsService;
 import de.govhackathon.wvsvcoronatracker.services.PushService;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,12 +24,13 @@ public class FriendsNotifyServiceImpl implements FriendsNotifyService {
   private static final String TITLE = "Meldung in deinem Freundeskreis"; // TODO: text/i18n
 
   private PushService pushService;
-  private FriendsService friendsService;
+
+  private UserRepository userRepository;
 
   @Autowired
-  public FriendsNotifyServiceImpl(PushService pushService, FriendsService friendsService) {
+  public FriendsNotifyServiceImpl(PushService pushService, UserRepository userRepository) {
     this.pushService = pushService;
-    this.friendsService = friendsService;
+    this.userRepository = userRepository;
   }
 
   public void onMedicalStateChanged(User user, MedicalState state) {
@@ -40,31 +42,36 @@ public class FriendsNotifyServiceImpl implements FriendsNotifyService {
   }
 
   private void iterateFriends(User user, MedicalState state) {
-    Set<User> friends = this.friendsService.getUsersFriends(user);
+    Set<Contact> friends = user.getFriends();
 
-    for(User friend : friends) {
-      this.pushService.sendPushToDevice(this.TITLE, String.format("Dein Freund {NAME} ist %s", state), friend.getToken(), this.buildData(user.getToken()));
+    for(Contact friend : friends) {
+      User friendUser =userRepository.findByContactDetailsPhoneHash(friend.getPhoneHash());
+      if (friendUser != null) {
+        this.pushService.sendPushToDevice(this.TITLE, String.format("Dein Freund {NAME} ist %s", state), friendUser.getToken(), this.buildData(user.getToken()));
+        this.iterateFriendsRecursion(user, state, friendUser, 1);
+      } else {
+        LOG.info("No user for contact {}",friend.getId());
+      }
     }
 
-    for(User friend : friends) {
-      this.iterateFriendsRecursion(user, state, friend, 1);
+    for(Contact friend : friends) {
     }
   }
 
   private void iterateFriendsRecursion(User user, MedicalState state, User friend, Integer degree) {
-    Set<User> friends2 = this.friendsService.getUsersFriends(friend);
+    Set<Contact> friends = user.getFriends();
 
-    for(User friend2 : friends2) {
-      if(degree < 2) {
-        this.pushService.sendPushToDevice(this.TITLE, String.format("Ein Freund von {NAME} ist %s", friend.getName(), state), friend2.getToken(), this.buildData(friend.getToken()));
+    for(Contact friendContact : friends) {
+      User friendUser =userRepository.findByContactDetailsPhoneHash(friendContact.getPhoneHash());
+      if (friendUser != null) {
+        if(degree < 2) {
+          this.pushService.sendPushToDevice(this.TITLE, String.format("Ein Freund von {NAME} ist %s", friendUser.getContactDetails().getName(), state), friendUser.getToken(), this.buildData(friend.getToken()));
+        } else {
+          this.pushService.sendPushToDevice(this.TITLE, String.format("Ein Freund %d. Grades von {NAME} ist %s", degree, friendUser.getContactDetails().getName(), state), friendUser.getToken(), this.buildData(friend.getToken()));
+        }
+        this.iterateFriendsRecursion(user, state, friendUser, degree+1);
       } else {
-        this.pushService.sendPushToDevice(this.TITLE, String.format("Ein Freund %d. Grades von {NAME} ist %s", degree, friend.getName(), state), friend2.getToken(), this.buildData(friend.getToken()));
-      }
-    }
-
-    for(User friend2 : friends2) {
-      if(degree < this.MAX_DEGREES) {
-        this.iterateFriendsRecursion(user, state, friend2, degree+1);
+        LOG.info("No user for contact {}", friendContact.getId());
       }
     }
   }

@@ -156,7 +156,7 @@ paths:
 
 
   /users/{id}/friends:
-    post:
+    put:
       summary: Upload users friends
       operationId: uploadFriends
       parameters:
@@ -172,6 +172,27 @@ paths:
               type: array
               items:
                 $ref: '#/components/schemas/Friend'
+        required: true
+      responses:
+        200:
+          description: OK
+        400:
+          description: No Permission
+          content: {}
+    post:
+      summary: Add users friends
+      operationId: addFriend
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Friend'
         required: true
       responses:
         200:
