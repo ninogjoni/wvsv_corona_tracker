@@ -46,5 +46,6 @@ Switch out the path to the jar, input swagger.json and output folder to suit you
    ```dart2
    import 'package:openapi/api.dart';
    ```
+7. Change the API base path in `/frontend/corona_tracker/corona-api/lib/api_client.dart` to `https://api.coronatrackerapp.org/api/v1`
 
 Source of these instructions: https://github.com/juliusspencer/Flutter-OpenAPI-Pattern
