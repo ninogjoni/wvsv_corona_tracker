@@ -39,6 +39,10 @@ dependencies:
   flutter_full_pdf_viewer: ^1.0.4
   path_provider: ^0.4.1
   dropdown_formfield: ^0.1.1
+  flutter_linkify: ^3.1.0
+  url_launcher: ^5.4.2
+
+
 
   openapi:
     path: ./corona-api

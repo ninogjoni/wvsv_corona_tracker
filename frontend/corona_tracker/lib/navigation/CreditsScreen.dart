@@ -1,6 +1,8 @@
 import 'package:corona_tracker/i18n/appLocalizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_full_pdf_viewer/full_pdf_viewer_scaffold.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'dart:typed_data';
@@ -60,17 +62,32 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           Align(
             alignment: Alignment.center,
-            child: Text (
-                'Kontakt: info@coronatrackerapp.org' ,
+            child:
+//            Text (
+//                'Kontakt: info@coronatrackerapp.org' ,
+//                style: TextStyle(
+//                    fontWeight: FontWeight.bold,
+//                    fontSize: 25
+//
+//                )
+//            ),
+              Linkify(
+                onOpen: (link) async {
+                  if (await canLaunch(link.url)) {
+                    await launch(link.url);
+                  } else {
+                    throw 'Could not launch $link';
+                  }
+                },
+                text: "Kontakt: info@coronatrackerapp.org",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 25
-
-                )
-            ),
+                ),
+              )
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20.0),
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
           ),
           Column(
           mainAxisAlignment: MainAxisAlignment.center,
