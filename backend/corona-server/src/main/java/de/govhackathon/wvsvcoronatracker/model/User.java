@@ -22,7 +22,8 @@ public class User {
     @Id
     private String token;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
     private Contact contactDetails;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -36,13 +37,5 @@ public class User {
     )
     @EqualsAndHashCode.Exclude
     private Set<Contact> friends;
-
-    @ManyToMany
-    @JoinTable(name = "tbl_friends",
-            joinColumns = @JoinColumn(name = "friendId"),
-            inverseJoinColumns = @JoinColumn(name = "userId")
-    )
-    @EqualsAndHashCode.Exclude
-    private Set<User> users;
 
 }

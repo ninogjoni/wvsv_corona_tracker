@@ -57,15 +57,17 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public User updateUser(final User user) {
         // TODO move to mapper
-        Contact existingContact = this.contactRepository.findByPhoneHash(user.getContactDetails().getPhoneHash());
-        if (existingContact != null) {
-            existingContact.setName(user.getContactDetails().getName());
-            existingContact.setPhoneHash(user.getContactDetails().getPhoneHash());
-            user.setContactDetails(existingContact);
-            this.contactRepository.save(existingContact);
-            user.setContactDetails(existingContact);
-        } else {
-            user.setContactDetails(this.contactRepository.save(user.getContactDetails()));
+        if (user.getContactDetails() != null) {
+            Contact existingContact = this.contactRepository.findByPhoneHash(user.getContactDetails().getPhoneHash());
+            if (existingContact != null) {
+                existingContact.setName(user.getContactDetails().getName());
+                existingContact.setPhoneHash(user.getContactDetails().getPhoneHash());
+                user.setContactDetails(existingContact);
+                this.contactRepository.save(existingContact);
+                user.setContactDetails(existingContact);
+            } else {
+                user.setContactDetails(this.contactRepository.save(user.getContactDetails()));
+            }
         }
         if (user.getFriends() != null) {
             user.getFriends().forEach(friend -> this.contactRepository.save(friend));
