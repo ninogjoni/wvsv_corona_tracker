@@ -4,6 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:corona_tracker/models/PhoneNumber.dart';
 import 'package:corona_tracker/i18n/appLocalizations.dart';
 //import 'package:devicelocale/devicelocale.dart';
+import 'package:dropdown_formfield/dropdown_formfield.dart';
+import 'package:openapi/api.dart';
+
 
 
 
@@ -77,6 +80,7 @@ class ReportScreenFormState extends State<ReportScreenForm> {
   bool _tirednessChecked = false;
   bool _dryCoughChecked = false;
   bool _achesPainsChecked = false;
+  String medicalState = MedicalStateEnum.UNKNOWN.toString();
 
 
   @override
@@ -92,6 +96,45 @@ class ReportScreenFormState extends State<ReportScreenForm> {
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 5.0),
+          ),
+          DropDownFormField(
+            titleText: 'Mein aktueller Gesundheitsstatus in Bezug auf SARS-CoV-2',
+            hintText: 'Bitte wählen Sie aus',
+            value: medicalState,
+            onSaved: (value) {
+              setState(() {
+                medicalState = value;
+              });
+            },
+            onChanged: (value) {
+              setState(() {
+                medicalState = value;
+              });
+            },
+            dataSource: [
+              {
+                "display": "Unbekannt/Gesund",
+                "value": MedicalStateEnum.UNKNOWN.toString(),
+              },
+              {
+                "display": "Verdachtsfall (ungetestet)",
+                "value": MedicalStateEnum.SUSPECTED.toString(),
+              },
+              {
+                "display": "Infiziert (positiver Test)",
+                "value": MedicalStateEnum.INFECTED.toString(),
+              },
+              {
+                "display": "Cured",
+                "value": MedicalStateEnum.CURED.toString(),
+              }
+            ],
+            textField: 'display',
+            valueField: 'value',
+          ),
+
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 15.0),
           ),
           Text (
               AppLocalizations.of(context).ReportScreen_FormSymptomPromptText,
@@ -221,6 +264,7 @@ class ReportScreenFormState extends State<ReportScreenForm> {
                   Scaffold.of(context)
                       .showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).ReportScreen_SendingReportText)));
                   _formKey.currentState.save();
+                  printInputs();
                 }
               },
               child: Text(AppLocalizations.of(context).SendButtonText),
@@ -229,5 +273,13 @@ class ReportScreenFormState extends State<ReportScreenForm> {
         ],
       ),
     );
+  }
+
+  void printInputs() {
+    print("_feverChecked:" + _feverChecked.toString());
+    print("_tirednessChecked:" + _tirednessChecked.toString());
+    print("_dryCoughChecked:" + _dryCoughChecked.toString());
+    print("_achesPainsChecked:" + _achesPainsChecked.toString());
+    print("medicalState:" + medicalState.toString());
   }
 }

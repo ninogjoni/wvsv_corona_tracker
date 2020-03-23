@@ -1,6 +1,6 @@
 part of openapi.api;
 
-enum MedicalStateEnum { UNKNOWN, INFECTED, TREATMENT, CURED }
+enum MedicalStateEnum { UNKNOWN, SUSPECTED, INFECTED, CURED }
 
 class HealthDataSet {
   
