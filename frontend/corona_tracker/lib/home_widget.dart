@@ -1,4 +1,5 @@
 import 'package:corona_tracker/navigation/ContactScreen.dart';
+import 'package:corona_tracker/navigation/DummyScreen.dart';
 import 'package:corona_tracker/navigation/HelpScreen.dart';
 import 'package:corona_tracker/navigation/MapScreen.dart';
 import 'package:corona_tracker/navigation/SettingsScreen.dart';
@@ -25,7 +26,8 @@ class _HomeState extends State<Home> {
     ReportScreen(),
     HelpScreen(),
     ContactScreen(),
-    SettingsScreen()
+    SettingsScreen(),
+    DummyScreen()
   ];
 
   @override
@@ -36,6 +38,7 @@ class _HomeState extends State<Home> {
       ),*/
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white70,
         type: BottomNavigationBarType.fixed,
         onTap: onTabTapped,
         currentIndex: _currentIndex, // this will be set when a new tab is tapped
@@ -65,6 +68,11 @@ class _HomeState extends State<Home> {
               icon: new Icon(Icons.settings),
               // TODO: i18n
               title: new Text('Dev_Push')
+          ),
+          BottomNavigationBarItem(
+              icon: new Icon(Icons.star),
+              // TODO: i18n
+              title: new Text('Fun')
           )
         ],
       ),

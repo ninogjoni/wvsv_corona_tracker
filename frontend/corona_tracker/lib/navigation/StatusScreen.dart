@@ -88,6 +88,7 @@ class StatusScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blueGrey[50],
       appBar: AppBar(
         title: Text(AppLocalizations.of(context).StatusScreen_AppBarTitleText),
         actions: <Widget>[
@@ -102,7 +103,8 @@ class StatusScreen extends StatelessWidget {
       body: Center(
         child: ListView(
           children: [
-            new Container(
+            Container(
+              color: Colors.lightBlue,
               child: Image.asset(
                 'assets/images/corona_tracker_homescreen_teaser.png',
                 fit: BoxFit.cover,
@@ -111,164 +113,243 @@ class StatusScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 25.0),
             ),
-            Row (
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                //StatusUsers
-                Column(
-                  children: //StatusUsers
-                  [
-                    Icon(
-                      Icons.people,
-                      color: Colors.blueGrey,
-                      size: 50.0,
+            Container(
+              //color: Colors.lightBlue,
+              child: Row (
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  //StatusUsers
+                  Container(
+                    width: 150,
+                    height: 150,
+                    decoration: BoxDecoration(
+                        color: Colors.blueGrey[100],
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(20)
+                      )
                     ),
-                    // TODO i18n
-                    Text(
-                      'Benutzer',
-                      style: TextStyle(
-                          fontSize: 34,
-                          decoration: TextDecoration.underline,
-                      ),
-
-                    ),
-                    FutureBuilder(
-                      future: getUserCount(),
-                      builder: (context, AsyncSnapshot<String> snapshot) {
-                        if (snapshot.hasData) {
-                          return Text(
-                              snapshot.data.toString(),
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 34,
-                              ));
-                        }
-                        else {
-                          return CircularProgressIndicator();
-                        }
-                      },
-                    )
-                  ],
-                ),
-                Column(
-                  children: [
-                    Icon(
-                      Icons.person,
-                      color: Colors.green[500],
-                      size: 50.0,
-                    ),
-                    // TODO i18n
-                    Text(
-                      'Status',
-                      style: TextStyle(
-                        //fontWeight: FontWeight.bold,
-                        fontSize: 34,
-                        decoration: TextDecoration.underline,
-                      ),
-                    ),
-                    FutureBuilder(
-                      initialData: defaultHealthState,
-                      future: getCurrentHealthstate(),
-                      builder: (context, data) {
-                        return Text(
-                            data.data.text,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: //StatusUsers
+                      [
+                        Icon(
+                          Icons.people,
+                          color: Colors.blueGrey,
+                          size: 50.0,
+                        ),
+                        // TODO i18n
+                        Text(
+                          'Benutzer',
+                          style: TextStyle(
                               fontSize: 34,
-                              color: data.data.color,
-                            ));
-                      },
-                    )
-                  ],
-                ),
-              ],
+                              decoration: TextDecoration.underline,
+                          ),
+
+                        ),
+                        FutureBuilder(
+                          future: getUserCount(),
+                          builder: (context, AsyncSnapshot<String> snapshot) {
+                            if (snapshot.hasData) {
+                              return Text(
+                                  snapshot.data.toString(),
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 34,
+                                  ));
+                            }
+                            else {
+                              return CircularProgressIndicator();
+                            }
+                          },
+                        )
+                      ],
+                    ),
+                  ),
+                  Container(
+                    //color: Colors.yellow,
+                    width: 150,
+                    height: 150,
+                    decoration: BoxDecoration(
+                        color: Colors.blueGrey[100],
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(20)
+                        )
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.person,
+                          color: Colors.green[500],
+                          size: 50.0,
+                        ),
+                        // TODO i18n
+                        Text(
+                          'Status',
+                          style: TextStyle(
+                            //fontWeight: FontWeight.bold,
+                            fontSize: 34,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                        FutureBuilder(
+                          initialData: defaultHealthState,
+                          future: getCurrentHealthstate(),
+                          builder: (context, data) {
+                            return Text(
+                                data.data.text,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 34,
+                                  color: data.data.color,
+                                ));
+                          },
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 25.0),
             ),
-            Row (
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Column(
-                  children: [
-                    Icon(
-                      Icons.healing,
-                      color: Colors.green[500],
-                      size: 50.0,
+            Container(
+              //color: Colors.lightBlue,
+              width: 150,
+              child: Row (
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Container(
+                    //color: Colors.red,
+                    width: 150,
+                    height: 150,
+                    decoration: BoxDecoration(
+                        color: Colors.blueGrey[100],
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(20)
+                        )
                     ),
-                    // TODO i18n
-                    Text(
-                      'Geheilt',
-                      style: TextStyle(
-                        //fontWeight: FontWeight.bold,
-                        fontSize: 34,
-                        color: Colors.green[500],
-                        decoration: TextDecoration.underline,
-                      ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.healing,
+                          color: Colors.green[500],
+                          size: 50.0,
+                        ),
+                        // TODO i18n
+                        Text(
+                          'Geheilt',
+                          style: TextStyle(
+                            //fontWeight: FontWeight.bold,
+                            fontSize: 34,
+                            color: Colors.green[500],
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                        FutureBuilder(
+                          future: getUsersCuredCount(),
+                          builder: (context, AsyncSnapshot<String> snapshot) {
+                            if (snapshot.hasData) {
+                              return Text(
+                                  snapshot.data.toString(),
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 34,
+                                    color: Colors.green[500],
+                                  ));
+                            }
+                            else {
+                              return CircularProgressIndicator();
+                            }
+                          },
+                        )
+                      ],
                     ),
-                    FutureBuilder(
-                      future: getUsersCuredCount(),
-                      builder: (context, AsyncSnapshot<String> snapshot) {
-                        if (snapshot.hasData) {
-                          return Text(
-                              snapshot.data.toString(),
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 34,
-                                color: Colors.green[500],
-                              ));
-                        }
-                        else {
-                          return CircularProgressIndicator();
-                        }
-                      },
-                    )
-                  ],
-                ),
-                Column(
-                  children: [
-                    Icon(
-                      Icons.info_outline,
-                      color: Colors.red[500],
-                      size: 50.0,
+                  ),
+                  Container(
+                    //color: Colors.yellow,
+                    width: 150,
+                    height: 150,
+                    decoration: BoxDecoration(
+                        color: Colors.blueGrey[100],
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(20)
+                        )
                     ),
-                    // TODO i18n
-                    Text(
-                      'Infiziert',
-                      style: TextStyle(
-                        //fontWeight: FontWeight.bold,
-                        fontSize: 34,
-                        color: Colors.red[500],
-                        decoration: TextDecoration.underline,
-                      ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.info_outline,
+                          color: Colors.red[500],
+                          size: 50.0,
+                        ),
+                        // TODO i18n
+                        Text(
+                          'Infiziert',
+                          style: TextStyle(
+                            //fontWeight: FontWeight.bold,
+                            fontSize: 34,
+                            color: Colors.red[500],
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                        FutureBuilder(
+                          future: getUsersInfectedCount(),
+                          builder: (context, AsyncSnapshot<String> snapshot) {
+                            if (snapshot.hasData) {
+                              return Text(
+                                  snapshot.data.toString(),
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 34,
+                                    color: Colors.red[500],
+                                  ));
+                            }
+                            else {
+                              return CircularProgressIndicator();
+                            }
+                          },
+                        )
+                      ],
                     ),
-                    FutureBuilder(
-                      future: getUsersInfectedCount(),
-                      builder: (context, AsyncSnapshot<String> snapshot) {
-                        if (snapshot.hasData) {
-                          return Text(
-                              snapshot.data.toString(),
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 34,
-                                color: Colors.red[500],
-                              ));
-                        }
-                        else {
-                          return CircularProgressIndicator();
-                        }
-                      },
-                    )
-                  ],
-                ),
-              ],
-            )
+                  ),
+//                Column(
+//                  children: <Widget>[
+//                    SizedBox(height: 10, width: 10),
+//                    makeElement(image: 'assets/images/corona_tracker_homescreen_teaser.png', tag: 'example')
+//                  ],
+//                )
+                ],
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 }
+
+Widget makeElement({image, tag}) {
+  return Hero(
+    tag: tag,
+    child: GestureDetector(
+        child: Container(
+          height: 250,
+          width: double.infinity,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              image: DecorationImage(
+                  image: AssetImage(image)
+              )
+          ),
+        )
+    ),
+  );
+}
+
 
 
 class StatusUsers extends StatefulWidget {

@@ -32,7 +32,7 @@ class User {
       case Status.suspicion:
         return 'Verdacht';
         break;
-      case Status.diseased:
+      case Status.infected:
         return 'Erkrankt';
         break;
       case Status.cured:
