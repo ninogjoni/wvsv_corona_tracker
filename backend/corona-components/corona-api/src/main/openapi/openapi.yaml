@@ -82,6 +82,7 @@ paths:
             application/gpx+xml:
               schema:
                 $ref: '#/components/schemas/Position'
+
   /users:
     get:
       summary: Fetch a list of Users
@@ -119,20 +120,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-      x-codegen-request-body-name: body
-    delete:
-      summary: Delete a User TODO move to /users/id
-      operationId: deleteUser
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        204:
-          description: No Content
-          content: {}
+
   /users/{id}:
     get:
       summary: Get a single users
@@ -153,7 +141,19 @@ paths:
         400:
           description: No Permission
           content: {}
-
+    delete:
+      summary: Delete a User TODO move to /users/id
+      operationId: deleteUser
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: No Content
+          content: {}
 
   /users/{id}/friends:
     put:
@@ -222,90 +222,6 @@ paths:
           description: No Permission
           content: {}
 
-
-
-  /geofences:
-    get:
-      summary: Fetch a list of Geofences
-      operationId: getGeofences
-      description: Without params, it returns a list of Geofences the user has access to
-      parameters:
-        - name: all
-          in: query
-          description: Can only be used by admins or managers to fetch all entities
-          schema:
-            type: boolean
-        - name: userId
-          in: query
-          description: Standard users can use this only with their own _userId_
-          schema:
-            type: string
-        - name: refresh
-          in: query
-          schema:
-            type: boolean
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Geofence'
-    post:
-      summary: Create a Geofence
-      operationId: createGeofence
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Geofence'
-        required: true
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Geofence'
-  /geofences/{id}:
-    put:
-      summary: Update a Geofence
-      operationId: updateGeofence
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Geofence'
-        required: true
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Geofence'
-      x-codegen-request-body-name: body
-    delete:
-      summary: Delete a Geofence
-      operationId: removeGeofence
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        204:
-          description: No Content
-          content: {}
   /reports/locations:
     get:
       summary: Fetch a list of  within the time period for the Device
@@ -343,6 +259,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ReportTrips'
+
   /measurement/bodytemp:
     get:
       summary: Fetch a list of body temp measurements
@@ -375,6 +292,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TempMeasurement'
+
   /healthDataSet:
     post:
       summary: Add a health dataset
@@ -392,6 +310,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HealthDataSet'
+
 components:
   schemas:
     Position:
@@ -401,12 +320,10 @@ components:
           type: string
         userId:
           type: string
-        protocol:
+        time:
           type: string
-        outdated:
-          type: boolean
-        valid:
-          type: boolean
+          description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
+          format: date-time
         latitude:
           type: number
         longitude:
@@ -416,9 +333,6 @@ components:
         accuracy:
           type: integer
           description: Position accuracy in meters (radius), lower is better
-        network:
-          type: object
-          properties: {}
     User:
       type: object
       required:
@@ -426,8 +340,6 @@ components:
         - phoneHash
       properties:
         token:
-          type: string
-        name:
           type: string
         phoneHash:
           type: string
@@ -445,35 +357,7 @@ components:
           type: string
         phoneHash:
           type: string
-          
-    Geofence:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        area:
-          type: string
-    Event:
-      type: object
-      properties:
-        id:
-          type: string
-        type:
-          type: string
-        serverTime:
-          type: string
-          description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
-          format: date-time
-        positionId:
-          type: string
-        geofenceId:
-          type: string
-        maintenanceId:
-          type: string
+
     TempMeasurement:
       type: object
       required:
@@ -509,29 +393,7 @@ components:
           type: string
           description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
           format: date-time
-        positionId:
-          type: string
-        geofenceId:
-          type: string
-    ReportSummary:
-      type: object
-      properties:
-        deviceName:
-          type: string
-        maxSpeed:
-          type: number
-          description: in knots
-        averageSpeed:
-          type: number
-          description: in knots
-        distance:
-          type: number
-          description: in meters
-        spentFuel:
-          type: number
-          description: in liters
-        engineHours:
-          type: integer
+
     ReportTrips:
       type: object
       properties:
@@ -571,111 +433,7 @@ components:
           type: number
         endLon:
           type: number
-    ReportStops:
-      type: object
-      properties:
-        deviceName:
-          type: string
-        duration:
-          type: integer
-        startTime:
-          type: string
-          description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
-          format: date-time
-        address:
-          type: string
-        lat:
-          type: number
-        lon:
-          type: number
-        endTime:
-          type: string
-          description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
-          format: date-time
-        spentFuel:
-          type: number
-          description: in liters
-        engineHours:
-          type: integer
-    DeviceAccumulators:
-      type: object
-      properties:
-        totalDistance:
-          type: number
-          description: in meters
-        hours:
-          type: number
-  parameters:
-    entityId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-    all:
-      name: all
-      in: query
-      description: Can only be used by admins or managers to fetch all entities
-      schema:
-        type: boolean
-    refresh:
-      name: refresh
-      in: query
-      schema:
-        type: boolean
-    userId:
-      name: userId
-      in: query
-      description: Standard users can use this only with their own _userId_
-      schema:
-        type: string
-    deviceIdArray:
-      name: deviceId
-      in: query
-      style: form
-      explode: true
-      schema:
-        type: array
-        items:
-          type: string
-    userIdArray:
-      name: deviceId
-      in: query
-      style: form
-      explode: true
-      schema:
-        type: array
-        items:
-          type: string
-    fromTime:
-      name: from
-      in: query
-      description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
-      required: true
-      schema:
-        type: string
-        format: date-time
-    toTime:
-      name: to
-      in: query
-      description: in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
-      required: true
-      schema:
-        type: string
-        format: date-time
-  requestBodies:
-    User:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/User'
-      required: true
-    Geofence:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Geofence'
-      required: true
+
   securitySchemes:
     basicAuth:
       type: http
