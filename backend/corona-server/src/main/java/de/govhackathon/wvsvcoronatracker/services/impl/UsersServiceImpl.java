@@ -60,10 +60,6 @@ public class UsersServiceImpl implements UsersService {
         if (user.getContactDetails() != null) {
             Contact existingContact = this.contactRepository.findByPhoneHash(user.getContactDetails().getPhoneHash());
             if (existingContact != null) {
-                existingContact.setName(user.getContactDetails().getName());
-                existingContact.setPhoneHash(user.getContactDetails().getPhoneHash());
-                user.setContactDetails(existingContact);
-                this.contactRepository.save(existingContact);
                 user.setContactDetails(existingContact);
             } else {
                 user.setContactDetails(this.contactRepository.save(user.getContactDetails()));

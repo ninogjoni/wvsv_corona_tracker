@@ -1,6 +1,5 @@
 package de.govhackathon.wvsvcoronatracker.services;
 
-import de.govhackathon.wvsvcoronatracker.model.Contact;
 import de.govhackathon.wvsvcoronatracker.model.HealthDataSet;
 import de.govhackathon.wvsvcoronatracker.model.MedicalState;
 import de.govhackathon.wvsvcoronatracker.model.User;
@@ -17,6 +16,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Optional;
 
+import static de.govhackathon.wvsvcoronatracker.utils.TestDataHelper.createTestUser;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -39,11 +39,7 @@ class Spec_HealthDataSetService {
     void setUp() {
         repository.deleteAll();
         userRepository.deleteAll();
-        User user = User.builder()
-                .contactDetails(Contact.builder().name("Max").phoneHash("42").build())
-                .token("123")
-                .build();
-        testUser = userRepository.save(user);
+        testUser = userRepository.save(createTestUser());
     }
 
     @Nested

@@ -7,15 +7,17 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
-@Setter
-@Getter
+@Data
 @Builder
 @Entity
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "POSITIONS")
 public class Position {
 
     @Id

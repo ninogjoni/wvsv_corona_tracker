@@ -9,13 +9,12 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
-@EqualsAndHashCode(callSuper = false)
 @Builder
 @Entity
-@Table(name = "TEMPERATURE_MEASUREMENT")
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "TEMPERATURE_MEASUREMENTS")
 public class TemperatureMeasurement implements Serializable {
 
     @Id

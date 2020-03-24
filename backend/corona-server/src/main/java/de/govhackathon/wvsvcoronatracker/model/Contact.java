@@ -1,24 +1,19 @@
 package de.govhackathon.wvsvcoronatracker.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 
 @Data
 @Builder
 @Entity
-@Table(name = "CONTACT")
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "CONTACTS")
 public class Contact {
 
     @Id
@@ -30,8 +25,6 @@ public class Contact {
     private String id;
 
     @NotNull
+    @Column(unique = true)
     private String phoneHash;
-
-    private String name;
-
 }

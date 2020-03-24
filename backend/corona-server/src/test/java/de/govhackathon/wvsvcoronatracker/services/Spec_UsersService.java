@@ -1,7 +1,6 @@
 package de.govhackathon.wvsvcoronatracker.services;
 
 import de.govhackathon.wvsvcoronatracker.model.Contact;
-import de.govhackathon.wvsvcoronatracker.model.HealthDataSet;
 import de.govhackathon.wvsvcoronatracker.model.User;
 import de.govhackathon.wvsvcoronatracker.repositories.ContactRepository;
 import de.govhackathon.wvsvcoronatracker.repositories.UserRepository;
@@ -15,7 +14,9 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Collections;
+import java.util.UUID;
 
+import static de.govhackathon.wvsvcoronatracker.utils.TestDataHelper.createTestUser;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -43,15 +44,7 @@ class Spec_UsersService {
 
         @Test
         void should_add_new_user() throws Exception {
-            User user = User.builder()
-                    .contactDetails(Contact.builder().name("Max").phoneHash("42").build())
-                    .healthDataSetList(Collections.singleton(
-                            HealthDataSet.builder().build()
-                    ))
-                    .token("123")
-                    .build();
-
-            User savedUser = usersService.createUser(user);
+            User savedUser = usersService.createUser(createTestUser());
             assertThat(savedUser).isNotNull();
             assertThat(savedUser.getToken()).isNotNull();
         }
@@ -62,22 +55,12 @@ class Spec_UsersService {
 
         @Test
         void should_add_new_user_with_friends() throws Exception {
-            User user = User.builder()
-                    .contactDetails(Contact.builder().name("Max").phoneHash("42").build())
-                    .healthDataSetList(Collections.singleton(
-                            HealthDataSet.builder().build()
-                    ))
-                    .friends(Collections.singleton(
-                            Contact.builder()
-                                    .name("Tim")
-                                    .phoneHash("23")
-                                    .build()
-                    ))
-                    .token("123")
-                    .build();
-
-            User savedUser = usersService.createUser(user);
-            Contact friend = contactRepository.findByPhoneHash("23");
+            User savedUser = usersService.createUser(createTestUser(
+                    Collections.singleton(
+                            Contact.builder().phoneHash(UUID.randomUUID().toString()).build()
+                    )
+            ));
+            Contact friend = contactRepository.findByPhoneHash(savedUser.getFriends().iterator().next().getPhoneHash());
             assertThat(savedUser).isNotNull();
             assertThat(savedUser.getToken()).isNotNull();
             assertThat(savedUser.getFriends()).isNotNull();
@@ -86,27 +69,18 @@ class Spec_UsersService {
 
         @Test
         void should_update_user_with_friends() throws Exception {
-            User user = User.builder()
-                    .contactDetails(Contact.builder().name("Max").phoneHash("42").build())
-                    .healthDataSetList(Collections.singleton(
-                            HealthDataSet.builder().build()
-                    ))
-                    .token("123")
-                    .build();
-
-            User savedUser = usersService.createUser(user);
+            User savedUser = usersService.createUser(createTestUser());
             assertThat(savedUser).isNotNull();
             assertThat(savedUser.getToken()).isNotNull();
             assertThat(savedUser.getFriends()).isNull();
             // update
             savedUser.setFriends(Collections.singleton(
                     Contact.builder()
-                            .name("Tim")
-                            .phoneHash("23")
+                            .phoneHash(UUID.randomUUID().toString())
                             .build()
             ));
             savedUser = usersService.updateUser(savedUser);
-            Contact friend = contactRepository.findByPhoneHash("23");
+            Contact friend = contactRepository.findByPhoneHash(savedUser.getFriends().iterator().next().getPhoneHash());
             assertThat(savedUser).isNotNull();
             assertThat(savedUser.getToken()).isNotNull();
             assertThat(friend).isNotNull();
