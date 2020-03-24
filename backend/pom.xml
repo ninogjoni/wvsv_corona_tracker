@@ -66,12 +66,14 @@
         <executions>
           <execution>
             <id>enforce versions</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
             <configuration>
               <rules>
                 <requireJavaVersion>
-                  <version>${java.version}</version>
+                  <version>(1.7,1.9)</version>
                 </requireJavaVersion>
-                <dependencyConvergence />
               </rules>
             </configuration>
           </execution>
