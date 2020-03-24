@@ -16,7 +16,6 @@
 
   <modules>
     <module>corona-api</module>
-    <module>corona-core</module>
   </modules>
 
 </project>
