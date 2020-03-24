@@ -1,7 +1,6 @@
 package de.govhackathon.wvsvcoronatracker.services;
 
 import de.govhackathon.wvsvcoronatracker.model.Contact;
-import de.govhackathon.wvsvcoronatracker.model.User;
 
 import java.util.List;
 import java.util.Optional;
