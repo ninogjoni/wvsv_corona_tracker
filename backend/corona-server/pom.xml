@@ -163,7 +163,7 @@
             </goals>
             <configuration>
               <output>${project.build.directory}/generated-sources</output>
-              <inputSpec>${project.build.directory}/generated-sources/openapi.yaml</inputSpec>
+              <inputSpec>${project.basedir}/src/main/resources/api/openapi.yaml</inputSpec>
               <modelPackage>de.ghwct.service.model</modelPackage>
               <apiPackage>de.ghwct.service.api</apiPackage>
               <generateApiDocumentation>false</generateApiDocumentation>
