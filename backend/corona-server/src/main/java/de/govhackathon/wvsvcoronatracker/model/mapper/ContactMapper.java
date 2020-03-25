@@ -6,7 +6,6 @@ import org.mapstruct.CollectionMappingStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.NullValueCheckStrategy;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 

@@ -1,9 +1,7 @@
 package de.govhackathon.wvsvcoronatracker.services.impl;
 
 import de.govhackathon.wvsvcoronatracker.model.Contact;
-import de.govhackathon.wvsvcoronatracker.model.User;
 import de.govhackathon.wvsvcoronatracker.repositories.ContactRepository;
-import de.govhackathon.wvsvcoronatracker.repositories.UserRepository;
 import de.govhackathon.wvsvcoronatracker.services.ContactService;
 import org.apache.commons.collections4.IterableUtils;
 import org.springframework.beans.factory.annotation.Autowired;
