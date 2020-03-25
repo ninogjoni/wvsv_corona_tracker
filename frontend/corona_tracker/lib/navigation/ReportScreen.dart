@@ -118,7 +118,8 @@ class ReportScreenFormState extends State<ReportScreenForm> {
               },
               {
                 "display": "Verdachtsfall (ungetestet)",
-                "value": MedicalStateEnum.SUSPECTED.toString(),
+                "value": "SUSPECTED",
+                //"value": MedicalStateEnum.SUSPECTED.toString(),
               },
               {
                 "display": "Infiziert (positiver Test)",

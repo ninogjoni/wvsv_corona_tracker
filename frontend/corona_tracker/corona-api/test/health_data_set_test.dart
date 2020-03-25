@@ -22,16 +22,6 @@ void main() {
       // TODO
     });
 
-    // String positionId (default value: null)
-    test('to test the property `positionId`', () async {
-      // TODO
-    });
-
-    // String geofenceId (default value: null)
-    test('to test the property `geofenceId`', () async {
-      // TODO
-    });
-
 
   });
 

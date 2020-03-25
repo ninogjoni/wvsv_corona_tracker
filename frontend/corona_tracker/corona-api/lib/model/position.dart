@@ -5,12 +5,8 @@ class Position {
   String id = null;
   
   String userId = null;
-  
-  String protocol = null;
-  
-  bool outdated = null;
-  
-  bool valid = null;
+  /* in IS0 8601 format. eg. `1963-11-22T18:30:00Z` */
+  DateTime time = null;
   
   num latitude = null;
   
@@ -19,27 +15,24 @@ class Position {
   num altitude = null;
   /* Position accuracy in meters (radius), lower is better */
   int accuracy = null;
-  
-  Object network = null;
   Position();
 
   @override
   String toString() {
-    return 'Position[id=$id, userId=$userId, protocol=$protocol, outdated=$outdated, valid=$valid, latitude=$latitude, longitude=$longitude, altitude=$altitude, accuracy=$accuracy, network=$network, ]';
+    return 'Position[id=$id, userId=$userId, time=$time, latitude=$latitude, longitude=$longitude, altitude=$altitude, accuracy=$accuracy, ]';
   }
 
   Position.fromJson(Map<String, dynamic> json) {
     if (json == null) return;
     id = json['id'];
     userId = json['userId'];
-    protocol = json['protocol'];
-    outdated = json['outdated'];
-    valid = json['valid'];
+    time = (json['time'] == null) ?
+      null :
+      DateTime.parse(json['time']);
     latitude = json['latitude'];
     longitude = json['longitude'];
     altitude = json['altitude'];
     accuracy = json['accuracy'];
-    network = json['network'];
   }
 
   Map<String, dynamic> toJson() {
@@ -48,12 +41,8 @@ class Position {
       json['id'] = id;
     if (userId != null)
       json['userId'] = userId;
-    if (protocol != null)
-      json['protocol'] = protocol;
-    if (outdated != null)
-      json['outdated'] = outdated;
-    if (valid != null)
-      json['valid'] = valid;
+    if (time != null)
+      json['time'] = time == null ? null : time.toUtc().toIso8601String();
     if (latitude != null)
       json['latitude'] = latitude;
     if (longitude != null)
@@ -62,8 +51,6 @@ class Position {
       json['altitude'] = altitude;
     if (accuracy != null)
       json['accuracy'] = accuracy;
-    if (network != null)
-      json['network'] = network;
     return json;
   }
 

@@ -44,13 +44,13 @@ import 'package:openapi/api.dart';
 //defaultApiClient.getAuthentication<HttpBasicAuth>('basicAuth').password = 'YOUR_PASSWORD';
 
 var api_instance = DefaultApi();
-var tempMeasurement = TempMeasurement(); // TempMeasurement | 
+var id = id_example; // String | 
+var friend = Friend(); // Friend | 
 
 try {
-    var result = api_instance.createBodyTempMeasurement(tempMeasurement);
-    print(result);
+    api_instance.addFriend(id, friend);
 } catch (e) {
-    print("Exception when calling DefaultApi->createBodyTempMeasurement: $e\n");
+    print("Exception when calling DefaultApi->addFriend: $e\n");
 }
 
 ```
@@ -61,34 +61,26 @@ All URIs are relative to *http://localhost/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*DefaultApi* | [**addFriend**](doc\/DefaultApi.md#addfriend) | **POST** /users/{id}/friends | Add users friends
 *DefaultApi* | [**createBodyTempMeasurement**](doc\/DefaultApi.md#createbodytempmeasurement) | **POST** /measurement/bodytemp | Add a plague body temp measurement
 *DefaultApi* | [**createDataSet**](doc\/DefaultApi.md#createdataset) | **POST** /healthDataSet | Add a health dataset
-*DefaultApi* | [**createGeofence**](doc\/DefaultApi.md#creategeofence) | **POST** /geofences | Create a Geofence
 *DefaultApi* | [**createPosition**](doc\/DefaultApi.md#createposition) | **POST** /positions | Create new location entry
 *DefaultApi* | [**createUser**](doc\/DefaultApi.md#createuser) | **POST** /users | Create a User
-*DefaultApi* | [**deleteUser**](doc\/DefaultApi.md#deleteuser) | **DELETE** /users | Delete a User TODO move to /users/id
+*DefaultApi* | [**deleteUser**](doc\/DefaultApi.md#deleteuser) | **DELETE** /users/{id} | Delete a User TODO move to /users/id
 *DefaultApi* | [**getBodyTempMeasurements**](doc\/DefaultApi.md#getbodytempmeasurements) | **GET** /measurement/bodytemp | Fetch a list of body temp measurements
 *DefaultApi* | [**getFriends**](doc\/DefaultApi.md#getfriends) | **GET** /users/{id}/friends | Get users friends
-*DefaultApi* | [**getGeofences**](doc\/DefaultApi.md#getgeofences) | **GET** /geofences | Fetch a list of Geofences
 *DefaultApi* | [**getLocations**](doc\/DefaultApi.md#getlocations) | **GET** /reports/locations | Fetch a list of  within the time period for the Device
 *DefaultApi* | [**getPositions**](doc\/DefaultApi.md#getpositions) | **GET** /positions | Fetches a list of Positions
 *DefaultApi* | [**getUser**](doc\/DefaultApi.md#getuser) | **GET** /users/{id} | Get a single users
 *DefaultApi* | [**getUsers**](doc\/DefaultApi.md#getusers) | **GET** /users | Fetch a list of Users
-*DefaultApi* | [**removeGeofence**](doc\/DefaultApi.md#removegeofence) | **DELETE** /geofences/{id} | Delete a Geofence
-*DefaultApi* | [**updateGeofence**](doc\/DefaultApi.md#updategeofence) | **PUT** /geofences/{id} | Update a Geofence
-*DefaultApi* | [**uploadFriends**](doc\/DefaultApi.md#uploadfriends) | **POST** /users/{id}/friends | Upload users friends
+*DefaultApi* | [**uploadFriends**](doc\/DefaultApi.md#uploadfriends) | **PUT** /users/{id}/friends | Upload users friends
 
 
 ## Documentation For Models
 
- - [DeviceAccumulators](doc\/DeviceAccumulators.md)
- - [Event](doc\/Event.md)
  - [Friend](doc\/Friend.md)
- - [Geofence](doc\/Geofence.md)
  - [HealthDataSet](doc\/HealthDataSet.md)
  - [Position](doc\/Position.md)
- - [ReportStops](doc\/ReportStops.md)
- - [ReportSummary](doc\/ReportSummary.md)
  - [ReportTrips](doc\/ReportTrips.md)
  - [TempMeasurement](doc\/TempMeasurement.md)
  - [User](doc\/User.md)

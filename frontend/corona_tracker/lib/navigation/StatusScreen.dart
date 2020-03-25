@@ -91,7 +91,8 @@ class StatusScreen extends StatelessWidget {
               healthState.text = prefs.getString('healthState');
               healthState.color = Colors.green[500];
             }
-            else if(u.healthHistory.last.medicalState == MedicalStateEnum.SUSPECTED.toString())
+            else if(u.healthHistory.last.medicalState == "SUSPECTED")
+            //else if(u.healthHistory.last.medicalState == MedicalStateEnum.SUSPECTED.toString())
             {
               prefs.setString('healthState', 'Verdacht');
               healthState.text = prefs.getString('healthState');

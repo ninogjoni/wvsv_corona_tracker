@@ -18,7 +18,7 @@ class ApiClient {
   final _regList = RegExp(r'^List<(.*)>$');
   final _regMap = RegExp(r'^Map<String,(.*)>$');
 
-  ApiClient({this.basePath = "https://api.coronatrackerapp.org/api/v1"}) {
+  ApiClient({this.basePath = "http://localhost/api/v1"}) {
     // Setup authentications (key: authentication name, value: authentication).
     _authentications['basicAuth'] = HttpBasicAuth();
   }
@@ -38,22 +38,12 @@ class ApiClient {
           return value is bool ? value : '$value'.toLowerCase() == 'true';
         case 'double':
           return value is double ? value : double.parse('$value');
-        case 'DeviceAccumulators':
-          return DeviceAccumulators.fromJson(value);
-        case 'Event':
-          return Event.fromJson(value);
         case 'Friend':
           return Friend.fromJson(value);
-        case 'Geofence':
-          return Geofence.fromJson(value);
         case 'HealthDataSet':
           return HealthDataSet.fromJson(value);
         case 'Position':
           return Position.fromJson(value);
-        case 'ReportStops':
-          return ReportStops.fromJson(value);
-        case 'ReportSummary':
-          return ReportSummary.fromJson(value);
         case 'ReportTrips':
           return ReportTrips.fromJson(value);
         case 'TempMeasurement':
