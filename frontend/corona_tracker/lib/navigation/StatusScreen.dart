@@ -13,40 +13,57 @@ class StatusScreen extends StatelessWidget {
   CurrentHealthState defaultHealthState = CurrentHealthState();
 
   Future<String> getUserCount() async {
-    String userCount = "0";
+    //Save locally
+    final prefs = await SharedPreferences.getInstance();
+    String userCount = prefs.getString('userCount') ?? '0';
+
+    //Testing
+//    prefs.setString('userCount', '777');
+
     await api_instance.getUsers().then((List<User> users) {
       //print("got back " + users.length.toString() + " users");
-      userCount = users.length.toString();
+      prefs.setString('userCount', users.length.toString());
+      userCount = prefs.getString('userCount');
     }).catchError((error) {
       print("error getting all users");
     });
+    
     return userCount;
   }
 
   Future<String> getUsersCuredCount() async {
-    int userCount = 0;
+    final prefs = await SharedPreferences.getInstance();
+    int userCount = prefs.getInt('usersCuredCount') ?? 0;
+
+    //Testing
+//    prefs.setInt('usersCuredCount', 111);
+
     await api_instance.getUsers().then((List<User> users) {
       for(User u in users) {
         if (u.healthHistory.last.medicalState == MedicalStateEnum.CURED.toString())
-          userCount++;
+          prefs.setInt('usersCuredCount', ++userCount);
       }
     }).catchError((error) {
       print("error getting all cured users");
     });
-    return userCount.toString();
+
+    return prefs.getInt('usersCuredCount').toString();
   }
 
   Future<String> getUsersInfectedCount() async {
-    int userCount = 0;
+    final prefs = await SharedPreferences.getInstance();
+    int userCount = prefs.getInt('usersInfectedCount') ?? 0;
+
     await api_instance.getUsers().then((List<User> users) {
       for(User u in users) {
         if (u.healthHistory.last.medicalState == MedicalStateEnum.INFECTED.toString())
-          userCount++;
+          prefs.setInt('usersInfectedCount', ++userCount);
       }
     }).catchError((error) {
       print("error getting all infected users");
     });
-    return userCount.toString();
+
+    return prefs.getInt('usersInfectedCount').toString();
   }
 
   Future<CurrentHealthState> getCurrentHealthstate() async {
