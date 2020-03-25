@@ -63,12 +63,10 @@ class _MyAppState extends State<MyApp> {
       globals.deviceId = token;
 
       User myUser = User();
-      myUser.id = "12345";
-      myUser.name = "Test User";
       //myUser.phoneHash = sha256.convert(utf8.encode("Eine Telefonnummer")).toString();
       //myUser.phoneHash = DateTime.now().toUtc().toIso8601String();
-      myUser.phoneHash = "0";
       myUser.token = token;
+      myUser.phoneHash = "0";
       apiInstance.createUser(myUser).then((User u){
         print("added User with token: " + u.token);
       }).catchError((e){

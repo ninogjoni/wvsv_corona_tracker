@@ -52,11 +52,9 @@ class ContactScreenFormState extends State<ContactScreenForm> {
 
   void addUserTest() {
     User myUser = User();
-    myUser.id = "12345";
-    myUser.name = "Test User";
+    myUser.token = "token4";
     myUser.phoneHash = sha256.convert(utf8.encode("Eine Telefonnummer")).toString();
     //myUser.phoneHash = DateTime.now().toUtc().toIso8601String();
-    myUser.token = "token4";
 
     /*HealthDataSet healthDataSet = HealthDataSet();
     healthDataSet.medicalState = MedicalStateEnum.UNKNOWN.toString();
@@ -69,8 +67,6 @@ class ContactScreenFormState extends State<ContactScreenForm> {
       healthDataSet.medicalState = MedicalStateEnum.CURED.toString();
       healthDataSet.userId = myUser.token;
       healthDataSet.time = DateTime.now(); //1963-11-22T18:30:00Z;
-      healthDataSet.geofenceId = "geoid";
-      healthDataSet.positionId = "posid";
       api_instance.createDataSet(healthDataSet).then((HealthDataSet hds) {
         print("added healtDataSet with status: " + hds.medicalState);
       }).catchError((e) {

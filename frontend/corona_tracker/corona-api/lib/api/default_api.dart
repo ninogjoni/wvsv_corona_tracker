@@ -7,6 +7,66 @@ class DefaultApi {
 
   DefaultApi([ApiClient apiClient]) : apiClient = apiClient ?? defaultApiClient;
 
+  /// Add users friends with HTTP info returned
+  ///
+  /// 
+  Future addFriendWithHttpInfo(String id, Friend friend) async {
+    Object postBody = friend;
+
+    // verify required params are set
+    if(id == null) {
+     throw ApiException(400, "Missing required param: id");
+    }
+    if(friend == null) {
+     throw ApiException(400, "Missing required param: friend");
+    }
+
+    // create path and map variables
+    String path = "/users/{id}/friends".replaceAll("{format}","json").replaceAll("{" + "id" + "}", id.toString());
+
+    // query params
+    List<QueryParam> queryParams = [];
+    Map<String, String> headerParams = {};
+    Map<String, String> formParams = {};
+
+    List<String> contentTypes = ["application/json"];
+
+    String contentType = contentTypes.isNotEmpty ? contentTypes[0] : "application/json";
+    List<String> authNames = ["basicAuth"];
+
+    if(contentType.startsWith("multipart/form-data")) {
+      bool hasFields = false;
+      MultipartRequest mp = MultipartRequest(null, null);
+      if(hasFields)
+        postBody = mp;
+    }
+    else {
+    }
+
+    var response = await apiClient.invokeAPI(path,
+                                             'POST',
+                                             queryParams,
+                                             postBody,
+                                             headerParams,
+                                             formParams,
+                                             contentType,
+                                             authNames);
+    return response;
+  }
+
+  /// Add users friends
+  ///
+  /// 
+  Future addFriend(String id, Friend friend) async {
+    Response response = await addFriendWithHttpInfo(id, friend);
+    if(response.statusCode >= 400) {
+      throw ApiException(response.statusCode, _decodeBodyBytes(response));
+    } else if(response.body != null) {
+    } else {
+      return;
+    }
+  }
+
   /// Add a plague body temp measurement with HTTP info returned
   ///
   /// 
@@ -123,64 +183,6 @@ class DefaultApi {
     }
   }
 
-  /// Create a Geofence with HTTP info returned
-  ///
-  /// 
-  Future<Response> createGeofenceWithHttpInfo(Geofence geofence) async {
-    Object postBody = geofence;
-
-    // verify required params are set
-    if(geofence == null) {
-     throw ApiException(400, "Missing required param: geofence");
-    }
-
-    // create path and map variables
-    String path = "/geofences".replaceAll("{format}","json");
-
-    // query params
-    List<QueryParam> queryParams = [];
-    Map<String, String> headerParams = {};
-    Map<String, String> formParams = {};
-
-    List<String> contentTypes = ["application/json"];
-
-    String contentType = contentTypes.isNotEmpty ? contentTypes[0] : "application/json";
-    List<String> authNames = ["basicAuth"];
-
-    if(contentType.startsWith("multipart/form-data")) {
-      bool hasFields = false;
-      MultipartRequest mp = MultipartRequest(null, null);
-      if(hasFields)
-        postBody = mp;
-    }
-    else {
-    }
-
-    var response = await apiClient.invokeAPI(path,
-                                             'POST',
-                                             queryParams,
-                                             postBody,
-                                             headerParams,
-                                             formParams,
-                                             contentType,
-                                             authNames);
-    return response;
-  }
-
-  /// Create a Geofence
-  ///
-  /// 
-  Future<Geofence> createGeofence(Geofence geofence) async {
-    Response response = await createGeofenceWithHttpInfo(geofence);
-    if(response.statusCode >= 400) {
-      throw ApiException(response.statusCode, _decodeBodyBytes(response));
-    } else if(response.body != null) {
-      return apiClient.deserialize(_decodeBodyBytes(response), 'Geofence') as Geofence;
-    } else {
-      return null;
-    }
-  }
-
   /// Create new location entry with HTTP info returned
   ///
   /// 
@@ -245,12 +247,12 @@ class DefaultApi {
   /// Create a User with HTTP info returned
   ///
   /// 
-  Future<Response> createUserWithHttpInfo(User body) async {
-    Object postBody = body;
+  Future<Response> createUserWithHttpInfo(User user) async {
+    Object postBody = user;
 
     // verify required params are set
-    if(body == null) {
-     throw ApiException(400, "Missing required param: body");
+    if(user == null) {
+     throw ApiException(400, "Missing required param: user");
     }
 
     // create path and map variables
@@ -289,8 +291,8 @@ class DefaultApi {
   /// Create a User
   ///
   /// 
-  Future<User> createUser(User body) async {
-    Response response = await createUserWithHttpInfo(body);
+  Future<User> createUser(User user) async {
+    Response response = await createUserWithHttpInfo(user);
     if(response.statusCode >= 400) {
       throw ApiException(response.statusCode, _decodeBodyBytes(response));
     } else if(response.body != null) {
@@ -312,7 +314,7 @@ class DefaultApi {
     }
 
     // create path and map variables
-    String path = "/users".replaceAll("{format}","json").replaceAll("{" + "id" + "}", id.toString());
+    String path = "/users/{id}".replaceAll("{format}","json").replaceAll("{" + "id" + "}", id.toString());
 
     // query params
     List<QueryParam> queryParams = [];
@@ -465,70 +467,6 @@ class DefaultApi {
       throw ApiException(response.statusCode, _decodeBodyBytes(response));
     } else if(response.body != null) {
       return (apiClient.deserialize(_decodeBodyBytes(response), 'List<Friend>') as List).map((item) => item as Friend).toList();
-    } else {
-      return null;
-    }
-  }
-
-  /// Fetch a list of Geofences with HTTP info returned
-  ///
-  /// Without params, it returns a list of Geofences the user has access to
-  Future<Response> getGeofencesWithHttpInfo({ bool all, String userId, bool refresh }) async {
-    Object postBody;
-
-    // verify required params are set
-
-    // create path and map variables
-    String path = "/geofences".replaceAll("{format}","json");
-
-    // query params
-    List<QueryParam> queryParams = [];
-    Map<String, String> headerParams = {};
-    Map<String, String> formParams = {};
-    if(all != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "all", all));
-    }
-    if(userId != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "userId", userId));
-    }
-    if(refresh != null) {
-      queryParams.addAll(_convertParametersForCollectionFormat("", "refresh", refresh));
-    }
-
-    List<String> contentTypes = [];
-
-    String contentType = contentTypes.isNotEmpty ? contentTypes[0] : "application/json";
-    List<String> authNames = ["basicAuth"];
-
-    if(contentType.startsWith("multipart/form-data")) {
-      bool hasFields = false;
-      MultipartRequest mp = MultipartRequest(null, null);
-      if(hasFields)
-        postBody = mp;
-    }
-    else {
-    }
-
-    var response = await apiClient.invokeAPI(path,
-                                             'GET',
-                                             queryParams,
-                                             postBody,
-                                             headerParams,
-                                             formParams,
-                                             contentType,
-                                             authNames);
-    return response;
-  }
-
-  /// Fetch a list of Geofences
-  ///
-  /// Without params, it returns a list of Geofences the user has access to
-  Future<List<Geofence>> getGeofences({ bool all, String userId, bool refresh }) async {
-    Response response = await getGeofencesWithHttpInfo( all: all, userId: userId, refresh: refresh );
-    if(response.statusCode >= 400) {
-      throw ApiException(response.statusCode, _decodeBodyBytes(response));
-    } else if(response.body != null) {
-      return (apiClient.deserialize(_decodeBodyBytes(response), 'List<Geofence>') as List).map((item) => item as Geofence).toList();
     } else {
       return null;
     }
@@ -783,124 +721,6 @@ class DefaultApi {
     }
   }
 
-  /// Delete a Geofence with HTTP info returned
-  ///
-  /// 
-  Future removeGeofenceWithHttpInfo(String id) async {
-    Object postBody;
-
-    // verify required params are set
-    if(id == null) {
-     throw ApiException(400, "Missing required param: id");
-    }
-
-    // create path and map variables
-    String path = "/geofences/{id}".replaceAll("{format}","json").replaceAll("{" + "id" + "}", id.toString());
-
-    // query params
-    List<QueryParam> queryParams = [];
-    Map<String, String> headerParams = {};
-    Map<String, String> formParams = {};
-
-    List<String> contentTypes = [];
-
-    String contentType = contentTypes.isNotEmpty ? contentTypes[0] : "application/json";
-    List<String> authNames = ["basicAuth"];
-
-    if(contentType.startsWith("multipart/form-data")) {
-      bool hasFields = false;
-      MultipartRequest mp = MultipartRequest(null, null);
-      if(hasFields)
-        postBody = mp;
-    }
-    else {
-    }
-
-    var response = await apiClient.invokeAPI(path,
-                                             'DELETE',
-                                             queryParams,
-                                             postBody,
-                                             headerParams,
-                                             formParams,
-                                             contentType,
-                                             authNames);
-    return response;
-  }
-
-  /// Delete a Geofence
-  ///
-  /// 
-  Future removeGeofence(String id) async {
-    Response response = await removeGeofenceWithHttpInfo(id);
-    if(response.statusCode >= 400) {
-      throw ApiException(response.statusCode, _decodeBodyBytes(response));
-    } else if(response.body != null) {
-    } else {
-      return;
-    }
-  }
-
-  /// Update a Geofence with HTTP info returned
-  ///
-  /// 
-  Future<Response> updateGeofenceWithHttpInfo(String id, Geofence body) async {
-    Object postBody = body;
-
-    // verify required params are set
-    if(id == null) {
-     throw ApiException(400, "Missing required param: id");
-    }
-    if(body == null) {
-     throw ApiException(400, "Missing required param: body");
-    }
-
-    // create path and map variables
-    String path = "/geofences/{id}".replaceAll("{format}","json").replaceAll("{" + "id" + "}", id.toString());
-
-    // query params
-    List<QueryParam> queryParams = [];
-    Map<String, String> headerParams = {};
-    Map<String, String> formParams = {};
-
-    List<String> contentTypes = ["application/json"];
-
-    String contentType = contentTypes.isNotEmpty ? contentTypes[0] : "application/json";
-    List<String> authNames = ["basicAuth"];
-
-    if(contentType.startsWith("multipart/form-data")) {
-      bool hasFields = false;
-      MultipartRequest mp = MultipartRequest(null, null);
-      if(hasFields)
-        postBody = mp;
-    }
-    else {
-    }
-
-    var response = await apiClient.invokeAPI(path,
-                                             'PUT',
-                                             queryParams,
-                                             postBody,
-                                             headerParams,
-                                             formParams,
-                                             contentType,
-                                             authNames);
-    return response;
-  }
-
-  /// Update a Geofence
-  ///
-  /// 
-  Future<Geofence> updateGeofence(String id, Geofence body) async {
-    Response response = await updateGeofenceWithHttpInfo(id, body);
-    if(response.statusCode >= 400) {
-      throw ApiException(response.statusCode, _decodeBodyBytes(response));
-    } else if(response.body != null) {
-      return apiClient.deserialize(_decodeBodyBytes(response), 'Geofence') as Geofence;
-    } else {
-      return null;
-    }
-  }
-
   /// Upload users friends with HTTP info returned
   ///
   /// 
@@ -938,7 +758,7 @@ class DefaultApi {
     }
 
     var response = await apiClient.invokeAPI(path,
-                                             'POST',
+                                             'PUT',
                                              queryParams,
                                              postBody,
                                              headerParams,
