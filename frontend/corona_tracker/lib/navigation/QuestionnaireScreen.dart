@@ -25,9 +25,6 @@ class _QuestionnaireScreenState extends State<QuestionnaireScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Fragebogen')
-      ),
       body: Center(
         child: ListView(
             //shrinkWrap: true,
@@ -51,7 +48,7 @@ class _QuestionnaireScreenState extends State<QuestionnaireScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Container(
-                      width: 280,
+                      width: 260,
                       child:
                       Text('Ist deine Körpertemperatur mindestens 38,5°C oder höher?',
                           style: TextStyle(
@@ -82,7 +79,7 @@ class _QuestionnaireScreenState extends State<QuestionnaireScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Container(
-                    width: 280,
+                    width: 260,
                     child:
                     Text('Hast du ein trockenes Husten?',
                         style: TextStyle(
@@ -113,7 +110,7 @@ class _QuestionnaireScreenState extends State<QuestionnaireScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Container(
-                    width: 280,
+                    width: 260,
                     child:
                     Text('Hattest du bereits Kontakt mit einem Infizierten?',
                         style: TextStyle(
@@ -144,7 +141,7 @@ class _QuestionnaireScreenState extends State<QuestionnaireScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Container(
-                      width: 280,
+                      width: 260,
                       child:
                       Text('Warst du neulich in einem Risikogebiet?',
                           style: TextStyle(

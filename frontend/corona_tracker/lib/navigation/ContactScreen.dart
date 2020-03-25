@@ -268,24 +268,26 @@ class ContactScreenFormState extends State<ContactScreenForm> {
                     ],
                   ),
                   Expanded(
-                    child: ListView.builder(
-                      itemCount: contactItems.length,
-                      itemBuilder: (context, index) {
-                        return CheckboxListTile(
-                          title: Text('${contactItems[index].name}'),
-                          subtitle: Text('${contactItems[index].phoneNumber}'),
-                          value: contactItems[index].checked,
-                          onChanged: (val) {
-                            setState(() {
-                              if(contactItems[index].checked)
-                                contactItems[index].checked = false;
-                              else
-                                contactItems[index].checked = true;
-                            });
-                          },
-                          //selected: true,
-                        );
-                      },
+                    child: Scrollbar(
+                      child: ListView.builder(
+                        itemCount: contactItems.length,
+                        itemBuilder: (context, index) {
+                          return CheckboxListTile(
+                            title: Text('${contactItems[index].name}'),
+                            subtitle: Text('${contactItems[index].phoneNumber}'),
+                            value: contactItems[index].checked,
+                            onChanged: (val) {
+                              setState(() {
+                                if(contactItems[index].checked)
+                                  contactItems[index].checked = false;
+                                else
+                                  contactItems[index].checked = true;
+                              });
+                            },
+                            //selected: true,
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ]

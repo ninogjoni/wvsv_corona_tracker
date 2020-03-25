@@ -27,7 +27,6 @@ class _HomeState extends State<Home> {
     ReportScreen(),
     HelpScreen(),
     ContactScreen(),
-    QuestionnaireScreen(),
     //SettingsScreen(),
     //DummyScreen()
   ];
@@ -66,11 +65,11 @@ class _HomeState extends State<Home> {
               // TODO: i18n
               title: new Text('Freunde')
           ),
-          BottomNavigationBarItem(
-              icon: new Icon(Icons.question_answer),
-              // TODO: i18n
-              title: new Text('Dev_Push')
-          ),
+//          BottomNavigationBarItem(
+//              icon: new Icon(Icons.question_answer),
+//              // TODO: i18n
+//              title: new Text('Dev_Push')
+//          ),
 //          BottomNavigationBarItem(
 //              icon: new Icon(Icons.star),
 //              // TODO: i18n
