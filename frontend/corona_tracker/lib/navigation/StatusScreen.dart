@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:openapi/api.dart';
 import '../globals.dart' as globals;
 import 'package:corona_tracker/navigation/CreditsScreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 class StatusScreen extends StatelessWidget {
 
@@ -48,24 +50,51 @@ class StatusScreen extends StatelessWidget {
   }
 
   Future<CurrentHealthState> getCurrentHealthstate() async {
-    defaultHealthState.text = "Gesund";
-    defaultHealthState.color = Colors.green[500];
+    //Save health status locally
+    final prefs = await SharedPreferences.getInstance();
 
+    //Only uncomment for testing purpose!
+    //prefs.setString('healthState', 'Gesund');
+    //prefs.remove('healthState');
+
+    defaultHealthState.text = prefs.getString('healthState') ?? 'Gesund';
+    defaultHealthState.color = Colors.green[500];
     CurrentHealthState healthState = CurrentHealthState();
-    healthState.text = "Gesund";
+
+    healthState.text = defaultHealthState.text;
     healthState.color = Colors.green[500];
+
     await api_instance.getUsers().then((List<User> users) {
       for(User u in users) {
         if(u.token == globals.deviceId) {
           if(u.healthHistory.last.medicalState.isNotEmpty) {
-            if (u.healthHistory.last.medicalState == MedicalStateEnum.UNKNOWN.toString())
-              healthState.text = "Gesund";
+            //TODO: Use Switches
+            if (u.healthHistory.last.medicalState == MedicalStateEnum.UNKNOWN.toString()) {
+              prefs.setString('healthState', 'Gesund');
+              healthState.text = prefs.getString('healthState');
+              healthState.color = Colors.green[500];
+            }
             else if(u.healthHistory.last.medicalState == MedicalStateEnum.SUSPECTED.toString())
-              healthState.text = "Verdacht";
-            else if(u.healthHistory.last.medicalState == MedicalStateEnum.INFECTED.toString())
-              healthState.text = "Infiziert";
-            else if(u.healthHistory.last.medicalState == MedicalStateEnum.CURED.toString())
-              healthState.text = "Immun";
+            {
+              prefs.setString('healthState', 'Verdacht');
+              healthState.text = prefs.getString('healthState');
+              healthState.color = Colors.orange[500];
+            }
+            else if(u.healthHistory.last.medicalState == MedicalStateEnum.INFECTED.toString()) {
+              prefs.setString('healthState', 'Infiziert');
+              healthState.text = prefs.getString('healthState');
+              healthState.color = Colors.red[500];
+            }
+            else if(u.healthHistory.last.medicalState == MedicalStateEnum.CURED.toString()) {
+              prefs.setString('healthState', 'Immun');
+              healthState.text = prefs.getString('healthState');
+              healthState.color = Colors.blue[500];
+            }
+            else {
+              prefs.setString('healthState', 'Unknown');
+              healthState.text = prefs.getString('healthState');
+              healthState.color = Colors.grey[500];
+            }
           }
         }
       }
@@ -73,15 +102,6 @@ class StatusScreen extends StatelessWidget {
       print("error getting health state of current user");
     });
 
-    if(healthState.text == MedicalStateEnum.INFECTED.toString()) {
-      healthState.color = Colors.red[500];
-    } else if(healthState.text == MedicalStateEnum.SUSPECTED.toString()) {
-      healthState.color = Colors.orange[500];
-    } else if(healthState.text == MedicalStateEnum.UNKNOWN.toString()) {
-      healthState.color = Colors.green[500];
-    } else if(healthState.text == MedicalStateEnum.CURED.toString()) {
-      healthState.color = Colors.green[500];
-    }
     return healthState;
   }
 
@@ -193,7 +213,7 @@ class StatusScreen extends StatelessWidget {
                           ),
                         ),
                         FutureBuilder(
-                          initialData: defaultHealthState,
+//                          initialData: defaultHealthState,
                           future: getCurrentHealthstate(),
                           builder: (context, data) {
                             return Text(
