@@ -33,40 +33,58 @@ class _QuestionnaireScreenState extends State<QuestionnaireScreen> {
             //shrinkWrap: true,
             padding: EdgeInsets.all(20.0),
             children: [
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Container(
-                    child:
-                      Text('Wie hoch ist dein Fieber',
-                      style: TextStyle(
-                          fontSize: 20
-                      )
+              Container(
+                child:
+                  Text(
+                    'Bitte beantworten Sie folgenden Fragen: ',
+                    style: TextStyle(
+                      fontSize: 30,
+
                     ),
-                  ),
-                  Container(
-                    child:
-                    Switch(
-                      value: tempIsSwitched,
-                      onChanged: (value) {
-                        setState(() {
-                          tempIsSwitched = value;
-                          print(tempIsSwitched);
-                        });
-                      },
-                    ),
-                  ),
-                ],
+                  )
               ),
-            ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 15.0),
+              ),
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Container(
+                      width: 280,
+                      child:
+                      Text('Ist deine Körpertemperatur mindestens 38,5°C oder höher?',
+                          style: TextStyle(
+                              fontSize: 20
+                          )
+                      ),
+                    ),
+                    Container(
+                      child:
+                      Switch(
+                        value: tempIsSwitched,
+                        onChanged: (value) {
+                          setState(() {
+                            tempIsSwitched = value;
+                            print(tempIsSwitched);
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 15.0),
+              ),
             Container(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Container(
+                    width: 280,
                     child:
-                    Text('Wie hoch ist dein Fieber',
+                    Text('Hast du ein trockenes Husten?',
                         style: TextStyle(
                             fontSize: 20
                         )
@@ -87,13 +105,17 @@ class _QuestionnaireScreenState extends State<QuestionnaireScreen> {
                 ],
               ),
             ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 15.0),
+              ),
             Container(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Container(
+                    width: 280,
                     child:
-                    Text('Wie hoch ist dein Fieber',
+                    Text('Hattest du bereits Kontakt mit einem Infizierten?',
                         style: TextStyle(
                             fontSize: 20
                         )
@@ -114,13 +136,17 @@ class _QuestionnaireScreenState extends State<QuestionnaireScreen> {
                 ],
               ),
             ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 15.0),
+              ),
             Container(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Container(
+                      width: 280,
                       child:
-                      Text('Wie hoch ist dein Fieber',
+                      Text('Warst du neulich in einem Risikogebiet?',
                           style: TextStyle(
                               fontSize: 20
                           )
