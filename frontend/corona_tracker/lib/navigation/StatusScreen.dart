@@ -141,7 +141,6 @@ class StatusScreen extends StatelessWidget {
         child: ListView(
           children: [
             Container(
-              color: Colors.lightBlue,
               child: Image.asset(
                 'assets/images/corona_tracker_homescreen_teaser.png',
                 fit: BoxFit.cover,
@@ -232,14 +231,19 @@ class StatusScreen extends StatelessWidget {
                         FutureBuilder(
 //                          initialData: defaultHealthState,
                           future: getCurrentHealthstate(),
-                          builder: (context, data) {
-                            return Text(
-                                data.data.text,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 34,
-                                  color: data.data.color,
-                                ));
+                          builder: (context, AsyncSnapshot<CurrentHealthState> snapshot) {
+                            if (snapshot.hasData) {
+                              return Text(
+                                  snapshot.data.text,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 34,
+                                    color: snapshot.data.color,
+                                  ));
+                            }
+                            else {
+                              return CircularProgressIndicator();
+                            }
                           },
                         )
                       ],

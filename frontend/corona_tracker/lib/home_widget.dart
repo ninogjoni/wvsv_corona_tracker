@@ -2,6 +2,7 @@ import 'package:corona_tracker/navigation/ContactScreen.dart';
 import 'package:corona_tracker/navigation/DummyScreen.dart';
 import 'package:corona_tracker/navigation/HelpScreen.dart';
 import 'package:corona_tracker/navigation/MapScreen.dart';
+import 'package:corona_tracker/navigation/QuestionnaireScreen.dart';
 import 'package:corona_tracker/navigation/SettingsScreen.dart';
 import 'package:corona_tracker/navigation/StatusScreen.dart';
 import 'package:corona_tracker/navigation/ReportScreen.dart';
@@ -26,6 +27,7 @@ class _HomeState extends State<Home> {
     ReportScreen(),
     HelpScreen(),
     ContactScreen(),
+    QuestionnaireScreen(),
     //SettingsScreen(),
     //DummyScreen()
   ];
@@ -64,16 +66,16 @@ class _HomeState extends State<Home> {
               // TODO: i18n
               title: new Text('Freunde')
           ),
-        /*  BottomNavigationBarItem(
-              icon: new Icon(Icons.settings),
+          BottomNavigationBarItem(
+              icon: new Icon(Icons.question_answer),
               // TODO: i18n
               title: new Text('Dev_Push')
           ),
-          BottomNavigationBarItem(
-              icon: new Icon(Icons.star),
-              // TODO: i18n
-              title: new Text('Fun')
-          )*/
+//          BottomNavigationBarItem(
+//              icon: new Icon(Icons.star),
+//              // TODO: i18n
+//              title: new Text('Fun')
+//          )
         ],
       ),
     );
