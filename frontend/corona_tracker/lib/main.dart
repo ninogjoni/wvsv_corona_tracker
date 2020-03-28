@@ -13,6 +13,8 @@ import 'globals.dart' as globals;
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:openapi/api.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -36,7 +38,12 @@ class _MyAppState extends State<MyApp> {
 
     defaultApiClient.getAuthentication<HttpBasicAuth>('basicAuth').username = "API_USER";
     defaultApiClient.getAuthentication<HttpBasicAuth>('basicAuth').password = "API_PASSWORD";
+    initFireBase();
+    configLocalNotification();
+  }
 
+  Future<void> initFireBase() async {
+    final prefs = await SharedPreferences.getInstance();
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
         showNotification(message["notification"]);
@@ -66,6 +73,7 @@ class _MyAppState extends State<MyApp> {
       //myUser.phoneHash = sha256.convert(utf8.encode("Eine Telefonnummer")).toString();
       //myUser.phoneHash = DateTime.now().toUtc().toIso8601String();
       myUser.token = token;
+      prefs.setString('UserToken', myUser.token);
       myUser.phoneHash = "0";
       apiInstance.createUser(myUser).then((User u){
         print("added User with token: " + u.token);
@@ -73,9 +81,6 @@ class _MyAppState extends State<MyApp> {
         print("error registering user");
       });
     });
-
-
-    configLocalNotification();
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.

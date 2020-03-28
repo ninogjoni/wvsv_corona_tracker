@@ -1,3 +1,4 @@
+import 'package:corona_tracker/navigation/BodyTemperatureScreen.dart';
 import 'package:corona_tracker/navigation/QuestionnaireScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -84,7 +85,7 @@ class ReportScreenFormState extends State<ReportScreenForm> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
           flexibleSpace:
@@ -95,15 +96,22 @@ class ReportScreenFormState extends State<ReportScreenForm> {
 //                  child: Tab(icon: Icon(Icons.help_outline)),
                     child: Tab(
                         child: Text(
+                          'Köpertemp.',
+                          style: TextStyle(fontSize: 20),
+                        ))),
+                new Container(
+//                  child: Tab(icon: Icon(Icons.help_outline)),
+                    child: Tab(
+                        child: Text(
                   'Fragen',
-                  style: TextStyle(fontSize: 25),
+                  style: TextStyle(fontSize: 20),
                 ))),
                 new Container(
 //                  child: Tab(icon: Icon(Icons.help_outline)),
                     child: Tab(
                         child: Text(
                   'Sende Fall',
-                  style: TextStyle(fontSize: 25),
+                  style: TextStyle(fontSize: 20),
                 ))),
               ],
             ),
@@ -112,6 +120,7 @@ class ReportScreenFormState extends State<ReportScreenForm> {
         body: TabBarView(
           children: <Widget>[
             //Build a Form widget using the _formKey created above.
+            new BodyTemperatureScreen(),
             new QuestionnaireScreen(),
             Form(
               key: _formKey,

@@ -33,7 +33,7 @@ class _QuestionnaireScreenState extends State<QuestionnaireScreen> {
               Container(
                 child:
                   Text(
-                    'Bitte beantworten Sie folgenden Fragen: ',
+                    'Beantworten Sie folgenden Fragen: ',
                     style: TextStyle(
                       fontSize: 30,
 

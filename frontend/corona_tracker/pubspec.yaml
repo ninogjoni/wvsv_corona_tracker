@@ -43,6 +43,8 @@ dependencies:
   url_launcher: ^5.4.2
   font_awesome_flutter: ^8.7.0
   shared_preferences: ^0.5.6+3
+  numberpicker: ^1.2.0
+
 
 
 
