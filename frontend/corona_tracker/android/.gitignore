@@ -5,3 +5,7 @@ gradle-wrapper.jar
 /gradlew.bat
 /local.properties
 GeneratedPluginRegistrant.java
+playstore-serviceaccount.json
+app/google-services.json
+fastlane/report.xml
+app/release/*

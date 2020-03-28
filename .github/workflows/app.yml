@@ -9,8 +9,13 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Prepare Env
-        run: cp ~/dev/secrets/corona-app/Corona\ FCM.plist frontend/corona_tracker/ios/Runner/GoogleService-Info.plist && cp ~/dev/secrets/corona-app/Corona\ FCM.json frontend/corona_tracker/android/app/google-services.json
+        run: cp ~/dev/secrets/corona-app/Corona\ FCM.plist frontend/corona_tracker/ios/Runner/GoogleService-Info.plist && cp ~/dev/secrets/corona-app/Corona\ FCM.json frontend/corona_tracker/android/app/google-services.json && cp ~/dev/secrets/corona-app/Corona\ Playstore.json frontend/corona_tracker/android/playstore-serviceaccount.json
       - name: Bundle APK
         run: cd frontend/corona_tracker/ && flutter build appbundle --target-platform android-arm,android-arm64,android-x64
       - name: Bundle IPA
-        run: cd frontend/corona_tracker/ && flutter build ios
+        run: cd frontend/corona_tracker/ && flutter build ios --release --no-codesign
+      - name: Publish preview
+        run: |
+          (cd frontend/corona_tracker/android && fastlane install_plugins && fastlane alpha)
+          (cd frontend/corona_tracker/ios && fastlane install_plugins && fastlane alpha)
+        #if: contains( github.ref, 'develop' ) || contains( github.base_ref, 'develop' )
