@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:openapi/api.dart';
+import 'package:corona_tracker/persistence/UserStore.dart';
+
 
 
 
@@ -49,8 +51,10 @@ class _BodyTemperatureScreenState extends State<BodyTemperatureScreen> {
 
   Future<Double> createBodyTempMeasurement(double value) async {
     final prefs = await SharedPreferences.getInstance();
-    String userId = prefs.getString('UserToken');
+    final userId = await UserStore().getUserToken();
     assert(userId!= null);
+
+
 
     tempMeasurement.time = DateTime.now();
     tempMeasurement.userId = userId;

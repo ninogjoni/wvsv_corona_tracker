@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:corona_tracker/persistence/UserStore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -73,7 +74,7 @@ class _MyAppState extends State<MyApp> {
       //myUser.phoneHash = sha256.convert(utf8.encode("Eine Telefonnummer")).toString();
       //myUser.phoneHash = DateTime.now().toUtc().toIso8601String();
       myUser.token = token;
-      prefs.setString('UserToken', myUser.token);
+      UserStore().setUserToken(myUser.token);
       myUser.phoneHash = "0";
       apiInstance.createUser(myUser).then((User u){
         print("added User with token: " + u.token);
