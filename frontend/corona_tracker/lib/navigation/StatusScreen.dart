@@ -1,7 +1,9 @@
 import 'package:corona_tracker/i18n/appLocalizations.dart';
 import 'package:corona_tracker/navigation/SettingsScreen.dart';
+import 'package:corona_tracker/navigation/TestScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:openapi/api.dart';
+import 'package:preferences/preference_service.dart';
 import '../globals.dart' as globals;
 import 'package:corona_tracker/navigation/CreditsScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -126,6 +128,11 @@ class StatusScreen extends StatelessWidget {
     return healthState;
   }
 
+  _onPreferenceScreen(BuildContext context)  async {
+    await PrefService.init(prefix: 'pref_');
+    Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => SettingsScreen()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -142,7 +149,8 @@ class StatusScreen extends StatelessWidget {
           IconButton(
             icon: FaIcon(FontAwesomeIcons.userCog),
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => SettingsScreen()));
+              //Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => SettingsScreen()));
+              _onPreferenceScreen(context);
             },
           )
         ],
