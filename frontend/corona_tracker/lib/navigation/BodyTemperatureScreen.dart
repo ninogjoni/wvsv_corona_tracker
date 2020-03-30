@@ -37,7 +37,6 @@ class _BodyTemperatureScreenState extends State<BodyTemperatureScreen> {
  // https://camposha.info/flutter-numberpicker-pick-integer-and-decimals/
 
   void _initializeNumberPickers() async {
-
     decimalNumberPicker = new NumberPicker.decimal(
       initialValue: _currentDoubleValue,
       minValue: 36,
@@ -50,11 +49,9 @@ class _BodyTemperatureScreenState extends State<BodyTemperatureScreen> {
   }
 
   Future<Double> createBodyTempMeasurement(double value) async {
-    final prefs = await SharedPreferences.getInstance();
     final userId = await UserStore().getUserToken();
     assert(userId!= null);
-
-
+    UserStore().setBodyTemperature(value);
 
     tempMeasurement.time = DateTime.now();
     tempMeasurement.userId = userId;
@@ -63,7 +60,7 @@ class _BodyTemperatureScreenState extends State<BodyTemperatureScreen> {
     try {
       var result = api_instance.createBodyTempMeasurement(tempMeasurement);
       print(result);
-      print('SUCCESS!!!!!!!!!!');
+      //print('SUCCESS!!!!!!!!!!');
     } catch (e) {
       print(
           "Exception when calling DefaultApi->createBodyTempMeasurement: $e\n");
@@ -107,7 +104,7 @@ class _BodyTemperatureScreenState extends State<BodyTemperatureScreen> {
                           Column(
                             children: <Widget>[
                               Text(
-                                  "Körpertemperatur: ",
+                                  "Neue Körpertemperatur: ",
                                    style: TextStyle(
                                    fontWeight: FontWeight.bold,
                                    fontSize: 34,
@@ -142,15 +139,42 @@ class _BodyTemperatureScreenState extends State<BodyTemperatureScreen> {
                             ),
                             onPressed: () {
                               createBodyTempMeasurement(_currentDoubleValue);
+                              Scaffold.of(context).showSnackBar(SnackBar(
+                                  content: Text(
+                                      'Körpertemperatur wird aktualisiert'
+                                  )));
                             },
                             color: Theme.of(context).primaryColor,
                             textColor: Colors.white,
-                            /*onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => StatusScreen(),
-                  ))*/
-                          )
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 15.0),
+                          ),
+                          Column(
+                            children: <Widget>[
+                              FutureBuilder(
+                                future: UserStore().getBodyTemperature(),
+                                builder: (context, AsyncSnapshot<double> snapshot) {
+                                  if (snapshot.hasData) {
+                                    return Text(
+                                        'Aktuelle Körpertemperatur: ' + snapshot.data.toString(),
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 28,
+                                        ));
+                                  }
+                                  else {
+                                    return Text(
+                                        'Angabe fehlt',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 34,
+                                        ));
+                                  }
+                                },
+                              )
+                            ],
+                          ),
                         ],
                       ),
                     ),

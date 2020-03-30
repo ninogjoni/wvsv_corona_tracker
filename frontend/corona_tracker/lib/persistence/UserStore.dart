@@ -10,6 +10,7 @@ class UserStore {
   UserStore._internal() {}
 
   static const _USER_TOKEN = 'userToken';
+  static const _USER_BODY_TEMPERATURE = 'bodyTemperature';
 
   setUserToken(String userToken) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -20,4 +21,16 @@ class UserStore {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString(_USER_TOKEN);
   }
+
+  setBodyTemperature(double bodyTemperature) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setDouble(_USER_BODY_TEMPERATURE, bodyTemperature);
+  }
+
+  Future<double> getBodyTemperature() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getDouble(_USER_BODY_TEMPERATURE);
+  }
+
+
 }
