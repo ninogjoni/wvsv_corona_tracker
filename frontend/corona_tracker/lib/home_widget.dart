@@ -42,7 +42,6 @@ class _HomeState extends State<Home> {
       ),*/
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white70,
         type: BottomNavigationBarType.fixed,
         onTap: onTabTapped,
         currentIndex: _currentIndex, // this will be set when a new tab is tapped
