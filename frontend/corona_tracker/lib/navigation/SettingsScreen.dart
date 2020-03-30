@@ -17,6 +17,9 @@ class SettingsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context).SettingsScreen_AppBarTitleText),
+        automaticallyImplyLeading: true,
+        leading: IconButton(icon: Icon(Icons.arrow_back),
+            onPressed: () => Navigator.pop(context)),
       ),
       body: Center(
           child: RaisedButton(

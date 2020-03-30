@@ -1,9 +1,12 @@
 import 'package:corona_tracker/i18n/appLocalizations.dart';
+import 'package:corona_tracker/navigation/SettingsScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:openapi/api.dart';
 import '../globals.dart' as globals;
 import 'package:corona_tracker/navigation/CreditsScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 
 
 class StatusScreen extends StatelessWidget {
@@ -131,9 +134,15 @@ class StatusScreen extends StatelessWidget {
         title: Text(AppLocalizations.of(context).StatusScreen_AppBarTitleText),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.info_outline),
+            icon: FaIcon(FontAwesomeIcons.infoCircle),
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => CreditsScreen()));
+            },
+          ),
+          IconButton(
+            icon: FaIcon(FontAwesomeIcons.userCog),
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => SettingsScreen()));
             },
           )
         ],
@@ -169,8 +178,8 @@ class StatusScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: //StatusUsers
                       [
-                        Icon(
-                          Icons.people,
+                        FaIcon(
+                          (FontAwesomeIcons.users),
                           color: Colors.blueGrey,
                           size: 50.0,
                         ),
@@ -215,8 +224,8 @@ class StatusScreen extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(
-                          Icons.person,
+                        FaIcon(
+                          (FontAwesomeIcons.userAlt),
                           color: Colors.green[500],
                           size: 50.0,
                         ),
@@ -275,8 +284,8 @@ class StatusScreen extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(
-                          Icons.healing,
+                        FaIcon(
+                          (FontAwesomeIcons.userShield),
                           color: Colors.green[500],
                           size: 50.0,
                         ),
@@ -323,8 +332,8 @@ class StatusScreen extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(
-                          Icons.info_outline,
+                        FaIcon(
+                          (FontAwesomeIcons.virus),
                           color: Colors.red[500],
                           size: 50.0,
                         ),
