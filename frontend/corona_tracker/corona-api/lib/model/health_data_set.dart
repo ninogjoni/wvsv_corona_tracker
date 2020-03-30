@@ -1,6 +1,6 @@
 part of openapi.api;
 
-enum MedicalStateEnum { UNKNOWN, INFECTED, TREATMENT, CURED }
+enum MedicalStateEnum {  UNKNOWN,  INFECTED,  TREATMENT,  CURED,  }
 
 class HealthDataSet {
   
@@ -9,17 +9,12 @@ class HealthDataSet {
   String medicalState = null;
   //enum medicalStateEnum {  UNKNOWN,  INFECTED,  TREATMENT,  CURED,  };{
   /* in IS0 8601 format. eg. `1963-11-22T18:30:00Z` */
-  //DateTime time = null;
   DateTime time = null;
-  
-  String positionId = null;
-  
-  String geofenceId = null;
   HealthDataSet();
 
   @override
   String toString() {
-    return 'HealthDataSet[userId=$userId, medicalState=$medicalState, time=$time, positionId=$positionId, geofenceId=$geofenceId, ]';
+    return 'HealthDataSet[userId=$userId, medicalState=$medicalState, time=$time, ]';
   }
 
   HealthDataSet.fromJson(Map<String, dynamic> json) {
@@ -29,8 +24,6 @@ class HealthDataSet {
     time = (json['time'] == null) ?
       null :
       DateTime.parse(json['time']);
-    positionId = json['positionId'];
-    geofenceId = json['geofenceId'];
   }
 
   Map<String, dynamic> toJson() {
@@ -41,10 +34,6 @@ class HealthDataSet {
       json['medicalState'] = medicalState;
     if (time != null)
       json['time'] = time == null ? null : time.toUtc().toIso8601String();
-    if (positionId != null)
-      json['positionId'] = positionId;
-    if (geofenceId != null)
-      json['geofenceId'] = geofenceId;
     return json;
   }
 

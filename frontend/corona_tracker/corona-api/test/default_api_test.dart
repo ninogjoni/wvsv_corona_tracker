@@ -7,6 +7,13 @@ void main() {
   var instance = DefaultApi();
 
   group('tests for DefaultApi', () {
+    // Add users friends
+    //
+    //Future addFriend(String id, Friend friend) async 
+    test('test addFriend', () async {
+      // TODO
+    });
+
     // Add a plague body temp measurement
     //
     //Future<TempMeasurement> createBodyTempMeasurement(TempMeasurement tempMeasurement) async 
@@ -21,13 +28,6 @@ void main() {
       // TODO
     });
 
-    // Create a Geofence
-    //
-    //Future<Geofence> createGeofence(Geofence geofence) async 
-    test('test createGeofence', () async {
-      // TODO
-    });
-
     // Create new location entry
     //
     //Future<Position> createPosition(Position position, { String userId }) async 
@@ -37,7 +37,7 @@ void main() {
 
     // Create a User
     //
-    //Future<User> createUser(User body) async 
+    //Future<User> createUser(User user) async 
     test('test createUser', () async {
       // TODO
     });
@@ -60,15 +60,6 @@ void main() {
     //
     //Future<List<Friend>> getFriends(String id) async 
     test('test getFriends', () async {
-      // TODO
-    });
-
-    // Fetch a list of Geofences
-    //
-    // Without params, it returns a list of Geofences the user has access to
-    //
-    //Future<List<Geofence>> getGeofences({ bool all, String userId, bool refresh }) async 
-    test('test getGeofences', () async {
       // TODO
     });
 
@@ -101,20 +92,6 @@ void main() {
     //
     //Future<List<User>> getUsers({ String userId }) async 
     test('test getUsers', () async {
-      // TODO
-    });
-
-    // Delete a Geofence
-    //
-    //Future removeGeofence(String id) async 
-    test('test removeGeofence', () async {
-      // TODO
-    });
-
-    // Update a Geofence
-    //
-    //Future<Geofence> updateGeofence(String id, Geofence body) async 
-    test('test updateGeofence', () async {
       // TODO
     });
 

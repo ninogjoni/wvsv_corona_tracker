@@ -4,8 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -13,38 +12,28 @@ import java.util.Set;
 @Builder
 @Entity
 // quote user, see https://stackoverflow.com/questions/3608420/hibernate-saving-user-model-to-postgres
-@Table(name = "\"USER\"")
+@Table(name = "\"USERS\"")
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
 
     @NotNull
     @Id
+    @Column(name = "USER_ID")
     private String token;
 
-    private String name;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Contact contactDetails;
 
-    @NotNull
-    private String phoneHash;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<HealthDataSet> healthDataSetList = new HashSet<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<HealthDataSet> healthDataSetList = new ArrayList<>();
-
-
-    @ManyToMany
-    @JoinTable(name="tbl_friends",
-            joinColumns=@JoinColumn(name="userId"),
-            inverseJoinColumns=@JoinColumn(name="friendId")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "FRIENDS",
+            joinColumns = @JoinColumn(name = "USER_ID"),
+            inverseJoinColumns = @JoinColumn(name = "FRIEND_ID")
     )
     @EqualsAndHashCode.Exclude
-    private Set<User> friends;
-
-    @ManyToMany
-    @JoinTable(name="tbl_friends",
-            joinColumns=@JoinColumn(name="friendId"),
-            inverseJoinColumns=@JoinColumn(name="userId")
-    )
-    @EqualsAndHashCode.Exclude
-    private Set<User> users;
+    private Set<Contact> friends;
 
 }

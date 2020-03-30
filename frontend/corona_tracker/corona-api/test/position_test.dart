@@ -16,18 +16,9 @@ void main() {
       // TODO
     });
 
-    // String protocol (default value: null)
-    test('to test the property `protocol`', () async {
-      // TODO
-    });
-
-    // bool outdated (default value: null)
-    test('to test the property `outdated`', () async {
-      // TODO
-    });
-
-    // bool valid (default value: null)
-    test('to test the property `valid`', () async {
+    // in IS0 8601 format. eg. `1963-11-22T18:30:00Z`
+    // DateTime time (default value: null)
+    test('to test the property `time`', () async {
       // TODO
     });
 
@@ -49,11 +40,6 @@ void main() {
     // Position accuracy in meters (radius), lower is better
     // int accuracy (default value: null)
     test('to test the property `accuracy`', () async {
-      // TODO
-    });
-
-    // Object network (default value: null)
-    test('to test the property `network`', () async {
       // TODO
     });
 

@@ -9,23 +9,65 @@ All URIs are relative to *http://localhost/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**addFriend**](DefaultApi.md#addFriend) | **POST** /users/{id}/friends | Add users friends
 [**createBodyTempMeasurement**](DefaultApi.md#createBodyTempMeasurement) | **POST** /measurement/bodytemp | Add a plague body temp measurement
 [**createDataSet**](DefaultApi.md#createDataSet) | **POST** /healthDataSet | Add a health dataset
-[**createGeofence**](DefaultApi.md#createGeofence) | **POST** /geofences | Create a Geofence
 [**createPosition**](DefaultApi.md#createPosition) | **POST** /positions | Create new location entry
 [**createUser**](DefaultApi.md#createUser) | **POST** /users | Create a User
-[**deleteUser**](DefaultApi.md#deleteUser) | **DELETE** /users | Delete a User TODO move to /users/id
+[**deleteUser**](DefaultApi.md#deleteUser) | **DELETE** /users/{id} | Delete a User TODO move to /users/id
 [**getBodyTempMeasurements**](DefaultApi.md#getBodyTempMeasurements) | **GET** /measurement/bodytemp | Fetch a list of body temp measurements
 [**getFriends**](DefaultApi.md#getFriends) | **GET** /users/{id}/friends | Get users friends
-[**getGeofences**](DefaultApi.md#getGeofences) | **GET** /geofences | Fetch a list of Geofences
 [**getLocations**](DefaultApi.md#getLocations) | **GET** /reports/locations | Fetch a list of  within the time period for the Device
 [**getPositions**](DefaultApi.md#getPositions) | **GET** /positions | Fetches a list of Positions
 [**getUser**](DefaultApi.md#getUser) | **GET** /users/{id} | Get a single users
 [**getUsers**](DefaultApi.md#getUsers) | **GET** /users | Fetch a list of Users
-[**removeGeofence**](DefaultApi.md#removeGeofence) | **DELETE** /geofences/{id} | Delete a Geofence
-[**updateGeofence**](DefaultApi.md#updateGeofence) | **PUT** /geofences/{id} | Update a Geofence
-[**uploadFriends**](DefaultApi.md#uploadFriends) | **POST** /users/{id}/friends | Upload users friends
+[**uploadFriends**](DefaultApi.md#uploadFriends) | **PUT** /users/{id}/friends | Upload users friends
 
+
+# **addFriend**
+> addFriend(id, friend)
+
+Add users friends
+
+### Example 
+```dart
+import 'package:openapi/api.dart';
+// TODO Configure HTTP basic authorization: basicAuth
+//defaultApiClient.getAuthentication<HttpBasicAuth>('basicAuth').username = 'YOUR_USERNAME'
+//defaultApiClient.getAuthentication<HttpBasicAuth>('basicAuth').password = 'YOUR_PASSWORD';
+
+var api_instance = DefaultApi();
+var id = id_example; // String | 
+var friend = Friend(); // Friend | 
+
+try { 
+    api_instance.addFriend(id, friend);
+} catch (e) {
+    print("Exception when calling DefaultApi->addFriend: $e\n");
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **String**|  | [default to null]
+ **friend** | [**Friend**](Friend.md)|  | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **createBodyTempMeasurement**
 > TempMeasurement createBodyTempMeasurement(tempMeasurement)
@@ -115,50 +157,6 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **createGeofence**
-> Geofence createGeofence(geofence)
-
-Create a Geofence
-
-### Example 
-```dart
-import 'package:openapi/api.dart';
-// TODO Configure HTTP basic authorization: basicAuth
-//defaultApiClient.getAuthentication<HttpBasicAuth>('basicAuth').username = 'YOUR_USERNAME'
-//defaultApiClient.getAuthentication<HttpBasicAuth>('basicAuth').password = 'YOUR_PASSWORD';
-
-var api_instance = DefaultApi();
-var geofence = Geofence(); // Geofence | 
-
-try { 
-    var result = api_instance.createGeofence(geofence);
-    print(result);
-} catch (e) {
-    print("Exception when calling DefaultApi->createGeofence: $e\n");
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **geofence** | [**Geofence**](Geofence.md)|  | 
-
-### Return type
-
-[**Geofence**](Geofence.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **createPosition**
 > Position createPosition(position, userId)
 
@@ -206,7 +204,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **createUser**
-> User createUser(body)
+> User createUser(user)
 
 Create a User
 
@@ -218,10 +216,10 @@ import 'package:openapi/api.dart';
 //defaultApiClient.getAuthentication<HttpBasicAuth>('basicAuth').password = 'YOUR_PASSWORD';
 
 var api_instance = DefaultApi();
-var body = User(); // User | 
+var user = User(); // User | 
 
 try { 
-    var result = api_instance.createUser(body);
+    var result = api_instance.createUser(user);
     print(result);
 } catch (e) {
     print("Exception when calling DefaultApi->createUser: $e\n");
@@ -232,7 +230,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**User**](User.md)|  | 
+ **user** | [**User**](User.md)|  | 
 
 ### Return type
 
@@ -364,56 +362,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**List<Friend>**](Friend.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **getGeofences**
-> List<Geofence> getGeofences(all, userId, refresh)
-
-Fetch a list of Geofences
-
-Without params, it returns a list of Geofences the user has access to
-
-### Example 
-```dart
-import 'package:openapi/api.dart';
-// TODO Configure HTTP basic authorization: basicAuth
-//defaultApiClient.getAuthentication<HttpBasicAuth>('basicAuth').username = 'YOUR_USERNAME'
-//defaultApiClient.getAuthentication<HttpBasicAuth>('basicAuth').password = 'YOUR_PASSWORD';
-
-var api_instance = DefaultApi();
-var all = true; // bool | Can only be used by admins or managers to fetch all entities
-var userId = userId_example; // String | Standard users can use this only with their own _userId_
-var refresh = true; // bool | 
-
-try { 
-    var result = api_instance.getGeofences(all, userId, refresh);
-    print(result);
-} catch (e) {
-    print("Exception when calling DefaultApi->getGeofences: $e\n");
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **all** | **bool**| Can only be used by admins or managers to fetch all entities | [optional] [default to null]
- **userId** | **String**| Standard users can use this only with their own _userId_ | [optional] [default to null]
- **refresh** | **bool**|  | [optional] [default to null]
-
-### Return type
-
-[**List<Geofence>**](Geofence.md)
 
 ### Authorization
 
@@ -612,95 +560,6 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **removeGeofence**
-> removeGeofence(id)
-
-Delete a Geofence
-
-### Example 
-```dart
-import 'package:openapi/api.dart';
-// TODO Configure HTTP basic authorization: basicAuth
-//defaultApiClient.getAuthentication<HttpBasicAuth>('basicAuth').username = 'YOUR_USERNAME'
-//defaultApiClient.getAuthentication<HttpBasicAuth>('basicAuth').password = 'YOUR_PASSWORD';
-
-var api_instance = DefaultApi();
-var id = id_example; // String | 
-
-try { 
-    api_instance.removeGeofence(id);
-} catch (e) {
-    print("Exception when calling DefaultApi->removeGeofence: $e\n");
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **String**|  | [default to null]
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: Not defined
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **updateGeofence**
-> Geofence updateGeofence(id, body)
-
-Update a Geofence
-
-### Example 
-```dart
-import 'package:openapi/api.dart';
-// TODO Configure HTTP basic authorization: basicAuth
-//defaultApiClient.getAuthentication<HttpBasicAuth>('basicAuth').username = 'YOUR_USERNAME'
-//defaultApiClient.getAuthentication<HttpBasicAuth>('basicAuth').password = 'YOUR_PASSWORD';
-
-var api_instance = DefaultApi();
-var id = id_example; // String | 
-var body = Geofence(); // Geofence | 
-
-try { 
-    var result = api_instance.updateGeofence(id, body);
-    print(result);
-} catch (e) {
-    print("Exception when calling DefaultApi->updateGeofence: $e\n");
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **String**|  | [default to null]
- **body** | [**Geofence**](Geofence.md)|  | 
-
-### Return type
-
-[**Geofence**](Geofence.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

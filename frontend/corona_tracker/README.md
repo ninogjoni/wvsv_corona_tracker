@@ -14,3 +14,38 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+
+## Generating corona-api
+1. Navigate to flutter project root (`/frontend/corona_tracker/`)
+
+2. Make sure you have a config file like `flutter.config.json` in your project root
+
+   Example content of `flutter.config.json`:
+   ```
+   {
+	   "browserClient": false
+   }
+   ```
+ 
+3. [Convert](https://www.convertjson.com/yaml-to-json.htm) `/backend/corona-components/corona-api/src/main/openapi/openapi.yaml` to JSON and save it anywhere as `swagger.json`
+   
+4. Use [openapi-generator-cli](https://github.com/OpenAPITools/openapi-generator) (see ‘DownloadJAR’ section) to run the following command.
+Switch out the path to the jar, input swagger.json and output folder to suit your environment and needs.
+   ```
+   java -jar /path/to/openapi-generator-cli.jar generate -i /path/to/swagger.json -g dart -c flutter.config.json -o corona-api
+   ```
+
+5. Update your main project’s `pubspec.yaml` to include the library
+   ```yaml
+   openapi:
+       path: ./corona-api
+   ```
+
+6. Access the API using the import:
+   ```dart2
+   import 'package:openapi/api.dart';
+   ```
+7. Change the API base path in `/frontend/corona_tracker/corona-api/lib/api_client.dart` to `https://api.coronatrackerapp.org/api/v1`
+
+Source of these instructions: https://github.com/juliusspencer/Flutter-OpenAPI-Pattern

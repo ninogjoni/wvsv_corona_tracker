@@ -6,23 +6,13 @@ void main() {
     var instance = new User();
 
   group('test User', () {
-    // String id (default value: null)
-    test('to test the property `id`', () async {
-      // TODO
-    });
-
-    // String name (default value: null)
-    test('to test the property `name`', () async {
+    // String token (default value: null)
+    test('to test the property `token`', () async {
       // TODO
     });
 
     // String phoneHash (default value: null)
     test('to test the property `phoneHash`', () async {
-      // TODO
-    });
-
-    // String token (default value: null)
-    test('to test the property `token`', () async {
       // TODO
     });
 

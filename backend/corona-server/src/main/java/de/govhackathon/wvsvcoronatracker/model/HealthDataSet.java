@@ -7,16 +7,13 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.time.OffsetDateTime;
 
-//@Data //do not use this: causes stackoverflow due to circular dependency
-
-@EqualsAndHashCode(callSuper = false)
+@Data
 @Builder
-@Getter
-@Setter
 @Entity
-@Table(name = "HEALTH_DATASET")
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "HEALTH_DATASETS")
 public class HealthDataSet {
 
     @Id
@@ -28,6 +25,8 @@ public class HealthDataSet {
     private String id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_ID", nullable = false)
+    @EqualsAndHashCode.Exclude
     private User user;
 
     @Builder.Default
@@ -35,8 +34,4 @@ public class HealthDataSet {
 
     private MedicalState medicalState = MedicalState.UNKNOWN;
 
-    //private GeoFence geoFence;
-
-    //@OneToOne
-    //private Position position;
 }

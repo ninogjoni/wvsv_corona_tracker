@@ -2,28 +2,22 @@ part of openapi.api;
 
 class User {
   
-  String id = null;
-  
-  String name = null;
+  String token = null;
   
   String phoneHash = null;
-  
-  String token = null;
   
   List<HealthDataSet> healthHistory = [];
   User();
 
   @override
   String toString() {
-    return 'User[id=$id, name=$name, phoneHash=$phoneHash, token=$token, healthHistory=$healthHistory, ]';
+    return 'User[token=$token, phoneHash=$phoneHash, healthHistory=$healthHistory, ]';
   }
 
   User.fromJson(Map<String, dynamic> json) {
     if (json == null) return;
-    id = json['id'];
-    name = json['name'];
-    phoneHash = json['phoneHash'];
     token = json['token'];
+    phoneHash = json['phoneHash'];
     healthHistory = (json['healthHistory'] == null) ?
       null :
       HealthDataSet.listFromJson(json['healthHistory']);
@@ -31,14 +25,10 @@ class User {
 
   Map<String, dynamic> toJson() {
     Map <String, dynamic> json = {};
-    if (id != null)
-      json['id'] = id;
-    if (name != null)
-      json['name'] = name;
-    if (phoneHash != null)
-      json['phoneHash'] = phoneHash;
     if (token != null)
       json['token'] = token;
+    if (phoneHash != null)
+      json['phoneHash'] = phoneHash;
     if (healthHistory != null)
       json['healthHistory'] = healthHistory;
     return json;

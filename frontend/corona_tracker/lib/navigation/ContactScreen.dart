@@ -1,3 +1,4 @@
+import 'package:corona_tracker/models/PhoneNumber.dart';
 import 'package:corona_tracker/navigation/CreditsScreen.dart';
 import 'package:corona_tracker/navigation/StatusScreen.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:openapi/api.dart';
 import 'package:crypto/crypto.dart';
 import 'dart:convert'; // for the utf8.encode method
+import 'package:devicelocale/devicelocale.dart';
 
 class ContactScreen extends StatelessWidget {
 
@@ -40,6 +42,7 @@ class ContactScreenFormState extends State<ContactScreenForm> {
   bool _saving = false;
   String selectionToggleText = "Alle nicht auswählen";
   var api_instance = DefaultApi();
+  String locale;
 
   @override
   void initState() {
@@ -49,11 +52,9 @@ class ContactScreenFormState extends State<ContactScreenForm> {
 
   void addUserTest() {
     User myUser = User();
-    myUser.id = "12345";
-    myUser.name = "Test User";
+    myUser.token = "token4";
     myUser.phoneHash = sha256.convert(utf8.encode("Eine Telefonnummer")).toString();
     //myUser.phoneHash = DateTime.now().toUtc().toIso8601String();
-    myUser.token = "token4";
 
     /*HealthDataSet healthDataSet = HealthDataSet();
     healthDataSet.medicalState = MedicalStateEnum.UNKNOWN.toString();
@@ -66,8 +67,6 @@ class ContactScreenFormState extends State<ContactScreenForm> {
       healthDataSet.medicalState = MedicalStateEnum.CURED.toString();
       healthDataSet.userId = myUser.token;
       healthDataSet.time = DateTime.now(); //1963-11-22T18:30:00Z;
-      healthDataSet.geofenceId = "geoid";
-      healthDataSet.positionId = "posid";
       api_instance.createDataSet(healthDataSet).then((HealthDataSet hds) {
         print("added healtDataSet with status: " + hds.medicalState);
       }).catchError((e) {
@@ -131,6 +130,7 @@ class ContactScreenFormState extends State<ContactScreenForm> {
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
 
+    locale = await Devicelocale.currentLocale;
     setState(() {
       _saving = true;
     });
@@ -206,8 +206,13 @@ class ContactScreenFormState extends State<ContactScreenForm> {
 
   void uploadContacts() {
     for(int i = 0; i < contactItems.length; i++) {
-      if(contactItems[i].checked)
+      if(contactItems[i].checked) {
         print("uploading: " + contactItems[i].name);
+        print("number: " + contactItems[i].phoneNumber);
+        print("locale: " + locale);
+        String normalizedPhoneNumber = PhoneNumber(contactItems[i].phoneNumber, locale).normalize();
+        print("normalized number: " + normalizedPhoneNumber);
+      }
 
       // hier hashen: contact_items[i].phoneNumber
     }
@@ -263,24 +268,26 @@ class ContactScreenFormState extends State<ContactScreenForm> {
                     ],
                   ),
                   Expanded(
-                    child: ListView.builder(
-                      itemCount: contactItems.length,
-                      itemBuilder: (context, index) {
-                        return CheckboxListTile(
-                          title: Text('${contactItems[index].name}'),
-                          subtitle: Text('${contactItems[index].phoneNumber}'),
-                          value: contactItems[index].checked,
-                          onChanged: (val) {
-                            setState(() {
-                              if(contactItems[index].checked)
-                                contactItems[index].checked = false;
-                              else
-                                contactItems[index].checked = true;
-                            });
-                          },
-                          //selected: true,
-                        );
-                      },
+                    child: Scrollbar(
+                      child: ListView.builder(
+                        itemCount: contactItems.length,
+                        itemBuilder: (context, index) {
+                          return CheckboxListTile(
+                            title: Text('${contactItems[index].name}'),
+                            subtitle: Text('${contactItems[index].phoneNumber}'),
+                            value: contactItems[index].checked,
+                            onChanged: (val) {
+                              setState(() {
+                                if(contactItems[index].checked)
+                                  contactItems[index].checked = false;
+                                else
+                                  contactItems[index].checked = true;
+                              });
+                            },
+                            //selected: true,
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ]
@@ -288,8 +295,8 @@ class ContactScreenFormState extends State<ContactScreenForm> {
         ),
         inAsyncCall: _saving,),
       floatingActionButton: FloatingActionButton(
-        //onPressed: uploadContacts,
-        onPressed: addUserTest,
+        onPressed: uploadContacts,
+        //onPressed: addUserTest,
         tooltip: 'Hochladen',
         child: Icon(Icons.cloud_upload),
       ), // This trailing comma makes auto-formatting nicer for build methods.

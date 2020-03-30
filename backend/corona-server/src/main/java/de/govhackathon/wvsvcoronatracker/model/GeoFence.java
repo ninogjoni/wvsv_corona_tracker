@@ -3,15 +3,18 @@ package de.govhackathon.wvsvcoronatracker.model;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Setter
-@Getter
+@Data
 @Builder
-@Table(name = "GEOFENCE")
 @Entity
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "GEOFENCES")
 public class GeoFence {
 
     @Id
