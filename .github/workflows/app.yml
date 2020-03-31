@@ -15,10 +15,7 @@ jobs:
           cp ~/dev/secrets/corona-app/Corona\ FCM.plist frontend/corona_tracker/ios/Runner/GoogleService-Info.plist
           cp ~/dev/secrets/corona-app/Corona\ FCM.json frontend/corona_tracker/android/app/google-services.json
           cp ~/dev/secrets/corona-app/Corona\ Playstore.json frontend/corona_tracker/android/playstore-serviceaccount.json
-          echo storePassword=${ANDROID_KEYSTORE_PASSWORD} > frontend/corona_tracker/android/key.properties
-          echo keyPassword=${ANDROID_KEYSTORE_ALIAS_PASSWORD} >> frontend/corona_tracker/android/key.properties
-          echo keyAlias=corona-tracker >> frontend/corona_tracker/android/key.properties
-          echo storeFile=keystore >> frontend/corona_tracker/android/key.properties
+          cp ~/dev/secrets/corona-app/Corona\ Android\ Keystore.properties frontend/corona_tracker/android/key.properties
 
       - name: Bundle Android AppBundle
         run: cd frontend/corona_tracker/ && flutter build appbundle --target-platform android-arm,android-arm64,android-x64
