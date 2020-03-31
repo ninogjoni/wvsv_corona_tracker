@@ -7,15 +7,34 @@ jobs:
     runs-on: [self-hosted, macos]
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+        clean: false
       - name: Prepare Env
-        run: cp ~/dev/secrets/corona-app/Corona\ FCM.plist frontend/corona_tracker/ios/Runner/GoogleService-Info.plist && cp ~/dev/secrets/corona-app/Corona\ FCM.json frontend/corona_tracker/android/app/google-services.json && cp ~/dev/secrets/corona-app/Corona\ Playstore.json frontend/corona_tracker/android/playstore-serviceaccount.json
-      - name: Bundle APK
+        run: |
+          cp ~/dev/secrets/corona-app/Corona\ FCM.plist frontend/corona_tracker/ios/Runner/GoogleService-Info.plist
+          cp ~/dev/secrets/corona-app/Corona\ FCM.json frontend/corona_tracker/android/app/google-services.json
+          cp ~/dev/secrets/corona-app/Corona\ Playstore.json frontend/corona_tracker/android/playstore-serviceaccount.json
+          echo storePassword=${ANDROID_KEYSTORE_PASSWORD} > frontend/corona_tracker/android/key.properties
+          echo keyPassword=${ANDROID_KEYSTORE_ALIAS_PASSWORD} >> frontend/corona_tracker/android/key.properties
+          echo keyAlias=corona-tracker >> frontend/corona_tracker/android/key.properties
+          echo storeFile=keystore >> frontend/corona_tracker/android/key.properties
+
+      - name: Bundle Android AppBundle
         run: cd frontend/corona_tracker/ && flutter build appbundle --target-platform android-arm,android-arm64,android-x64
-      - name: Bundle IPA
+      - name: Bundle iOS App
         run: cd frontend/corona_tracker/ && flutter build ios --release --no-codesign
-      - name: Publish preview
+      - name: Publish Preview
         run: |
           (cd frontend/corona_tracker/android && fastlane install_plugins && fastlane alpha)
           (cd frontend/corona_tracker/ios && fastlane install_plugins && fastlane alpha)
+        #if: contains( github.ref, 'develop' ) || contains( github.base_ref, 'develop' )
+      - uses: actions/upload-artifact@v1
+        with:
+          name: IPA
+          path: frontend/corona_tracker/ios/Corona\ Track.ipa
+        #if: contains( github.ref, 'develop' ) || contains( github.base_ref, 'develop' )
+      - uses: actions/upload-artifact@v1
+        with:
+          name: AAB
+          path: frontend/corona_tracker/build/app/outputs/bundle/release/app-release.aab
         #if: contains( github.ref, 'develop' ) || contains( github.base_ref, 'develop' )
