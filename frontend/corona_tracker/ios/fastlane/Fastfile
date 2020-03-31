@@ -30,7 +30,6 @@ platform :ios do
   desc "Submit a new Alpha Build to Apple TestFlight"
   desc "This will also make sure the profile is up to date"
   lane :alpha do
-    increment_build_number_in_plist
     gym # Build your app - more options available
     pilot(skip_waiting_for_build_processing:true)
 

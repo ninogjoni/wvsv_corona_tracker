@@ -16,7 +16,7 @@ jobs:
           cp ~/dev/secrets/corona-app/Corona\ FCM.json frontend/corona_tracker/android/app/google-services.json
           cp ~/dev/secrets/corona-app/Corona\ Playstore.json frontend/corona_tracker/android/playstore-serviceaccount.json
           cp ~/dev/secrets/corona-app/Corona\ Android\ Keystore.properties frontend/corona_tracker/android/key.properties
-          (cd frontend/corona_tracker/ && flutter clean)
+          (cd frontend/corona_tracker/ && ./bin/increment_version_code.sh && flutter clean)
 
       - name: Bundle Android AppBundle
         run: |
