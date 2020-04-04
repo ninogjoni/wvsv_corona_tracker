@@ -1,5 +1,9 @@
 # corona_tracker
 
+- [corona_tracker](#coronatracker)
+  - [Getting Started](#getting-started)
+  - [Generating corona-api](#generating-corona-api)
+  - [Updating icons](#updating-icons)
 A new Flutter application.
 
 ## Getting Started
@@ -49,3 +53,11 @@ Switch out the path to the jar, input swagger.json and output folder to suit you
 7. Change the API base path in `/frontend/corona_tracker/corona-api/lib/api_client.dart` to `https://api.coronatrackerapp.org/api/v1`
 
 Source of these instructions: https://github.com/juliusspencer/Flutter-OpenAPI-Pattern
+
+## Updating icons
+
+Update icon at `assets/icon/icon.png` and run
+
+```
+flutter pub run flutter_launcher_icons:main
+```

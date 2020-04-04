@@ -139,6 +139,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.6"
+  flutter_launcher_icons:
+    dependency: "direct dev"
+    description:
+      name: flutter_launcher_icons
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.7.4"
   flutter_linkify:
     dependency: "direct main"
     description:
@@ -301,13 +308,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1+2"
-  openapi:
-    dependency: "direct main"
-    description:
-      path: corona-api
-      relative: true
-    source: path
-    version: "1.0.0"
   package_config:
     dependency: transitive
     description:
