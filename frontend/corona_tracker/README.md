@@ -3,6 +3,8 @@
 - [corona_tracker](#coronatracker)
   - [Getting Started](#getting-started)
   - [Generating corona-api](#generating-corona-api)
+    - [Via Maven](#via-maven)
+    - [Manual](#manual)
   - [Updating icons](#updating-icons)
 A new Flutter application.
 
