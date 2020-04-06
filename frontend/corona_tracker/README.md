@@ -21,6 +21,12 @@ samples, guidance on mobile development, and a full API reference.
 
 
 ## Generating corona-api
+
+### Via Maven
+
+Just run `./mvn clean install to update client`
+
+### Manual
 1. Navigate to flutter project root (`/frontend/corona_tracker/`)
 
 2. Make sure you have a config file like `flutter.config.json` in your project root
@@ -31,9 +37,9 @@ samples, guidance on mobile development, and a full API reference.
 	   "browserClient": false
    }
    ```
- 
+
 3. [Convert](https://www.convertjson.com/yaml-to-json.htm) `/backend/corona-components/corona-api/src/main/openapi/openapi.yaml` to JSON and save it anywhere as `swagger.json`
-   
+
 4. Use [openapi-generator-cli](https://github.com/OpenAPITools/openapi-generator) (see ‘DownloadJAR’ section) to run the following command.
 Switch out the path to the jar, input swagger.json and output folder to suit your environment and needs.
    ```
