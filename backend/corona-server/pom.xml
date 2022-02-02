@@ -15,7 +15,7 @@
   <description>Demo project for Spring Boot</description>
 
   <properties>
-    <pg-driver.version>42.2.10</pg-driver.version>
+    <pg-driver.version>42.2.25</pg-driver.version>
   </properties>
 
   <packaging>jar</packaging>
